@@ -1,0 +1,23 @@
+suites:
+    main:
+        namespace: App
+        psr4_prefix: App
+
+formatter.name: pretty
+
+extensions:
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        format:
+            - 'clover'
+            - 'html'
+        output:
+            clover: 'build/logs/clover.xml'
+            html: 'build/coverage'
+        whitelist:
+            - 'src/Application'
+            - 'src/Domain'
+            - 'src/Infrastructure/ReadModel'
+        blacklist:
+            - 'src/Domain/ApplyMethodDispatcherTrait.php'
+            - 'src/Infrastructure/ReadModel/AbstractReadModel.php'
+            - 'src/Infrastructure/ReadModel/AbstractReadModelProjector.php'

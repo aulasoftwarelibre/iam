@@ -1,0 +1,17 @@
+imports:
+    - 'tests/Behat/Resources/config/suites.yaml'
+
+default:
+    extensions:
+        FriendsOfBehat\CrossContainerExtension: ~
+        FriendsOfBehat\VariadicExtension: ~
+        FriendsOfBehat\SymfonyExtension:
+            env_file: .env.test
+            kernel:
+                bootstrap: 'vendor/autoload.php'
+                class: 'App\Infrastructure\Kernel'
+                path: 'src/Infrastructure/Kernel.php'
+                debug: true
+        FriendsOfBehat\ContextServiceExtension:
+            imports:
+                - 'tests/Behat/Resources/config/services.xml'

@@ -1,0 +1,12 @@
+version: '3'
+services:
+    database:
+        image: 'postgres:9'
+        ports:
+            - '5432'
+        volumes:
+            - './vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d'
+            - './var/run/postgresql:/run/postgresql'
+        environment:
+            - 'POSTGRES_USER=iam'
+            - 'POSTGRES_PASSWORD'

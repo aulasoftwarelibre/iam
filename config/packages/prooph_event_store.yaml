@@ -1,0 +1,35 @@
+prooph_event_store:
+    stores:
+        default:
+            event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
+            repositories:
+                App\Infrastructure\Repository\EventStoreUsers:
+                    aggregate_type: 'App\Domain\User\Model\User'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+
+services:
+    _defaults:
+        public: false
+
+    Prooph\EventStore\Pdo\PostgresEventStore:
+        arguments:
+            - '@prooph_event_store.message_factory'
+            - '@doctrine.pdo.connection'
+            - '@prooph_event_store.single_stream_strategy'
+
+    Prooph\EventStore\EventStore: '@Prooph\EventStore\Pdo\PostgresEventStore'
+
+    doctrine.pdo.connection:
+        class: '\PDO'
+        factory: ['@database_connection', 'getWrappedConnection']
+
+    prooph_event_sourcing.aggregate_translator:
+        class: 'Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator'
+
+    prooph_event_store.single_stream_strategy:
+        class: 'Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy'
+
+    # Repositories
+    App\Application\User\Repository\Users: '@App\Infrastructure\Repository\EventStoreUsers'
+
+#    App\Infrastructure\ReadModel\User\Repository\UserViews: '@App\Infrastructure\Doctrine\Repository\UserViewsORMRepository'

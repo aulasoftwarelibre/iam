@@ -1,0 +1,6 @@
+services:
+    tests.service.prooph.plugin.event_collector_plugin:
+        class: 'Tests\Service\Prooph\Plugin\EventCollectorPlugin'
+        public: true
+        tags:
+            { name: 'prooph_service_bus.event_bus.plugin' }

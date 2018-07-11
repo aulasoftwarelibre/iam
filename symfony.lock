@@ -164,6 +164,9 @@
     "phpunit/php-token-stream": {
         "version": "3.0.0"
     },
+    "prolic/fpp": {
+        "version": "dev-master"
+    },
     "prooph/common": {
         "version": "v4.2.2"
     },

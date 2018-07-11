@@ -31,6 +31,7 @@
         "leanphp/phpspec-code-coverage": "^4.2",
         "php-coveralls/php-coveralls": "^2.1",
         "phpspec/phpspec": "^4.3",
+        "prolic/fpp": "dev-master",
         "symfony/dotenv": "^4.1"
     },
     "config": {

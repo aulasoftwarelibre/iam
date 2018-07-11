@@ -1,0 +1,2 @@
+imports:
+    - 'suites/application/user.yaml'

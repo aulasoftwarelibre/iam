@@ -1,0 +1,18 @@
+prooph_event_store:
+    stores:
+        default:
+            event_store: 'Prooph\EventStore\InMemoryEventStore'
+            repositories:
+                App\Infrastructure\Repository\EventStoreUsers:
+                    aggregate_type: 'App\Domain\User\Model\User'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    stream_name: 'test'
+                    one_stream_per_aggregate: true
+
+services:
+    _defaults:
+        public: false
+
+    Prooph\EventStore\InMemoryEventStore: ~
+    Prooph\EventStore\EventStore: '@Prooph\EventStore\InMemoryEventStore'
+

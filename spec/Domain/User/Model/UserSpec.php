@@ -17,9 +17,9 @@ use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Model\Email;
 use App\Domain\User\Model\UserId;
 use App\Domain\User\Model\Username;
+use AulaSoftwareLibre\DDD\Service\Prooph\Spec\AggregateAsserter;
 use PhpSpec\ObjectBehavior;
 use Prooph\EventSourcing\AggregateRoot;
-use Tests\Service\Prooph\Spec\AggregateAsserter;
 
 class UserSpec extends ObjectBehavior
 {

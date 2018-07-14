@@ -18,10 +18,9 @@ use App\Application\User\Repository\Users;
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Model\Email;
 use App\Domain\User\Model\Username;
+use AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventsRecorder;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
-use Tests\Service\Prooph\Plugin\EventsRecorder;
-use Tests\Service\SharedStorage;
 use Webmozart\Assert\Assert;
 
 class UserContext implements Context
@@ -34,10 +33,6 @@ class UserContext implements Context
      * @var EventsRecorder
      */
     private $eventsRecorder;
-    /**
-     * @var SharedStorage
-     */
-    private $sharedStorage;
     /**
      * @var Users
      */

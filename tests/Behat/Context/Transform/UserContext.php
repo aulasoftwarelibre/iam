@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Transform;
 
+use AulaSoftwareLibre\DDD\Service\SharedStorage;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
-use Tests\Service\SharedStorage;
 
 final class UserContext implements Context
 {

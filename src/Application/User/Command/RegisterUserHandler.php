@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Application\User\Command;
+namespace AulaSoftwareLibre\Iam\Application\User\Command;
 
-use App\Application\User\Repository\Users;
-use App\Domain\User\Model\User;
+use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
+use AulaSoftwareLibre\Iam\Domain\User\Model\User;
 
 class RegisterUserHandler
 {

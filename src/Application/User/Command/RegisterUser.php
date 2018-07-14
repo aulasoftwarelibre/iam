@@ -14,30 +14,30 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Application\User\Command;
+namespace AulaSoftwareLibre\Iam\Application\User\Command;
 
 final class RegisterUser extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    protected $messageName = 'App\Application\User\Command\RegisterUser';
+    protected $messageName = 'AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser';
 
-    public function userId(): \App\Domain\User\Model\UserId
+    public function userId(): \AulaSoftwareLibre\Iam\Domain\User\Model\UserId
     {
-        return \App\Domain\User\Model\UserId::fromString($this->payload['userId']);
+        return \AulaSoftwareLibre\Iam\Domain\User\Model\UserId::fromString($this->payload['userId']);
     }
 
-    public function username(): \App\Domain\User\Model\Username
+    public function username(): \AulaSoftwareLibre\Iam\Domain\User\Model\Username
     {
-        return \App\Domain\User\Model\Username::fromString($this->payload['username']);
+        return \AulaSoftwareLibre\Iam\Domain\User\Model\Username::fromString($this->payload['username']);
     }
 
-    public function email(): \App\Domain\User\Model\Email
+    public function email(): \AulaSoftwareLibre\Iam\Domain\User\Model\Email
     {
-        return \App\Domain\User\Model\Email::fromString($this->payload['email']);
+        return \AulaSoftwareLibre\Iam\Domain\User\Model\Email::fromString($this->payload['email']);
     }
 
-    public static function with(\App\Domain\User\Model\UserId $userId, \App\Domain\User\Model\Username $username, \App\Domain\User\Model\Email $email): RegisterUser
+    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username, \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email): RegisterUser
     {
         return new self([
             'userId' => $userId->toString(),

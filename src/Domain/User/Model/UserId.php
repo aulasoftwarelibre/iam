@@ -14,7 +14,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\User\Model;
+namespace AulaSoftwareLibre\Iam\Domain\User\Model;
 
 final class UserId
 {

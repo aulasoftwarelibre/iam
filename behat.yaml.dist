@@ -9,7 +9,7 @@ default:
             env_file: .env.test
             kernel:
                 bootstrap: 'vendor/autoload.php'
-                class: 'App\Infrastructure\Kernel'
+                class: 'AulaSoftwareLibre\Iam\Infrastructure\Kernel'
                 path: 'src/Infrastructure/Kernel.php'
                 debug: true
         FriendsOfBehat\ContextServiceExtension:

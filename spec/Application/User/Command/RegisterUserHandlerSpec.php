@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace spec\App\Application\User\Command;
+namespace spec\AulaSoftwareLibre\Iam\Application\User\Command;
 
-use App\Application\User\Command\RegisterUser;
-use App\Application\User\Repository\Users;
-use App\Domain\User\Model\Email;
-use App\Domain\User\Model\User;
-use App\Domain\User\Model\UserId;
-use App\Domain\User\Model\Username;
+use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
+use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Domain\User\Model\User;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

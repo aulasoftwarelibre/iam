@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Infrastructure\Command;
+namespace AulaSoftwareLibre\Iam\Infrastructure\Command;
 
 use Prooph\EventStore\EventStore;
 use Prooph\EventStore\Stream;

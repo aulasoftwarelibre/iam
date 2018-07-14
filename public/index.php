@@ -1,6 +1,17 @@
 <?php
 
-use App\Infrastructure\Kernel;
+declare(strict_types=1);
+
+/*
+ * This file is part of the `iam` project.
+ *
+ * (c) Aula de Software Libre de la UCO <aulasoftwarelibre@uco.es>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use AulaSoftwareLibre\Iam\Infrastructure\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;

@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Application\User\Repository;
+namespace AulaSoftwareLibre\Iam\Application\User\Repository;
 
-use App\Domain\User\Model\User;
-use App\Domain\User\Model\UserId;
+use AulaSoftwareLibre\Iam\Domain\User\Model\User;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 
 interface Users
 {

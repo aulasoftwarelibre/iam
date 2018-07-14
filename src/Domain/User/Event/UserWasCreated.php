@@ -14,11 +14,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\User\Event;
+namespace AulaSoftwareLibre\Iam\Domain\User\Event;
 
 final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
 {
-    protected $messageName = 'App\Domain\User\Event\UserWasCreated';
+    protected $messageName = 'AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated';
 
     protected $payload = [];
 
@@ -26,34 +26,34 @@ final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
     private $username;
     private $email;
 
-    public function userId(): \App\Domain\User\Model\UserId
+    public function userId(): \AulaSoftwareLibre\Iam\Domain\User\Model\UserId
     {
         if (null === $this->userId) {
-            $this->userId = \App\Domain\User\Model\UserId::fromString($this->aggregateId());
+            $this->userId = \AulaSoftwareLibre\Iam\Domain\User\Model\UserId::fromString($this->aggregateId());
         }
 
         return $this->userId;
     }
 
-    public function username(): \App\Domain\User\Model\Username
+    public function username(): \AulaSoftwareLibre\Iam\Domain\User\Model\Username
     {
         if (null === $this->username) {
-            $this->username = \App\Domain\User\Model\Username::fromString($this->payload['username']);
+            $this->username = \AulaSoftwareLibre\Iam\Domain\User\Model\Username::fromString($this->payload['username']);
         }
 
         return $this->username;
     }
 
-    public function email(): \App\Domain\User\Model\Email
+    public function email(): \AulaSoftwareLibre\Iam\Domain\User\Model\Email
     {
         if (null === $this->email) {
-            $this->email = \App\Domain\User\Model\Email::fromString($this->payload['email']);
+            $this->email = \AulaSoftwareLibre\Iam\Domain\User\Model\Email::fromString($this->payload['email']);
         }
 
         return $this->email;
     }
 
-    public static function with(\App\Domain\User\Model\UserId $userId, \App\Domain\User\Model\Username $username, \App\Domain\User\Model\Email $email): UserWasCreated
+    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username, \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email): UserWasCreated
     {
         return new self($userId->toString(), [
             'username' => $username->toString(),

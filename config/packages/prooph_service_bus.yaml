@@ -16,11 +16,11 @@ services:
     Prooph\ServiceBus\QueryBus: '@prooph_service_bus.default_query_bus'
 
     # Autoregister your message handlers here
-    # Make sure App\Messaging\* services are not overriden in `config/services.yaml`
+    # Make sure AulaSoftwareLibre\Iam\Messaging\* services are not overriden in `config/services.yaml`
     # Read more at https://github.com/prooph/service-bus-symfony-bundle/blob/master/doc/routing.md
     #
     command_handlers:
         resource: '../../src/Application/**/Command/*Handler.php'
-        namespace: 'App\Application\'
+        namespace: 'AulaSoftwareLibre\Iam\Application\'
         tags:
             - { name: 'prooph_service_bus.default_command_bus.route_target', message_detection: true }

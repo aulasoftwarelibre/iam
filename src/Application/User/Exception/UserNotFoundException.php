@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Application\User\Exception;
+namespace AulaSoftwareLibre\Iam\Application\User\Exception;
 
 class UserNotFoundException extends \DomainException
 {

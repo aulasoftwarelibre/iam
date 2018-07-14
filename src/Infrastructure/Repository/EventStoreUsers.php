@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Infrastructure\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\Repository;
 
-use App\Application\User\Exception\UserNotFoundException;
-use App\Application\User\Repository\Users;
-use App\Domain\User\Model\User;
-use App\Domain\User\Model\UserId;
+use AulaSoftwareLibre\Iam\Application\User\Exception\UserNotFoundException;
+use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
+use AulaSoftwareLibre\Iam\Domain\User\Model\User;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use Prooph\EventSourcing\Aggregate\AggregateRepository;
 
 class EventStoreUsers extends AggregateRepository implements Users

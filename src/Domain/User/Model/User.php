@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Domain\User\Model;
+namespace AulaSoftwareLibre\Iam\Domain\User\Model;
 
-use App\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use Prooph\EventSourcing\AggregateRoot;
 
 class User extends AggregateRoot

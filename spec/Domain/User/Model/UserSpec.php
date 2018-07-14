@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace spec\App\Domain\User\Model;
+namespace spec\AulaSoftwareLibre\Iam\Domain\User\Model;
 
-use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Model\Email;
-use App\Domain\User\Model\UserId;
-use App\Domain\User\Model\Username;
 use AulaSoftwareLibre\DDD\Service\Prooph\Spec\AggregateAsserter;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use PhpSpec\ObjectBehavior;
 use Prooph\EventSourcing\AggregateRoot;
 

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Application;
 
-use App\Application\User\Command\RegisterUser;
-use App\Application\User\Repository\Users;
-use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Model\Email;
-use App\Domain\User\Model\Username;
 use AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventsRecorder;
+use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
+use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
 use Webmozart\Assert\Assert;

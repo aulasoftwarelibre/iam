@@ -43,7 +43,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "AulaSoftwareLibre\\Iam\\": "src/"
         }
     },
     "autoload-dev": {

@@ -1,7 +1,7 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: AulaSoftwareLibre\Iam
+        psr4_prefix: AulaSoftwareLibre\Iam
 
 formatter.name: pretty
 

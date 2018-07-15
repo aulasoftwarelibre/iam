@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    
+    <entity name="AulaSoftwareLibre\Iam\Infrastructure\Entity\UserView" table="user_view">
+        <id name="id" column="id" type="string" />
+        <field name="username" type="string" unique="true" />
+        <field name="email" type="string" unique="true" />
+    </entity>
+     
+</doctrine-mapping>

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection;
 
 use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModelProjector;
 

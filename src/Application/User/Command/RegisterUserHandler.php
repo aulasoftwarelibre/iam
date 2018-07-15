@@ -17,7 +17,7 @@ use AulaSoftwareLibre\Iam\Application\User\Exception\EmailAlreadyRegisteredExcep
 use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
-use AulaSoftwareLibre\Iam\Infrastructure\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
 
 class RegisterUserHandler
 {

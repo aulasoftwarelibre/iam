@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
-use AulaSoftwareLibre\Iam\Infrastructure\Entity\UserView;
-use AulaSoftwareLibre\Iam\Infrastructure\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
 
 class UserReadModel extends AbstractReadModel
 {

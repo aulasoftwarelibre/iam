@@ -1,6 +1,11 @@
 services:
-    tests.service.prooph.plugin.event_collector_plugin:
-        class: 'AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventCollectorPlugin'
+    _defaults:
+        public: false
+
+    AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventCollectorPlugin:
         public: true
         tags:
             { name: 'prooph_service_bus.event_bus.plugin' }
+
+    Tests\Behat\Repository\:
+        resource: '../tests/Behat/Repository'

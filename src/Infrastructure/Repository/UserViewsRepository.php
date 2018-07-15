@@ -37,4 +37,14 @@ class UserViewsRepository extends ServiceEntityRepository implements UserViews
     {
         return $this->find($userId);
     }
+
+    public function findByUsername(string $username): ?UserView
+    {
+        return $this->findOneBy(['username' => $username]);
+    }
+
+    public function findByEmail(string $email): ?UserView
+    {
+        return $this->findOneBy(['email' => $email]);
+    }
 }

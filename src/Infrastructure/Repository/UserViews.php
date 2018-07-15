@@ -21,4 +21,8 @@ interface UserViews extends SchemaManagerInterface
     public function add(UserView $userView): void;
 
     public function get(string $userId): UserView;
+
+    public function findByUsername(string $username): ?UserView;
+
+    public function findByEmail(string $email): ?UserView;
 }

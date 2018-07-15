@@ -7,6 +7,16 @@ prooph_event_store:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
 
+    projection_managers:
+        default:
+            event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
+            connection: 'doctrine.pdo.connection'
+            projections:
+                user_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\UserReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\UserProjection'
+
+
 services:
     _defaults:
         public: false
@@ -30,6 +40,5 @@ services:
         class: 'Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy'
 
     # Repositories
-
-#    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsORMRepository'
     AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\EventStore\EventStoreUsers'
+    AulaSoftwareLibre\Iam\Infrastructure\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Repository\UserViewsRepository'

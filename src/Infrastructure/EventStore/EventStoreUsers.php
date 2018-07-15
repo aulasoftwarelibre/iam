@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\EventStore;
 
 use AulaSoftwareLibre\Iam\Application\User\Exception\UserNotFoundException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;

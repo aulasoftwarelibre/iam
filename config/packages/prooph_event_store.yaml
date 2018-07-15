@@ -3,7 +3,7 @@ prooph_event_store:
         default:
             event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
             repositories:
-                AulaSoftwareLibre\Iam\Infrastructure\Repository\EventStoreUsers:
+                AulaSoftwareLibre\Iam\Infrastructure\EventStore\EventStoreUsers:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
 
@@ -30,6 +30,6 @@ services:
         class: 'Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy'
 
     # Repositories
-    AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Repository\EventStoreUsers'
 
 #    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsORMRepository'
+    AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\EventStore\EventStoreUsers'

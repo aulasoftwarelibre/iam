@@ -3,7 +3,7 @@ prooph_event_store:
         default:
             event_store: 'Prooph\EventStore\InMemoryEventStore'
             repositories:
-                AulaSoftwareLibre\Iam\Infrastructure\Repository\EventStoreUsers:
+                AulaSoftwareLibre\Iam\Infrastructure\EventStore\EventStoreUsers:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
                     stream_name: 'test'

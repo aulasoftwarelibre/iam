@@ -3,21 +3,23 @@ prooph_event_store:
         default:
             event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
             repositories:
-                AulaSoftwareLibre\Iam\Infrastructure\Repository\EventStoreUsers:
+                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+
+    projection_managers:
+        default:
+            event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
+            connection: 'doctrine.pdo.connection'
+            projections:
+                user_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserProjection'
+
 
 services:
     _defaults:
         public: false
-
-    Prooph\EventStore\Pdo\PostgresEventStore:
-        arguments:
-            - '@prooph_event_store.message_factory'
-            - '@doctrine.pdo.connection'
-            - '@prooph_event_store.single_stream_strategy'
-
-    Prooph\EventStore\EventStore: '@Prooph\EventStore\Pdo\PostgresEventStore'
 
     doctrine.pdo.connection:
         class: '\PDO'
@@ -29,7 +31,19 @@ services:
     prooph_event_store.single_stream_strategy:
         class: 'Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy'
 
-    # Repositories
-    AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Repository\EventStoreUsers'
+    # Event Store
+    Prooph\EventStore\Pdo\PostgresEventStore:
+        arguments:
+            - '@prooph_event_store.message_factory'
+            - '@doctrine.pdo.connection'
+            - '@prooph_event_store.single_stream_strategy'
 
-#    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsORMRepository'
+    Prooph\EventStore\EventStore: '@Prooph\EventStore\Pdo\PostgresEventStore'
+
+    # Repositories
+
+    ## Write model
+    AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore'
+
+    ## Read model
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'

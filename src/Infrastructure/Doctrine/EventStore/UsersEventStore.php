@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore;
 
 use AulaSoftwareLibre\Iam\Application\User\Exception\UserNotFoundException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Domain\User\Model\User;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use Prooph\EventSourcing\Aggregate\AggregateRepository;
 
-class EventStoreUsers extends AggregateRepository implements Users
+class UsersEventStore extends AggregateRepository implements Users
 {
     public function save(User $user): void
     {

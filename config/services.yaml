@@ -15,9 +15,9 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     AulaSoftwareLibre\Iam\Infrastructure\:
         resource: '../src/Infrastructure'
-        exclude: '../src/Infrastructure/{Repository,Kernel.php}'
+        exclude: '../src/Infrastructure/{DependencyInjection,Migrations,Doctrine/EventStore,ReadModel,Kernel.php}'
 
-    # controllers are imported separately to make sure services can be injected
+        # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     AulaSoftwareLibre\Iam\Infrastructure\Controller\:
         resource: '../src/Infrastructure/Controller'
@@ -25,3 +25,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\:
+        resource: '../src/Infrastructure/ReadModel/**/Projection'

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View;
 
-final class UserView
+class UserView
 {
     /**
      * @var string

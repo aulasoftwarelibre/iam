@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Application;
 
-use AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventsRecorder;
+use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventsRecorder;
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;

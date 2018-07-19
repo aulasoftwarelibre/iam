@@ -6,7 +6,7 @@
     <services>
         <service id="tests.behat.context.application.user_context" class="Tests\Behat\Context\Application\UserContext">
             <argument type="service" id="__symfony__.prooph_service_bus.default_command_bus" />
-            <argument type="service" id="__symfony__.AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventCollectorPlugin" />
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventCollectorPlugin" />
             <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore"/>
             <tag name="fob.context_service" />
         </service>

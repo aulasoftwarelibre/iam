@@ -26,7 +26,12 @@ class UsersEventStore extends AggregateRepository implements Users
         $this->saveAggregateRoot($user);
     }
 
-    public function get(UserId $userId): ?User
+    public function find(UserId $userId): ?User
+    {
+        return $this->getAggregateRoot($userId->toString());
+    }
+
+    public function get(UserId $userId): User
     {
         $user = $this->getAggregateRoot($userId->toString());
 

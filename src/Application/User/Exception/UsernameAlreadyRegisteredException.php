@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\User\Exception;
 
-class UsernameAlreadyRegisteredException extends \DomainException
+use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
+
+class UsernameAlreadyRegisteredException extends \InvalidArgumentException
 {
+    public static function withUsername(Username $username): UsernameAlreadyRegisteredException
+    {
+        return new self(sprintf('Username %s already taken', $username->toString()));
+    }
 }

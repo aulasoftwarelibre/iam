@@ -1,3 +1,13 @@
 #index:
 #    path: /
 #    controller: AulaSoftwareLibre\Iam\Controller\DefaultController::index
+
+fallback:
+    path: /{url}
+    defaults:
+        _controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+        url: null
+        template: base.html.twig
+    requirements:
+        url: .*
+

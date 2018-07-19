@@ -2,7 +2,7 @@ services:
     _defaults:
         public: false
 
-    AulaSoftwareLibre\DDD\Service\Prooph\Plugin\EventCollectorPlugin:
+    AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventCollectorPlugin:
         public: true
         tags:
             { name: 'prooph_service_bus.event_bus.plugin' }

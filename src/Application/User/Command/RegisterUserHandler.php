@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Application\User\Command;
 
 use AulaSoftwareLibre\Iam\Application\User\Exception\EmailAlreadyRegisteredException;
+use AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
@@ -42,12 +43,16 @@ class RegisterUserHandler
         $username = $registerUser->username();
         $email = $registerUser->email();
 
+        if ($this->users->find($userId)) {
+            throw UserIdAlreadyRegisteredException::withUserId($userId);
+        }
+
         if ($this->userViews->findByUsername($username->toString())) {
-            throw new UsernameAlreadyRegisteredException();
+            throw UsernameAlreadyRegisteredException::withUsername($username);
         }
 
         if ($this->userViews->findByEmail($email->toString())) {
-            throw new EmailAlreadyRegisteredException();
+            throw EmailAlreadyRegisteredException::withEmail($email);
         }
 
         $user = User::add(

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources xmlns="https://api-platform.com/schema/metadata">
+    <resource
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView"
+            shortName="User"
+            description="Users"
+    >
+        <itemOperations>
+            <itemOperation name="get" />
+        </itemOperations>
+
+
+
+    </resource>
+</resources>

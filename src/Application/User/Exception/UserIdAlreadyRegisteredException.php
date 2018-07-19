@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\User\Exception;
 
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 
-class EmailAlreadyRegisteredException extends \InvalidArgumentException
+class UserIdAlreadyRegisteredException extends \InvalidArgumentException
 {
-    public static function withEmail(Email $email): EmailAlreadyRegisteredException
+    public static function withUserId(UserId $userId): UserIdAlreadyRegisteredException
     {
-        return new self(sprintf('Email %s already taken', $email->toString()));
+        return new self(sprintf('UserId %s already taken', $userId->toString()));
     }
 }

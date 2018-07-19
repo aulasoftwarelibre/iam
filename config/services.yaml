@@ -28,3 +28,6 @@ services:
 
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\:
         resource: '../src/Infrastructure/ReadModel/**/Projection'
+
+    AulaSoftwareLibre\Iam\DummyDataPersist:
+        decorates: api_platform.doctrine.orm.data_persister

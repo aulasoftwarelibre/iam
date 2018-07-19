@@ -36,6 +36,7 @@ class RegisterUserHandlerSpec extends ObjectBehavior
     {
         $this->beConstructedWith($users, $userViews);
 
+        $users->find(self::USER_ID)->willReturn(null);
         $userViews->findByUsername(self::USERNAME)->willReturn(null);
         $userViews->findByEmail(self::EMAIL)->willReturn(null);
     }

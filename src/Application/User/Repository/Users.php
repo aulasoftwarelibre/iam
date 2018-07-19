@@ -20,7 +20,9 @@ interface Users
 {
     public function save(User $user): void;
 
-    public function get(UserId $userId): ?User;
+    public function get(UserId $userId): User;
+
+    public function find(UserId $userId): ?User;
 
     public function nextIdentity(): UserId;
 }

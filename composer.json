@@ -7,6 +7,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "api-platform/api-pack": "^1.1",
         "aulasoftwarelibre/ddd-base": "^1.0",
         "doctrine/collections": "^1.5",
         "prooph/event-sourcing": "^5.5",
@@ -33,7 +34,8 @@
         "php-coveralls/php-coveralls": "^2.1",
         "phpspec/phpspec": "^4.3",
         "prolic/fpp": "dev-master",
-        "symfony/dotenv": "^4.1"
+        "symfony/dotenv": "^4.1",
+        "symfony/web-server-bundle": "^4.1"
     },
     "config": {
         "preferred-install": {

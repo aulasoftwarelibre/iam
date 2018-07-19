@@ -1,3 +1,7 @@
 api_platform:
     mapping:
         paths: ['%kernel.root_dir%/Resources/config/api_platform/']
+    exception_to_status:
+        AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredException: 400
+        AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException: 400
+        AulaSoftwareLibre\Iam\Application\User\Exception\EmailAlreadyRegisteredException: 400

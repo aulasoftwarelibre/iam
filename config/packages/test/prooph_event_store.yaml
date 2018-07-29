@@ -8,6 +8,11 @@ prooph_event_store:
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
                     stream_name: 'test'
                     one_stream_per_aggregate: true
+                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
+                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    stream_name: 'test'
+                    one_stream_per_aggregate: true
 
     projection_managers:
         default:
@@ -16,6 +21,9 @@ prooph_event_store:
                 user_projection:
                     read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserReadModel'
                     projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserProjection'
+                scope_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
 
 
 services:
@@ -31,3 +39,4 @@ services:
 
     ## Read model (in memory)
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@Tests\Behat\Repository\UserViewInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewInMemoryRepository'

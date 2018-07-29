@@ -27,7 +27,7 @@ script:
   - mkdir -p build/logs
   - vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
   - vendor/bin/phpspec run --format=pretty --ansi --no-code-generation
-  - vendor/bin/behat --strict --colors
+  - vendor/bin/behat --strict --colors --no-snippets
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls

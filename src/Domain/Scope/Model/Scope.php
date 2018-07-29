@@ -86,6 +86,11 @@ class Scope extends AggregateRoot
         $this->recordThat(ScopeWasRemoved::with($this->scopeId()));
     }
 
+    public function isRemoved(): bool
+    {
+        return $this->isRemoved;
+    }
+
     protected function aggregateId(): string
     {
         return $this->scopeId->toString();

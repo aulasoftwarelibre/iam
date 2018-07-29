@@ -15,9 +15,11 @@ namespace Tests\Behat\Context\Application;
 
 use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventsRecorder;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
+use AulaSoftwareLibre\Iam\Application\Scope\Command\RemoveScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
+use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
@@ -109,5 +111,31 @@ class ScopeContext implements Context
         ));
         Assert::true($event->scopeId()->equals($scopeId));
         Assert::true($event->name()->equals(Name::fromString($name)));
+    }
+
+    /**
+     * @When /^I remove (it)$/
+     */
+    public function iRemoveIt(ScopeId $scopeId)
+    {
+        $this->commandBus->dispatch(RemoveScope::with(
+            $scopeId
+        ));
+    }
+
+    /**
+     * @Then /^(the scope) should not be available$/
+     */
+    public function theScopeShouldNotBeAvailable(ScopeId $scopeId)
+    {
+        /** @var ScopeWasRemoved $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, ScopeWasRemoved::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            ScopeWasRemoved::class,
+            \get_class($event)
+        ));
+        Assert::true($event->scopeId()->equals($scopeId));
     }
 }

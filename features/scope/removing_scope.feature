@@ -8,4 +8,4 @@ Feature: Removing a scope
     Scenario: Removing a scope
         Given the scope "iam" with name "Identity and Access Management"
         When I remove it
-        Then the scope "iam" with name "Identity and Access Management" should not be available
+        Then the scope should not be available

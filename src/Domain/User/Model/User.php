@@ -34,7 +34,7 @@ class User extends AggregateRoot
      */
     private $email;
 
-    public static function add(UserId $userId, Username $username, Email $email)
+    public static function add(UserId $userId, Username $username, Email $email): self
     {
         $user = new self();
 
@@ -48,17 +48,17 @@ class User extends AggregateRoot
         return $this->username()->value();
     }
 
-    public function userId()
+    public function userId(): UserId
     {
         return $this->userId;
     }
 
-    public function username()
+    public function username(): Username
     {
         return $this->username;
     }
 
-    public function email()
+    public function email(): Email
     {
         return $this->email;
     }

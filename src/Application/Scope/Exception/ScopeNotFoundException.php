@@ -11,18 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Application\Scope\Repository;
+namespace AulaSoftwareLibre\Iam\Application\Scope\Exception;
 
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 
-interface Scopes
+class ScopeNotFoundException extends \InvalidArgumentException
 {
-    public function save(Scope $scope): void;
-
-    public function get(ScopeId $scopeId): Scope;
-
-    public function find(ScopeId $scopeId): ?Scope;
-
-    public function nextIdentity(): ScopeId;
+    public static function withScopeId(ScopeId $scopeId): self
+    {
+        return new self(sprintf('Scope with id %s does not exists', $scopeId->toString()));
+    }
 }

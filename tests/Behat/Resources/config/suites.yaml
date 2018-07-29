@@ -1,2 +1,3 @@
 imports:
     - 'suites/application/user.yaml'
+    - 'suites/application/scope.yaml'

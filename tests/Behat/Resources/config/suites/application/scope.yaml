@@ -1,0 +1,9 @@
+default:
+    suites:
+        scope_application_features:
+            contexts_services:
+                - 'tests.behat.context.application.scope_context'
+
+                - 'tests.behat.context.transform.scope_context'
+            filters:
+                tags: '@scope && @application'

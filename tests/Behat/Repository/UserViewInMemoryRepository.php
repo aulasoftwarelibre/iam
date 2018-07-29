@@ -16,62 +16,25 @@ namespace Tests\Behat\Repository;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
 
-class UserViewInMemoryRepository implements UserViews
+class UserViewInMemoryRepository extends AbstractInMemoryRepository implements UserViews
 {
-    private $users = [];
-
-    public function init(): void
-    {
-    }
-
-    public function isInitialized(): bool
-    {
-        return true;
-    }
-
-    public function reset(): void
-    {
-        $this->users = [];
-    }
-
-    public function delete(): void
-    {
-        $this->users = [];
-    }
-
     public function add(UserView $userView): void
     {
-        $this->users[$userView->id()] = $userView;
+        $this->_add($userView->id(), $userView);
     }
 
     public function get(string $userId): UserView
     {
-        return $this->users[$userId];
+        return $this->_get($userId);
     }
 
     public function findByUsername(string $username): ?UserView
     {
-        $userView = current(\array_filter($this->users, function (UserView $userView) use ($username) {
-            return $userView->username() === $username;
-        }));
-
-        if (false === $userView) {
-            return null;
-        }
-
-        return $userView;
+        return $this->findBy('username', $username);
     }
 
     public function findByEmail(string $email): ?UserView
     {
-        $userView = current(\array_filter($this->users, function (UserView $userView) use ($email) {
-            return $userView->email() === $email;
-        }));
-
-        if (false === $userView) {
-            return null;
-        }
-
-        return $userView;
+        return $this->findBy('email', $email);
     }
 }

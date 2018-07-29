@@ -49,9 +49,9 @@ class ScopeContext implements Context
     }
 
     /**
-     * @When /^I register an scope with name "([^"]*)" and shortname "([^"]*)"$/
+     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
      */
-    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName)
+    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
     {
         $this->commandBus->dispatch(
             CreateScope::with(

@@ -20,3 +20,13 @@ services:
         environment:
             - 'DATABASE_URL'
         command: 'sh -c ".docker/wait-for database:5432 -- php bin/console event-store:projection:run user_projection"'
+
+    scope_projection:
+        build: 'docker/php'
+        volumes:
+            - '.:/app'
+        depends_on:
+            - 'database'
+        environment:
+            - 'DATABASE_URL'
+        command: 'sh -c ".docker/wait-for database:5432 -- php bin/console event-store:projection:run scope_projection"'

@@ -6,6 +6,9 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
+                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
 
     projection_managers:
         default:
@@ -15,7 +18,9 @@ prooph_event_store:
                 user_projection:
                     read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserReadModel'
                     projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserProjection'
-
+                scope_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
 
 services:
     _defaults:
@@ -44,6 +49,8 @@ services:
 
     ## Write model
     AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore'
+    AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore'
 
     ## Read model
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'

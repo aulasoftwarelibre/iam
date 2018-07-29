@@ -20,7 +20,7 @@ use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
 
-class RegisterUserHandler
+final class RegisterUserHandler
 {
     /**
      * @var Users

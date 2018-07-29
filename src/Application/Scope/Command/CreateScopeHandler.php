@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
 
-class CreateScopeHandler
+final class CreateScopeHandler
 {
     /**
      * @var Scopes

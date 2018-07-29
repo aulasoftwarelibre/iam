@@ -15,7 +15,7 @@ namespace AulaSoftwareLibre\Iam\Application\Scope\Command;
 
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 
-class RenameScopeHandler
+final class RenameScopeHandler
 {
     /**
      * @var Scopes

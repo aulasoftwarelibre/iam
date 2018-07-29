@@ -15,9 +15,12 @@ namespace Tests\Behat\Context\Application;
 
 use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventsRecorder;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
+use AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
+use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
@@ -65,7 +68,7 @@ class ScopeContext implements Context
     /**
      * @Then /^the scope "([^"]*)" with name "([^"]*)" should be available$/
      */
-    public function theScopeWithNameShouldBeAvailable(string $shortName, string $name)
+    public function theScopeWithNameShouldBeAvailable(string $shortName, string $name): void
     {
         /** @var ScopeWasCreated $event */
         $event = $this->eventsRecorder->getLastMessage()->event();
@@ -78,5 +81,33 @@ class ScopeContext implements Context
 
         Assert::true($event->name()->equals(Name::fromString($name)));
         Assert::true($event->shortName()->equals(ShortName::fromString($shortName)));
+    }
+
+    /**
+     * @When /^I rename (it) to "([^"]*)"$/
+     */
+    public function iRenameItTo(ScopeId $scopeId, string $name): void
+    {
+        $this->commandBus->dispatch(RenameScope::with(
+            $scopeId,
+            Name::fromString($name)
+        ));
+    }
+
+    /**
+     * @Then /^(it) should be renamed to "([^"]*)"$/
+     */
+    public function itShouldBeRenamedTo(ScopeId $scopeId, string $name): void
+    {
+        /** @var ScopeWasRenamed $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, ScopeWasRenamed::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            ScopeWasRenamed::class,
+            \get_class($event)
+        ));
+        Assert::true($event->scopeId()->equals($scopeId));
+        Assert::true($event->name()->equals(Name::fromString($name)));
     }
 }

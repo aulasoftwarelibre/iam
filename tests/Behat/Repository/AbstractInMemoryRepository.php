@@ -46,6 +46,13 @@ class AbstractInMemoryRepository
         return $this->stack[$id];
     }
 
+    protected function _remove(string $id)
+    {
+        if (\array_key_exists($id, $this->stack)) {
+            unset($this[$id]);
+        }
+    }
+
     protected function findBy($field, $value)
     {
         $instance = current(\array_filter($this->stack, function ($item) use ($field, $value) {

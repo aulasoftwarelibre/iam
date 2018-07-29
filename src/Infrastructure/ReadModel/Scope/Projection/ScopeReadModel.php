@@ -16,6 +16,7 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection;
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
+use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
 
@@ -44,5 +45,13 @@ class ScopeReadModel extends AbstractReadModel
         );
 
         $this->scopeViews->add($scopeView);
+    }
+
+    public function applyScopeWasRenamed(ScopeWasRenamed $event): void
+    {
+        $this->scopeViews->rename(
+            $event->scopeId()->toString(),
+            $event->name()->toString()
+        );
     }
 }

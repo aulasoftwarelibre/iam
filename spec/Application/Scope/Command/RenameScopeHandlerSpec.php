@@ -25,9 +25,7 @@ use Prophecy\Argument;
 
 class RenameScopeHandlerSpec extends ObjectBehavior
 {
-    const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
-    const NAME = 'Identity and Access Management';
-    const SHORT_NAME = 'iam';
+    private const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
 
     public function let(Scopes $scopes, ScopeViews $scopeViews): void
     {

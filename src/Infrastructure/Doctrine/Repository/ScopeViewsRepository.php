@@ -39,6 +39,14 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
         $this->find($scopeId);
     }
 
+    public function rename(string $scopeId, string $name): void
+    {
+        $scopeView = $this->get($scopeId);
+        $scopeView->rename($name);
+
+        $this->_em->flush();
+    }
+
     public function findByName(string $name): ?ScopeView
     {
         return $this->findOneBy(['name' => $name]);

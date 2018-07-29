@@ -52,6 +52,14 @@ class ScopeView
     }
 
     /**
+     * @param string $name
+     */
+    public function rename(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @return string
      */
     public function getShortName(): string

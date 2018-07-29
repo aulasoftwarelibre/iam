@@ -28,6 +28,15 @@ class ScopeViewInMemoryRepository extends AbstractInMemoryRepository implements 
         return $this->_get($scopeId);
     }
 
+    public function rename(string $scopeId, string $name): void
+    {
+        /** @var ScopeView $scopeView */
+        $scopeView = $this->get($scopeId);
+        $scopeView->rename($name);
+
+        $this->_add($scopeId, $scopeView);
+    }
+
     public function findByName(string $name): ?ScopeView
     {
         return $this->findBy('getName', $name);

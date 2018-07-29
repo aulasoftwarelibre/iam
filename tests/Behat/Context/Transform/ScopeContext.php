@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Behat\Context\Transform;
 
 use AulaSoftwareLibre\DDD\Tests\Service\SharedStorage;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
 
 class ScopeContext implements Context
@@ -26,5 +27,13 @@ class ScopeContext implements Context
     public function __construct(SharedStorage $sharedStorage)
     {
         $this->sharedStorage = $sharedStorage;
+    }
+
+    /**
+     * @Transform
+     */
+    public function getScopeFromSharedStorage(): ScopeId
+    {
+        return $this->sharedStorage->get('scopeId');
     }
 }

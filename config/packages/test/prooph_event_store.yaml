@@ -6,13 +6,9 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-                    stream_name: 'test'
-                    one_stream_per_aggregate: true
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-                    stream_name: 'test'
-                    one_stream_per_aggregate: true
 
     projection_managers:
         default:
@@ -31,7 +27,8 @@ services:
         public: false
 
     # Event Store (in memory)
-    Prooph\EventStore\InMemoryEventStore: ~
+    Prooph\EventStore\InMemoryEventStore:
+        public: true
 
     Prooph\EventStore\EventStore: '@Prooph\EventStore\InMemoryEventStore'
 

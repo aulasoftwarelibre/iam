@@ -24,7 +24,9 @@ interface ScopeViews extends SchemaManagerInterface
 
     public function rename(string $scopeId, string $name): void;
 
-    public function get(string $scopeId): ScopeView;
+    public function get(string $scopeId): ?ScopeView;
+
+    public function findAll(): array;
 
     public function findByName(string $name): ?ScopeView;
 

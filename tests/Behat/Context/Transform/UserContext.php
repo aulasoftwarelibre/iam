@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Transform;
 
-use AulaSoftwareLibre\DDD\Tests\Service\SharedStorage;
+use AulaSoftwareLibre\DDD\TestsBundle\Service\SharedStorage;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 

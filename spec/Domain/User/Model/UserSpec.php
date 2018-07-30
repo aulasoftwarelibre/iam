@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\AulaSoftwareLibre\Iam\Domain\User\Model;
 
-use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Spec\AggregateAsserter;
+use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Spec\AggregateAsserter;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;

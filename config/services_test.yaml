@@ -2,10 +2,5 @@ services:
     _defaults:
         public: false
 
-    AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventCollectorPlugin:
-        public: true
-        tags:
-            { name: 'prooph_service_bus.event_bus.plugin' }
-
     Tests\Behat\Repository\:
         resource: '../tests/Behat/Repository'

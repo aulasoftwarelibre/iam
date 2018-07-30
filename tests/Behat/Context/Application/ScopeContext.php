@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Application;
 
-use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Plugin\EventsRecorder;
+use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Plugin\EventsRecorder;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RemoveScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope;

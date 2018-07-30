@@ -23,7 +23,7 @@ class ScopeViewInMemoryRepository extends AbstractInMemoryRepository implements 
         $this->_add($scopeView->getId(), $scopeView);
     }
 
-    public function get(string $scopeId): ScopeView
+    public function get(string $scopeId): ?ScopeView
     {
         return $this->_get($scopeId);
     }

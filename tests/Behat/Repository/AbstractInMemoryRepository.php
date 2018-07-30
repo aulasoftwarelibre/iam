@@ -36,6 +36,11 @@ class AbstractInMemoryRepository
         $this->users = [];
     }
 
+    public function findAll(): array
+    {
+        return $this->stack;
+    }
+
     protected function _add($id, $object)
     {
         $this->stack[$id] = $object;
@@ -43,13 +48,13 @@ class AbstractInMemoryRepository
 
     protected function _get(string $id)
     {
-        return $this->stack[$id];
+        return $this->stack[$id] ?? null;
     }
 
     protected function _remove(string $id)
     {
         if (\array_key_exists($id, $this->stack)) {
-            unset($this[$id]);
+            unset($this->stack[$id]);
         }
     }
 

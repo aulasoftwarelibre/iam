@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="tests.behat.context.hook.prooph_context" class="Tests\Behat\Context\Hook\ProophContext">
+            <argument type="service" id="__symfony__.Prooph\EventStore\InMemoryEventStore" />
+            <argument type="service" id="__symfony__.prooph_event_store.projection_manager.default" />
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel" />
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection" />
+            <tag name="fob.context_service" />
+        </service>
+    </services>
+</container>

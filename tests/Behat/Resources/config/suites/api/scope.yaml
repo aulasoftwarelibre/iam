@@ -1,8 +1,8 @@
 default:
     suites:
-        scope_application_features:
+        scope_api_features:
             contexts_services:
-                - 'tests.behat.context.application.scope_context'
+                - 'tests.behat.context.api.scope_context'
 
                 - 'tests.behat.context.hook.prooph_context'
 
@@ -10,4 +10,4 @@ default:
 
                 - 'tests.behat.context.transform.scope_context'
             filters:
-                tags: '@scope && @application'
+                tags: '@scope && @api'

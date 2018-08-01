@@ -11,3 +11,10 @@ services:
         public: true
         resource: '../src/Infrastructure/ReadModel/**/Projection'
 
+    tests.services.scope_read_model_projector:
+        public: true
+        class: Tests\Services\ScopeReadModelProjector
+        arguments:
+            - '@prooph_event_store.projection_manager.default'
+            - '@AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
+            - '@AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'

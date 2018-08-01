@@ -13,44 +13,27 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Hook;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use Prooph\EventStore\InMemoryEventStore;
-use Prooph\EventStore\Projection\ProjectionManager;
+use Behat\Behat\Hook\Scope\BeforeStepScope;
+use Prooph\EventStore\EventStore;
 use Prooph\EventStore\Stream;
 use Prooph\EventStore\StreamName;
+use Tests\Services\ScopeReadModelProjector;
 
 class ProophContext implements Context
 {
     /**
-     * @var ScopeProjection
+     * @var EventStore
      */
-    private $scopeProjection;
-    /**
-     * @var ProjectionManager
-     */
-    private $projectionManager;
-    /**
-     * @var ScopeReadModel
-     */
-    private $scopeReadModel;
-    /**
-     * @var InMemoryEventStore
-     */
-    private $inMemoryEventStore;
+    private $eventStore;
+    private $projector;
 
     public function __construct(
-        InMemoryEventStore $inMemoryEventStore,
-        ProjectionManager $projectionManager,
-        ScopeReadModel $scopeReadModel,
-        ScopeProjection $scopeProjection
+        EventStore $eventStore,
+        ScopeReadModelProjector $scopeReadModelProjector
     ) {
-        $this->scopeProjection = $scopeProjection;
-        $this->projectionManager = $projectionManager;
-        $this->scopeReadModel = $scopeReadModel;
-        $this->inMemoryEventStore = $inMemoryEventStore;
+        $this->eventStore = $eventStore;
+        $this->projector = $scopeReadModelProjector->projector('scope_projection');
     }
 
     /**
@@ -58,19 +41,19 @@ class ProophContext implements Context
      */
     public function createStream(): void
     {
-        $this->inMemoryEventStore->create(new Stream(new StreamName('event_stream'), new \ArrayIterator([])));
+        $this->eventStore->create(new Stream(new StreamName('event_stream'), new \ArrayIterator([])));
+        $this->projector->reset();
     }
 
     /**
-     * @AfterStep
+     * @BeforeStep
      */
-    public function runProjection(AfterStepScope $scope): void
+    public function runProjection(BeforeStepScope $scope): void
     {
         if (!$scope->getFeature()->hasTag('api')) {
             return;
         }
 
-        $projector = $this->projectionManager->createReadModelProjection('scope_projection', $this->scopeReadModel);
-        $this->scopeProjection->project($projector)->run(false);
+        $this->projector->run(false);
     }
 }

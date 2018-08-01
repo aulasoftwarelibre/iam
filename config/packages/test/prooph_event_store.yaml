@@ -27,8 +27,7 @@ services:
         public: false
 
     # Event Store (in memory)
-    Prooph\EventStore\InMemoryEventStore:
-        public: true
+    Prooph\EventStore\InMemoryEventStore: ~
 
     Prooph\EventStore\EventStore: '@Prooph\EventStore\InMemoryEventStore'
 

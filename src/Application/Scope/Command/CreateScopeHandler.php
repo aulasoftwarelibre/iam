@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Scope\Command;
 
-use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ShortNameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
@@ -39,12 +38,30 @@ final class CreateScopeHandler
     public function __invoke(CreateScope $createScope): void
     {
         $scopeId = $createScope->scopeId();
+
+        if ($scope = $this->scopes->find($scopeId)) {
+            $this->update($createScope, $scope);
+
+            return;
+        }
+
+        $this->create($createScope);
+    }
+
+    private function update(CreateScope $createScope, Scope $scope)
+    {
+        $name = $createScope->name();
+
+        $scope->rename($name);
+
+        $this->scopes->save($scope);
+    }
+
+    private function create(CreateScope $createScope)
+    {
+        $scopeId = $createScope->scopeId();
         $name = $createScope->name();
         $shortName = $createScope->shortName();
-
-        if ($this->scopes->find($scopeId)) {
-            throw ScopeIdAlreadyRegisteredException::withScopeId($scopeId);
-        }
 
         if ($this->scopeViews->findByShortName($shortName->toString())) {
             throw ShortNameAlreadyRegisteredException::withShortName($shortName);

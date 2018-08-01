@@ -54,7 +54,7 @@ class ScopeView
     /**
      * @param string $name
      */
-    public function rename(string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

@@ -50,7 +50,7 @@ class ScopeContext implements Context
      */
     public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
     {
-        $this->client->post('/api/scopes', [
+        $this->client->post('/api/scopes', [], [
             'id' => ScopeId::generate()->toString(),
             'name' => $name,
             'shortName' => $shortName,
@@ -71,6 +71,14 @@ class ScopeContext implements Context
     public function iRemoveIt(ScopeId $scopeId)
     {
         $this->client->delete('/api/scopes/'.$scopeId->toString());
+    }
+
+    /**
+     * @When /^I rename (it) to "([^"]*)"$/
+     */
+    public function iRenameItTo(ScopeId $scopeId, string $name): void
+    {
+        $this->client->put('/api/scopes/'.$scopeId->toString(), [], ['name' => $name]);
     }
 
     /**
@@ -117,6 +125,19 @@ class ScopeContext implements Context
         $this->asserter->assertResponseCode(
             $this->client->response(),
             Response::HTTP_NO_CONTENT
+        );
+    }
+
+    /**
+     * @Then /^(it) should be renamed to "([^"]*)"$/
+     */
+    public function itShouldBeRenamedTo(ScopeId $scopeId, string $name): void
+    {
+        $expectedContent = sprintf('{"id":"%s","name":"%s","shortName":"@string@"}', $scopeId->toString(), $name);
+        $this->asserter->assertResponse(
+            $this->client->response(),
+            Response::HTTP_OK,
+            $expectedContent
         );
     }
 }

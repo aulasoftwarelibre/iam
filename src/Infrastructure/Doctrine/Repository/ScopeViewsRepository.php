@@ -59,7 +59,7 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
     public function rename(string $scopeId, string $name): void
     {
         $scopeView = $this->get($scopeId);
-        $scopeView->rename($name);
+        $scopeView->setName($name);
 
         $this->_em->flush();
     }

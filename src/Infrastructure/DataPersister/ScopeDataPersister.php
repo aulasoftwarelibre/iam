@@ -54,7 +54,7 @@ class ScopeDataPersister implements DataPersisterInterface
             )
         );
 
-        return $data;
+        return new ScopeView($data->getId(), $data->getName(), $data->getShortName());
     }
 
     /**

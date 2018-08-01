@@ -15,6 +15,7 @@ namespace Tests\Behat\Context\Api;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\HttpClient;
 use AulaSoftwareLibre\DDD\TestsBundle\Service\ResponseAsserter;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Client;
@@ -56,5 +57,25 @@ class ScopeContext implements Context
             Response::HTTP_OK,
             $expectedContent
         );
+    }
+
+    /**
+     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
+     */
+    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
+    {
+        $this->client->post('/api/scopes', [
+            'id' => ScopeId::generate()->toString(),
+            'name' => $name,
+            'shortName' => $shortName,
+        ]);
+    }
+
+    /**
+     * @Then /^the scope "([^"]*)" with name "([^"]*)" should be available$/
+     */
+    public function theScopeWithNameShouldBeAvailable(string $shortName, string $name): void
+    {
+        $this->asserter->assertResponseCode($this->client->response(), Response::HTTP_CREATED);
     }
 }

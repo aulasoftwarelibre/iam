@@ -46,6 +46,34 @@ class ScopeContext implements Context
     }
 
     /**
+     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
+     */
+    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
+    {
+        $this->client->post('/api/scopes', [
+            'id' => ScopeId::generate()->toString(),
+            'name' => $name,
+            'shortName' => $shortName,
+        ]);
+    }
+
+    /**
+     * @When /^I check (its) details$/
+     */
+    public function iCheckItsDetails(ScopeId $scopeId)
+    {
+        $this->client->get('/api/scopes/'.$scopeId->toString());
+    }
+
+    /**
+     * @When /^I remove (it)$/
+     */
+    public function iRemoveIt(ScopeId $scopeId)
+    {
+        $this->client->delete('/api/scopes/'.$scopeId->toString());
+    }
+
+    /**
      * @Then /^I should see the "([^"]*)" scope$/
      */
     public function iShouldSeeTheScope(string $shortName): void
@@ -60,31 +88,11 @@ class ScopeContext implements Context
     }
 
     /**
-     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
-     */
-    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
-    {
-        $this->client->post('/api/scopes', [
-            'id' => ScopeId::generate()->toString(),
-            'name' => $name,
-            'shortName' => $shortName,
-        ]);
-    }
-
-    /**
      * @Then /^the scope "([^"]*)" with name "([^"]*)" should be available$/
      */
     public function theScopeWithNameShouldBeAvailable(string $shortName, string $name): void
     {
         $this->asserter->assertResponseCode($this->client->response(), Response::HTTP_CREATED);
-    }
-
-    /**
-     * @When /^I check (its) details$/
-     */
-    public function iCheckItsDetails(ScopeId $scopeId)
-    {
-        $this->client->get('/api/scopes/'.$scopeId->toString());
     }
 
     /**
@@ -98,6 +106,17 @@ class ScopeContext implements Context
             $this->client->response(),
             Response::HTTP_OK,
             $expectedContent
+        );
+    }
+
+    /**
+     * @Then /^(the scope) should not be available$/
+     */
+    public function theScopeShouldNotBeAvailable(ScopeId $scopeId)
+    {
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_NO_CONTENT
         );
     }
 }

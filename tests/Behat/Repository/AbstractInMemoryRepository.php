@@ -38,7 +38,7 @@ class AbstractInMemoryRepository
 
     public function findAll(): array
     {
-        return $this->stack;
+        return \array_values($this->stack);
     }
 
     protected function _add($id, $object)

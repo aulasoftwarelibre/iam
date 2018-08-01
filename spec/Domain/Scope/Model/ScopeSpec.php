@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
-use AulaSoftwareLibre\DDD\Tests\Service\Prooph\Spec\AggregateAsserter;
+use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Spec\AggregateAsserter;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;

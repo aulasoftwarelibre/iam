@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Transform;
 
-use AulaSoftwareLibre\DDD\Tests\Service\SharedStorage;
+use AulaSoftwareLibre\DDD\TestsBundle\Service\SharedStorage;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
 

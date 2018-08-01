@@ -3,7 +3,11 @@ default:
         scope_application_features:
             contexts_services:
                 - 'tests.behat.context.application.scope_context'
+
+                - 'tests.behat.context.hook.prooph_context'
+
                 - 'tests.behat.context.setup.scope_context'
+
                 - 'tests.behat.context.transform.scope_context'
             filters:
                 tags: '@scope && @application'

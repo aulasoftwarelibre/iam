@@ -9,8 +9,12 @@
         <itemOperations>
             <itemOperation name="get" />
         </itemOperations>
+    </resource>
 
-
-
+    <resource
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView"
+            shortName="Scope"
+            description="Scopes"
+    >
     </resource>
 </resources>

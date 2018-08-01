@@ -38,3 +38,11 @@ namespace AulaSoftwareLibre\Iam\Application\Scope\Command {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
     } deriving (Command);
 }
+
+namespace AulaSoftwareLibre\Iam\Application\Scope\Query {
+    data GetScopes = GetScopes {
+    } deriving (Query);
+    data GetScope = GetScope {
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
+    } deriving (Query);
+}

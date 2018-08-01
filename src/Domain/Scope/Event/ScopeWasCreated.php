@@ -18,7 +18,9 @@ namespace AulaSoftwareLibre\Iam\Domain\Scope\Event;
 
 final class ScopeWasCreated extends \Prooph\EventSourcing\AggregateChanged
 {
-    protected $messageName = 'AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated';
+    public const MESSAGE_NAME = 'AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     protected $payload = [];
 

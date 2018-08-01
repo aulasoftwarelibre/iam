@@ -6,7 +6,4 @@
     <imports>
         <import resource="services/**/*.xml"/>
     </imports>
-    <services>
-        <service id="tests.service.in_memory_shared_storage" class="AulaSoftwareLibre\DDD\Tests\Service\InMemorySharedStorage" />
-    </services>
 </container>

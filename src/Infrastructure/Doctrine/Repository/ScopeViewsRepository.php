@@ -34,14 +34,20 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
         $this->_em->flush();
     }
 
-    public function get(string $scopeId): ScopeView
+    public function get(string $scopeId): ?ScopeView
     {
-        $this->find($scopeId);
+        return $this->find($scopeId);
+    }
+
+    public function findAll(): array
+    {
+        return parent::findAll();
     }
 
     public function remove(string $scopeId): void
     {
         $scope = $this->get($scopeId);
+
         if (!$scope instanceof ScopeView) {
             return;
         }
@@ -53,7 +59,7 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
     public function rename(string $scopeId, string $name): void
     {
         $scopeView = $this->get($scopeId);
-        $scopeView->rename($name);
+        $scopeView->setName($name);
 
         $this->_em->flush();
     }

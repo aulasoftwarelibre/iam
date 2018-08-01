@@ -20,7 +20,9 @@ final class RegisterUser extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    protected $messageName = 'AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser';
+    public const MESSAGE_NAME = 'AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function userId(): \AulaSoftwareLibre\Iam\Domain\User\Model\UserId
     {

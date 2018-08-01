@@ -15,29 +15,39 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use Prooph\ServiceBus\QueryBus;
 
 class ScopeItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
-     * @var ScopeViews
+     * @var QueryBus
      */
-    private $scopeViews;
+    private $queryBus;
 
-    public function __construct(ScopeViews $scopeViews)
+    public function __construct(QueryBus $queryBus)
     {
-        $this->scopeViews = $scopeViews;
+        $this->queryBus = $queryBus;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return Scope::class === $resourceClass;
+        return ScopeView::class === $resourceClass;
     }
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?ScopeView
     {
-        return $this->scopeViews->get($id);
+        $promise = $this->queryBus->dispatch(
+            GetScope::with(ScopeId::fromString($id))
+        );
+
+        $scope = null;
+        $promise->then(function ($result) use (&$scope) {
+            $scope = $result;
+        });
+
+        return $scope;
     }
 }

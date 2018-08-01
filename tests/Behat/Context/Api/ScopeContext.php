@@ -78,4 +78,26 @@ class ScopeContext implements Context
     {
         $this->asserter->assertResponseCode($this->client->response(), Response::HTTP_CREATED);
     }
+
+    /**
+     * @When /^I check (its) details$/
+     */
+    public function iCheckItsDetails(ScopeId $scopeId)
+    {
+        $this->client->get('/api/scopes/'.$scopeId->toString());
+    }
+
+    /**
+     * @Then /^I should see than the name is "([^"]*)" and the short name "([^"]*)"$/
+     */
+    public function iShouldSeeThanTheNameIsAndTheShortName(string $name, string $shortName)
+    {
+        $expectedContent = sprintf('{"id":"@string@","name":"%s","shortName":"%s"}', $name, $shortName);
+
+        $this->asserter->assertResponse(
+            $this->client->response(),
+            Response::HTTP_OK,
+            $expectedContent
+        );
+    }
 }

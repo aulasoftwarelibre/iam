@@ -266,6 +266,9 @@
     "ramsey/uuid": {
         "version": "3.7.3"
     },
+    "react/promise": {
+        "version": "v2.7.0"
+    },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
     },

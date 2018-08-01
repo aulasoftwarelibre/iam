@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2165885b7e805a4fcb75f655bc14e69e",
+    "content-hash": "5e6f4f03881c9f260102a7625d5248a7",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2786,6 +2786,52 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
+            "name": "react/promise",
+            "version": "v2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/f4edc2581617431aea50430749db55cc3fc031b3",
+                "reference": "f4edc2581617431aea50430749db55cc3fc031b3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "time": "2018-06-13T15:59:06+00:00"
+        },
+        {
             "name": "symfony/asset",
             "version": "v4.1.2",
             "source": {
@@ -5117,16 +5163,16 @@
     "packages-dev": [
         {
             "name": "aulasoftwarelibre/ddd-test",
-            "version": "v0.2.2",
+            "version": "v0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aulasoftwarelibre/ddd-test.git",
-                "reference": "dd8ee9950651070a655a5380eba50b6da0cb8019"
+                "reference": "6bb771936584ba25b71551ea52b147fc59ba06cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aulasoftwarelibre/ddd-test/zipball/dd8ee9950651070a655a5380eba50b6da0cb8019",
-                "reference": "dd8ee9950651070a655a5380eba50b6da0cb8019",
+                "url": "https://api.github.com/repos/aulasoftwarelibre/ddd-test/zipball/6bb771936584ba25b71551ea52b147fc59ba06cd",
+                "reference": "6bb771936584ba25b71551ea52b147fc59ba06cd",
                 "shasum": ""
             },
             "require": {
@@ -5171,7 +5217,7 @@
                 }
             ],
             "description": "Base test classes for DDD projects",
-            "time": "2018-07-30T17:31:59+00:00"
+            "time": "2018-07-30T22:39:59+00:00"
         },
         {
             "name": "behat/behat",
@@ -6884,12 +6930,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/prolic/fpp.git",
-                "reference": "0abe82c1c3ce1cc0277b542d73d9b3eaa77e5730"
+                "reference": "94e30a89d9ef7aa4cb6ed475c3d623e65e3693e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prolic/fpp/zipball/0abe82c1c3ce1cc0277b542d73d9b3eaa77e5730",
-                "reference": "0abe82c1c3ce1cc0277b542d73d9b3eaa77e5730",
+                "url": "https://api.github.com/repos/prolic/fpp/zipball/94e30a89d9ef7aa4cb6ed475c3d623e65e3693e4",
+                "reference": "94e30a89d9ef7aa4cb6ed475c3d623e65e3693e4",
                 "shasum": ""
             },
             "require": {
@@ -6923,7 +6969,7 @@
                 }
             ],
             "description": "Functional PHP Preprocessor",
-            "time": "2018-07-20T10:38:40+00:00"
+            "time": "2018-07-31T15:22:49+00:00"
         },
         {
             "name": "psr/http-message",

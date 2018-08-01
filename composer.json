@@ -16,6 +16,7 @@
         "prooph/pdo-event-store": "^1.8",
         "prooph/service-bus-symfony-bundle": "^0.7.0",
         "ramsey/uuid": "^3.7",
+        "react/promise": "^2.7",
         "symfony/console": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.1",

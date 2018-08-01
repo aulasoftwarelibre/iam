@@ -18,7 +18,9 @@ namespace AulaSoftwareLibre\Iam\Domain\User\Event;
 
 final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
 {
-    protected $messageName = 'AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated';
+    public const MESSAGE_NAME = 'AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     protected $payload = [];
 

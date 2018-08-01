@@ -20,7 +20,9 @@ final class RenameScope extends \Prooph\Common\Messaging\Command
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    protected $messageName = 'AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope';
+    public const MESSAGE_NAME = 'AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     public function scopeId(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId
     {

@@ -20,7 +20,9 @@ final class GetScopes extends \Prooph\Common\Messaging\Query
 {
     use \Prooph\Common\Messaging\PayloadTrait;
 
-    protected $messageName = 'AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes';
+    public const MESSAGE_NAME = 'AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes';
+
+    protected $messageName = self::MESSAGE_NAME;
 
     protected function setPayload(array $payload): void
     {

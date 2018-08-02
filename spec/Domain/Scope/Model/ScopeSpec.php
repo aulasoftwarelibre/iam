@@ -96,4 +96,21 @@ class ScopeSpec extends ObjectBehavior
             )
         );
     }
+
+    public function it_can_add_roles(): void
+    {
+        $role = $this->addRole(
+            RoleId::fromString(Fixtures\Role::ROLE_ID),
+            RoleName::fromString(Fixtures\Role::NAME)
+        );
+
+        (new AggregateAsserter())->assertAggregateHasProducedEvent(
+            $role->getWrappedObject(),
+            RoleWasAdded::with(
+                RoleId::fromString(Fixtures\Role::ROLE_ID),
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+                RoleName::fromString(Fixtures\Role::NAME)
+            )
+        );
+    }
 }

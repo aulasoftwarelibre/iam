@@ -17,34 +17,30 @@ use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Spec\AggregateAsserter;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasDescribed;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
-use AulaSoftwareLibre\Iam\Domain\Role\Model\Description;
-use AulaSoftwareLibre\Iam\Domain\Role\Model\Name;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use PhpSpec\ObjectBehavior;
 use Prooph\EventSourcing\AggregateRoot;
+use Tests\Spec\Fixtures;
 
 class RoleSpec extends ObjectBehavior
 {
-    private const ROLE_ID = 'e408bda0-5bed-4c50-85a8-662fa596aebf';
-    private const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
-    private const NAME = 'ROLE_USER';
-    private const DESCRIPTION = 'Role user';
-
     public function let()
     {
         $this->beConstructedThrough('add', [
-            RoleId::fromString(self::ROLE_ID),
-            ScopeId::fromString(self::SCOPE_ID),
-            Name::fromString(self::NAME),
+            RoleId::fromString(Fixtures\Role::ROLE_ID),
+            ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+            RoleName::fromString(Fixtures\Role::NAME),
         ]);
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             RoleWasAdded::with(
-                RoleId::fromString(self::ROLE_ID),
-                ScopeId::fromString(self::SCOPE_ID),
-                Name::fromString(self::NAME)
+                RoleId::fromString(Fixtures\Role::ROLE_ID),
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+                RoleName::fromString(Fixtures\Role::NAME)
             )
         );
     }
@@ -56,27 +52,27 @@ class RoleSpec extends ObjectBehavior
 
     public function it_can_be_a_string(): void
     {
-        $this->__toString()->shouldBe(self::NAME);
+        $this->__toString()->shouldBe(Fixtures\Role::NAME);
     }
 
     public function it_has_a_role_id(): void
     {
-        $this->roleId()->shouldBeLike(RoleId::fromString(self::ROLE_ID));
+        $this->roleId()->shouldBeLike(RoleId::fromString(Fixtures\Role::ROLE_ID));
     }
 
     public function it_has_a_scope_id(): void
     {
-        $this->scopeId()->shouldBeLike(ScopeId::fromString(self::SCOPE_ID));
+        $this->scopeId()->shouldBeLike(ScopeId::fromString(Fixtures\Scope::SCOPE_ID));
     }
 
     public function it_has_a_name(): void
     {
-        $this->name()->shouldBeLike(Name::fromString(self::NAME));
+        $this->name()->shouldBeLike(RoleName::fromString(Fixtures\Role::NAME));
     }
 
     public function it_has_no_description_by_default(): void
     {
-        $this->description()->shouldBeLike(Description::fromString(''));
+        $this->description()->shouldBeLike(RoleDescription::fromString(''));
     }
 
     public function it_is_not_removed_by_default(): void
@@ -91,20 +87,20 @@ class RoleSpec extends ObjectBehavior
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             RoleWasRemoved::with(
-                RoleId::fromString(self::ROLE_ID)
+                RoleId::fromString(Fixtures\Role::ROLE_ID)
             )
         );
     }
 
     public function it_can_be_described(): void
     {
-        $this->describe(Description::fromString(self::DESCRIPTION));
+        $this->describe(RoleDescription::fromString(Fixtures\Role::DESCRIPTION));
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             RoleWasDescribed::with(
-                RoleId::fromString(self::ROLE_ID),
-                Description::fromString(self::DESCRIPTION)
+                RoleId::fromString(Fixtures\Role::ROLE_ID),
+                RoleDescription::fromString(Fixtures\Role::DESCRIPTION)
             )
         );
     }

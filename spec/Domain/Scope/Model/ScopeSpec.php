@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace spec\AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Spec\AggregateAsserter;
+use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
@@ -22,27 +25,24 @@ use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
 use PhpSpec\ObjectBehavior;
 use Prooph\EventSourcing\AggregateRoot;
+use Tests\Spec\Fixtures;
 
 class ScopeSpec extends ObjectBehavior
 {
-    const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
-    const NAME = 'Identity and Access Management';
-    const SHORT_NAME = 'iam';
-
     public function let(): void
     {
         $this->beConstructedThrough('add', [
-            ScopeId::fromString(self::SCOPE_ID),
-            Name::fromString(self::NAME),
-            ShortName::fromString(self::SHORT_NAME),
+            ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+            Name::fromString(Fixtures\Scope::NAME),
+            ShortName::fromString(Fixtures\Scope::SHORT_NAME),
         ]);
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             ScopeWasCreated::with(
-                ScopeId::fromString(self::SCOPE_ID),
-                Name::fromString(self::NAME),
-                ShortName::fromString(self::SHORT_NAME)
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+                Name::fromString(Fixtures\Scope::NAME),
+                ShortName::fromString(Fixtures\Scope::SHORT_NAME)
             )
         );
     }
@@ -54,22 +54,22 @@ class ScopeSpec extends ObjectBehavior
 
     public function it_can_be_a_string(): void
     {
-        $this->__toString()->shouldBe(self::NAME);
+        $this->__toString()->shouldBe(Fixtures\Scope::NAME);
     }
 
     public function it_has_a_scope_id(): void
     {
-        $this->scopeId()->shouldBeLike(ScopeId::fromString(self::SCOPE_ID));
+        $this->scopeId()->shouldBeLike(ScopeId::fromString(Fixtures\Scope::SCOPE_ID));
     }
 
     public function it_has_a_name(): void
     {
-        $this->name()->shouldBeLike(Name::fromString(self::NAME));
+        $this->name()->shouldBeLike(Name::fromString(Fixtures\Scope::NAME));
     }
 
     public function it_has_a_short_name(): void
     {
-        $this->shortName()->shouldBeLike(ShortName::fromString(self::SHORT_NAME));
+        $this->shortName()->shouldBeLike(ShortName::fromString(Fixtures\Scope::SHORT_NAME));
     }
 
     public function it_can_be_renamed(): void
@@ -79,7 +79,7 @@ class ScopeSpec extends ObjectBehavior
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             ScopeWasRenamed::with(
-                ScopeId::fromString(self::SCOPE_ID),
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
                 Name::fromString('AulaSL Identity and Access Management')
             )
         );
@@ -92,7 +92,7 @@ class ScopeSpec extends ObjectBehavior
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             ScopeWasRemoved::with(
-                ScopeId::fromString(self::SCOPE_ID)
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID)
             )
         );
     }

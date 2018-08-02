@@ -46,16 +46,16 @@ final class RoleWasAdded extends \Prooph\EventSourcing\AggregateChanged
         return $this->scopeId;
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Role\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName
     {
         if (null === $this->name) {
-            $this->name = \AulaSoftwareLibre\Iam\Domain\Role\Model\Name::fromString($this->payload['name']);
+            $this->name = \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName::fromString($this->payload['name']);
         }
 
         return $this->name;
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Role\Model\Name $name): RoleWasAdded
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName $name): RoleWasAdded
     {
         return new self($roleId->toString(), [
             'scopeId' => $scopeId->toString(),

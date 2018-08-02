@@ -36,16 +36,16 @@ final class RoleWasDescribed extends \Prooph\EventSourcing\AggregateChanged
         return $this->roleId;
     }
 
-    public function description(): \AulaSoftwareLibre\Iam\Domain\Role\Model\Description
+    public function description(): \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription
     {
         if (null === $this->description) {
-            $this->description = \AulaSoftwareLibre\Iam\Domain\Role\Model\Description::fromString($this->payload['description']);
+            $this->description = \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription::fromString($this->payload['description']);
         }
 
         return $this->description;
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Role\Model\Description $description): RoleWasDescribed
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription $description): RoleWasDescribed
     {
         return new self($roleId->toString(), [
             'description' => $description->toString(),

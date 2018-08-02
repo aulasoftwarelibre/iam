@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Domain\Role\Model;
 
-final class Description
+final class RoleName
 {
     private $value;
 
@@ -40,17 +40,17 @@ final class Description
         return $this->value;
     }
 
-    public static function fromString(string $description): Description
+    public static function fromString(string $roleName): RoleName
     {
-        return new self($description);
+        return new self($roleName);
     }
 
-    public function equals(Description $description): bool
+    public function equals(RoleName $roleName): bool
     {
-        if (\get_class($this) !== \get_class($description)) {
+        if (\get_class($this) !== \get_class($roleName)) {
             return false;
         }
 
-        return $this->value === $description->value;
+        return $this->value === $roleName->value;
     }
 }

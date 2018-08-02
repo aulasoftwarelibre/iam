@@ -34,12 +34,12 @@ final class AddRole extends \Prooph\Common\Messaging\Command
         return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId::fromString($this->payload['scopeId']);
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Role\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName
     {
-        return \AulaSoftwareLibre\Iam\Domain\Role\Model\Name::fromString($this->payload['name']);
+        return \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName::fromString($this->payload['name']);
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Role\Model\Name $name): AddRole
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName $name): AddRole
     {
         return new self([
             'roleId' => $roleId->toString(),

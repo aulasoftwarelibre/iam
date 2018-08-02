@@ -33,11 +33,11 @@ class Role extends AggregateRoot
      */
     private $scopeId;
     /**
-     * @var Name
+     * @var RoleName
      */
     private $name;
     /**
-     * @var Description
+     * @var RoleDescription
      */
     private $description;
     /**
@@ -45,7 +45,7 @@ class Role extends AggregateRoot
      */
     private $isRemoved;
 
-    public static function add(RoleId $roleId, ScopeId $scopeId, Name $name): self
+    public static function add(RoleId $roleId, ScopeId $scopeId, RoleName $name): self
     {
         $role = new self();
         $role->recordThat(RoleWasAdded::with($roleId, $scopeId, $name));
@@ -75,22 +75,22 @@ class Role extends AggregateRoot
     }
 
     /**
-     * @return Name
+     * @return RoleName
      */
-    public function name(): Name
+    public function name(): RoleName
     {
         return $this->name;
     }
 
     /**
-     * @return Description
+     * @return RoleDescription
      */
-    public function description(): ?Description
+    public function description(): RoleDescription
     {
         return $this->description;
     }
 
-    public function describe(Description $description): void
+    public function describe(RoleDescription $description): void
     {
         if ($this->description->equals($description)) {
             return;
@@ -123,7 +123,7 @@ class Role extends AggregateRoot
         $this->roleId = $event->roleId();
         $this->scopeId = $event->scopeId();
         $this->name = $event->name();
-        $this->description = Description::fromString('');
+        $this->description = RoleDescription::fromString('');
         $this->isRemoved = false;
     }
 

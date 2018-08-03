@@ -64,12 +64,7 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
         $this->_em->flush();
     }
 
-    public function findByName(string $name): ?ScopeView
-    {
-        return $this->findOneBy(['name' => $name]);
-    }
-
-    public function findByShortName(string $shortName): ?ScopeView
+    public function findOneByShortName(string $shortName): ?ScopeView
     {
         return $this->findOneBy(['shortName' => $shortName]);
     }

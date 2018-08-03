@@ -58,16 +58,21 @@ class AbstractInMemoryRepository
         }
     }
 
-    protected function findBy($field, $value)
+    protected function findOneBy($field, $value)
     {
-        $instance = current(\array_filter($this->stack, function ($item) use ($field, $value) {
-            return $item->$field() === $value;
-        }));
+        $instance = current($this->findBy($field, $value));
 
         if (false === $instance) {
             return null;
         }
 
         return $instance;
+    }
+
+    protected function findBy($field, $value): array
+    {
+        return \array_filter($this->stack, function ($item) use ($field, $value) {
+            return $item->$field() === $value;
+        });
     }
 }

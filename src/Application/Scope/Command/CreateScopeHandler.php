@@ -63,7 +63,7 @@ final class CreateScopeHandler
         $name = $createScope->name();
         $shortName = $createScope->shortName();
 
-        if ($this->scopeViews->findByShortName($shortName->toString())) {
+        if ($this->scopeViews->findOneByShortName($shortName->toString())) {
             throw ShortNameAlreadyRegisteredException::withShortName($shortName);
         }
 

@@ -17,5 +17,11 @@
             <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore"/>
             <tag name="fob.context_service" />
         </service>
+        <service id="tests.behat.context.application.role_context" class="Tests\Behat\Context\Application\RoleContext">
+            <argument type="service" id="__symfony__.prooph_service_bus.default_command_bus" />
+            <argument type="service" id="__symfony__.aulasl.prooph_plugin.event_collector_plugin" />
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore"/>
+            <tag name="fob.context_service" />
+        </service>
     </services>
 </container>

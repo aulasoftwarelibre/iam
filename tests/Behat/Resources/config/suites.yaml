@@ -1,4 +1,5 @@
 imports:
     - 'suites/application/user.yaml'
     - 'suites/application/scope.yaml'
+    - 'suites/application/role.yaml'
     - 'suites/api/scope.yaml'

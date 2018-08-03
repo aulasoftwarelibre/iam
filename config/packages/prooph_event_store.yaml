@@ -24,6 +24,9 @@ prooph_event_store:
                 scope_projection:
                     read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
                     projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
+                role_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleProjection'
 
 services:
     _defaults:
@@ -58,3 +61,4 @@ services:
     ## Read model
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'

@@ -15,7 +15,6 @@ namespace AulaSoftwareLibre\Iam\Domain\Role\Model;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
-use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasDescribed;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Prooph\EventSourcing\AggregateRoot;
@@ -36,10 +35,6 @@ class Role extends AggregateRoot
      * @var RoleName
      */
     private $name;
-    /**
-     * @var RoleDescription
-     */
-    private $description;
     /**
      * @var bool
      */
@@ -82,23 +77,6 @@ class Role extends AggregateRoot
         return $this->name;
     }
 
-    /**
-     * @return RoleDescription
-     */
-    public function description(): RoleDescription
-    {
-        return $this->description;
-    }
-
-    public function describe(RoleDescription $description): void
-    {
-        if ($this->description->equals($description)) {
-            return;
-        }
-
-        $this->recordThat(RoleWasDescribed::with($this->roleId(), $description));
-    }
-
     public function remove(): void
     {
         if ($this->isRemoved) {
@@ -123,17 +101,11 @@ class Role extends AggregateRoot
         $this->roleId = $event->roleId();
         $this->scopeId = $event->scopeId();
         $this->name = $event->name();
-        $this->description = RoleDescription::fromString('');
         $this->isRemoved = false;
     }
 
     protected function applyRoleWasRemoved(): void
     {
         $this->isRemoved = true;
-    }
-
-    protected function applyRoleWasDescribed(RoleWasDescribed $event): void
-    {
-        $this->description = $event->description();
     }
 }

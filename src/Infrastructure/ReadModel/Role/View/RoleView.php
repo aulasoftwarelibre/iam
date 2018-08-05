@@ -27,10 +27,6 @@ class RoleView
      * @var string
      */
     private $name;
-    /**
-     * @var ?string
-     */
-    private $description;
 
     /**
      * RoleView constructor.
@@ -38,14 +34,12 @@ class RoleView
      * @param string $id
      * @param string $scopeId
      * @param string $name
-     * @param $description
      */
-    public function __construct(string $id, string $scopeId, string $name, ?string $description = null)
+    public function __construct(string $id, string $scopeId, string $name)
     {
         $this->id = $id;
         $this->scopeId = $scopeId;
         $this->name = $name;
-        $this->description = $description;
     }
 
     /**
@@ -70,21 +64,5 @@ class RoleView
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param mixed $description
-     */
-    public function setDescription(?string $description): void
-    {
-        $this->description = $description;
     }
 }

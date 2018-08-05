@@ -33,15 +33,6 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
         $this->_remove($roleId);
     }
 
-    public function describe(string $roleId, ?string $description): void
-    {
-        /** @var RoleView $roleView */
-        $roleView = $this->get($roleId);
-        $roleView->setDescription($description);
-
-        $this->_add($roleId, $roleView);
-    }
-
     public function findByScopeId(string $scopeId): array
     {
         return $this->findBy('scopeId', $scopeId);

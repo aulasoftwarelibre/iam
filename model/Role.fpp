@@ -1,7 +1,6 @@
 namespace AulaSoftwareLibre\Iam\Domain\Role\Model {
     data RoleId = RoleId deriving (Uuid);
     data RoleName = String deriving (ToString, FromString, Equals);
-    data RoleDescription = String deriving (ToString, FromString, Equals);
 }
 
 namespace AulaSoftwareLibre\Iam\Domain\Role\Event {
@@ -13,11 +12,6 @@ namespace AulaSoftwareLibre\Iam\Domain\Role\Event {
 
     data RoleWasRemoved = RoleWasRemoved {
         \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
-    } deriving (AggregateChanged);
-
-    data RoleWasDescribed = RoleWasDescribed {
-        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId,
-        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription $description
     } deriving (AggregateChanged);
 }
 

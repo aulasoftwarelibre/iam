@@ -5,6 +5,5 @@
         <id name="id" column="id" type="string" />
         <field name="scopeId" type="string" />
         <field name="name" type="string" />
-        <field name="description" type="string" nullable="true" />
     </entity>
 </doctrine-mapping>

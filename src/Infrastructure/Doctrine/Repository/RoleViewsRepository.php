@@ -56,16 +56,6 @@ class RoleViewsRepository extends ServiceEntityRepository implements RoleViews
         $this->_em->flush();
     }
 
-    public function describe(string $roleId, ?string $description): void
-    {
-        if (!$role = $this->get($roleId)) {
-            return;
-        }
-
-        $role->setDescription($description);
-        $this->_em->flush();
-    }
-
     public function findByScopeId(string $scopeId): array
     {
         return $this->findBy(['scopeId' => $scopeId]);

@@ -22,8 +22,6 @@ interface RoleViews extends SchemaManagerInterface
 
     public function remove(string $roleId): void;
 
-    public function describe(string $roleId, ?string $description): void;
-
     public function get(string $roleId): ?RoleView;
 
     public function findAll(): array;

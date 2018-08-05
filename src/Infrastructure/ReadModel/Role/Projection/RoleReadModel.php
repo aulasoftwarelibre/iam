@@ -16,7 +16,6 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection;
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
-use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasDescribed;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
@@ -51,13 +50,5 @@ class RoleReadModel extends AbstractReadModel
     public function applyRoleWasRemoved(RoleWasRemoved $event): void
     {
         $this->roleViews->remove($event->roleId()->toString());
-    }
-
-    public function applyRoleWasDescribed(RoleWasDescribed $event): void
-    {
-        $this->roleViews->describe(
-            $event->roleId()->toString(),
-            $event->description()->toString()
-        );
     }
 }

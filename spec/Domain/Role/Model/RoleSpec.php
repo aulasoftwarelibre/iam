@@ -15,9 +15,7 @@ namespace spec\AulaSoftwareLibre\Iam\Domain\Role\Model;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Spec\AggregateAsserter;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
-use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasDescribed;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
-use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleDescription;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
@@ -70,11 +68,6 @@ class RoleSpec extends ObjectBehavior
         $this->name()->shouldBeLike(RoleName::fromString(Fixtures\Role::NAME));
     }
 
-    public function it_has_no_description_by_default(): void
-    {
-        $this->description()->shouldBeLike(RoleDescription::fromString(''));
-    }
-
     public function it_is_not_removed_by_default(): void
     {
         $this->isRemoved()->shouldBe(false);
@@ -88,19 +81,6 @@ class RoleSpec extends ObjectBehavior
             $this->getWrappedObject(),
             RoleWasRemoved::with(
                 RoleId::fromString(Fixtures\Role::ROLE_ID)
-            )
-        );
-    }
-
-    public function it_can_be_described(): void
-    {
-        $this->describe(RoleDescription::fromString(Fixtures\Role::DESCRIPTION));
-
-        (new AggregateAsserter())->assertAggregateHasProducedEvent(
-            $this->getWrappedObject(),
-            RoleWasDescribed::with(
-                RoleId::fromString(Fixtures\Role::ROLE_ID),
-                RoleDescription::fromString(Fixtures\Role::DESCRIPTION)
             )
         );
     }

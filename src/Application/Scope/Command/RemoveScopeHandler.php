@@ -30,12 +30,8 @@ final class RemoveScopeHandler
     public function __invoke(RemoveScope $removeScope)
     {
         $scope = $this->scopes->get($removeScope->scopeId());
-
-        if ($scope->isRemoved()) {
-            return;
-        }
-
         $scope->remove();
+
         $this->scopes->save($scope);
     }
 }

@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Tests\Spec\Fixtures;
 
 class RemoveScopeHandlerSpec extends ObjectBehavior
 {
@@ -37,14 +37,12 @@ class RemoveScopeHandlerSpec extends ObjectBehavior
 
     public function it_removes_a_scope(Scopes $scopes, Scope $scope): void
     {
-        $scopes->get(Argument::exact(ScopeId::fromString(self::SCOPE_ID)))->willReturn($scope);
-
-        $scope->isRemoved()->willReturn(false);
+        $scopes->get(ScopeId::fromString(Fixtures\Scope::SCOPE_ID))->willReturn($scope);
         $scope->remove()->shouldBeCalled();
         $scopes->save($scope)->shouldBeCalled();
 
         $this(RemoveScope::with(
-            ScopeId::fromString(self::SCOPE_ID)
+            ScopeId::fromString(Fixtures\Scope::SCOPE_ID)
         ));
     }
 }

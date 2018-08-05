@@ -14,9 +14,14 @@ declare(strict_types=1);
 namespace Tests\Behat\Context\Application;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Plugin\EventsRecorder;
+use AulaSoftwareLibre\Iam\Application\Role\Command\AddRole;
+use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
+use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
 use Webmozart\Assert\Assert;
@@ -47,6 +52,20 @@ class RoleContext implements Context
     }
 
     /**
+     * @When /^I add a "([^"]*)" to (it)$/
+     */
+    public function iAddAToIt(string $roleName, ScopeId $scopeId)
+    {
+        $roleId = $this->roles->nextIdentity();
+
+        $this->commandBus->dispatch(AddRole::with(
+            $roleId,
+            $scopeId,
+            RoleName::fromString($roleName)
+        ));
+    }
+
+    /**
      * @Then /^the role "([^"]*)" in this scope should be available$/
      */
     public function theRoleInThisScopeShouldBeAvailable(string $roleName)
@@ -61,5 +80,31 @@ class RoleContext implements Context
         ));
 
         Assert::true($event->name()->equals(RoleName::fromString($roleName)));
+    }
+
+    /**
+     * @When /^I remove (it)$/
+     */
+    public function iRemoveIt(RoleId $roleId)
+    {
+        $this->commandBus->dispatch(RemoveRole::with(
+            $roleId
+        ));
+    }
+
+    /**
+     * @Then /^(the role) should not be available$/
+     */
+    public function theRoleShouldNotBeAvailable(RoleId $roleId)
+    {
+        /** @var RoleWasRemoved $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, RoleWasRemoved::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            RoleWasRemoved::class,
+            \get_class($event)
+        ));
+        Assert::true($event->roleId()->equals($roleId));
     }
 }

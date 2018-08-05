@@ -47,9 +47,9 @@ class RoleContext implements Context
     }
 
     /**
-     * @When /^I add a "([^"]*)" to (it)$/
+     * @Given /^the role "([^"]*)" from (this) scope$/
      */
-    public function iAddAToIt(string $roleName, ScopeId $scopeId)
+    public function theRoleFromThisScope($roleName, ScopeId $scopeId)
     {
         $roleId = $this->roles->nextIdentity();
 

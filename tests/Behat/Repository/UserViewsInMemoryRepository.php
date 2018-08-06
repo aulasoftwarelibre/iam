@@ -16,7 +16,7 @@ namespace Tests\Behat\Repository;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
 
-class UserViewInMemoryRepository extends AbstractInMemoryRepository implements UserViews
+class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements UserViews
 {
     public function add(UserView $userView): void
     {
@@ -30,11 +30,11 @@ class UserViewInMemoryRepository extends AbstractInMemoryRepository implements U
 
     public function findByUsername(string $username): ?UserView
     {
-        return $this->findBy('username', $username);
+        return $this->findOneBy('username', $username);
     }
 
     public function findByEmail(string $email): ?UserView
     {
-        return $this->findBy('email', $email);
+        return $this->findOneBy('email', $email);
     }
 }

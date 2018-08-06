@@ -28,7 +28,5 @@ interface ScopeViews extends SchemaManagerInterface
 
     public function findAll(): array;
 
-    public function findByName(string $name): ?ScopeView;
-
-    public function findByShortName(string $shortName): ?ScopeView;
+    public function findOneByShortName(string $shortName): ?ScopeView;
 }

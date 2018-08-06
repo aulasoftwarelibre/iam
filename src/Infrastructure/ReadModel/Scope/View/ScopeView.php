@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View;
 
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+
 class ScopeView
 {
     /**
@@ -27,6 +29,10 @@ class ScopeView
      * @var string
      */
     private $shortName;
+    /**
+     * @var RoleView[]|array
+     */
+    private $roles;
 
     public function __construct(string $id, string $name, string $shortName)
     {

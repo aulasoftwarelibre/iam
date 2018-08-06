@@ -9,6 +9,9 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore:
+                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
 
     projection_managers:
         default:
@@ -21,6 +24,9 @@ prooph_event_store:
                 scope_projection:
                     read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
                     projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
+                role_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleProjection'
 
 services:
     _defaults:
@@ -50,7 +56,9 @@ services:
     ## Write model
     AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore'
     AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore'
+    AulaSoftwareLibre\Iam\Application\Role\Repository\Roles: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore'
 
     ## Read model
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
     AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'

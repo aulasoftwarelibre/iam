@@ -37,7 +37,7 @@ class CreateScopeHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($scopes, $scopeViews);
 
         $scopes->find(self::SCOPE_ID)->willReturn(null);
-        $scopeViews->findByShortName(self::SHORT_NAME)->willReturn(null);
+        $scopeViews->findOneByShortName(self::SHORT_NAME)->willReturn(null);
     }
 
     public function it_is_initializable()
@@ -64,7 +64,7 @@ class CreateScopeHandlerSpec extends ObjectBehavior
 
     public function it_checks_short_name_is_free(ScopeViews $scopeViews): void
     {
-        $scopeViews->findByShortName(self::SHORT_NAME)->shouldBeCalled()->willReturn(
+        $scopeViews->findOneByShortName(self::SHORT_NAME)->shouldBeCalled()->willReturn(
             new ScopeView(self::SCOPE_ID, self::NAME, self::SHORT_NAME)
         );
 

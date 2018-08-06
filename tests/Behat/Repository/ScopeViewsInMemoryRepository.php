@@ -16,7 +16,7 @@ namespace Tests\Behat\Repository;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
 
-class ScopeViewInMemoryRepository extends AbstractInMemoryRepository implements ScopeViews
+class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements ScopeViews
 {
     public function add(ScopeView $scopeView): void
     {
@@ -42,13 +42,8 @@ class ScopeViewInMemoryRepository extends AbstractInMemoryRepository implements 
         $this->_add($scopeId, $scopeView);
     }
 
-    public function findByName(string $name): ?ScopeView
+    public function findOneByShortName(string $shortName): ?ScopeView
     {
-        return $this->findBy('getName', $name);
-    }
-
-    public function findByShortName(string $shortName): ?ScopeView
-    {
-        return $this->findBy('getShortName', $shortName);
+        return $this->findOneBy('getShortName', $shortName);
     }
 }

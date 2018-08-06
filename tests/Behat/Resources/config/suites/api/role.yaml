@@ -1,0 +1,15 @@
+default:
+    suites:
+        role_api_features:
+            contexts_services:
+            - 'tests.behat.context.api.role_context'
+
+            - 'tests.behat.context.hook.prooph_context'
+
+            - 'tests.behat.context.setup.role_context'
+            - 'tests.behat.context.setup.scope_context'
+
+            - 'tests.behat.context.transform.role_context'
+            - 'tests.behat.context.transform.scope_context'
+            filters:
+                tags: '@role && @api'

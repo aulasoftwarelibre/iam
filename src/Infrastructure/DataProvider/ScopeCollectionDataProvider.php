@@ -34,7 +34,7 @@ class ScopeCollectionDataProvider implements CollectionDataProviderInterface, Re
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return ScopeView::class === $resourceClass;
+        return ScopeView::class === $resourceClass && 'get' === $operationName;
     }
 
     public function getCollection(string $resourceClass, string $operationName = null)

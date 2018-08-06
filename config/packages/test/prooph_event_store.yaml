@@ -6,9 +6,15 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
+                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore:
+                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
+                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
 
     projection_managers:
         default:
@@ -20,6 +26,9 @@ prooph_event_store:
                 scope_projection:
                     read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
                     projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
+                role_projection:
+                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel'
+                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleProjection'
 
 
 services:
@@ -34,5 +43,6 @@ services:
     # Repositories
 
     ## Read model (in memory)
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@Tests\Behat\Repository\UserViewInMemoryRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@Tests\Behat\Repository\UserViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@Tests\Behat\Repository\RoleViewsInMemoryRepository'

@@ -13,47 +13,47 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Hook;
 
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Hook\Scope\BeforeStepScope;
-use Prooph\EventStore\EventStore;
-use Prooph\EventStore\Stream;
-use Prooph\EventStore\StreamName;
-use Tests\Services\ScopeReadModelProjector;
+use Prooph\EventStore\Projection\ProjectionManager;
 
 class ProophContext implements Context
 {
+    private $runner;
     /**
-     * @var EventStore
+     * @var ScopeReadModel
      */
-    private $eventStore;
-    private $projector;
+    private $scopeReadModel;
+    /**
+     * @var RoleReadModel
+     */
+    private $roleReadModel;
 
     public function __construct(
-        EventStore $eventStore,
-        ScopeReadModelProjector $scopeReadModelProjector
+        ProjectionManager $projectionManager,
+        ScopeReadModel $scopeReadModel,
+        RoleReadModel $roleReadModel
     ) {
-        $this->eventStore = $eventStore;
-        $this->projector = $scopeReadModelProjector->projector('scope_projection');
+        $this->runner = $projectionManager
+            ->createProjection('$all')
+            ->fromAll()
+            ->whenAny(function ($state, $event) use ($scopeReadModel, $roleReadModel): void {
+                $scopeReadModel->stack('apply', $event);
+                $roleReadModel->stack('apply', $event);
+            })
+        ;
+        $this->scopeReadModel = $scopeReadModel;
+        $this->roleReadModel = $roleReadModel;
     }
 
     /**
-     * @BeforeScenario
+     * @AfterStep
      */
-    public function createStream(): void
+    public function runProjection(): void
     {
-        $this->eventStore->create(new Stream(new StreamName('event_stream'), new \ArrayIterator([])));
-        $this->projector->reset();
-    }
-
-    /**
-     * @BeforeStep
-     */
-    public function runProjection(BeforeStepScope $scope): void
-    {
-        if (!$scope->getFeature()->hasTag('api')) {
-            return;
-        }
-
-        $this->projector->run(false);
+        $this->runner->run(false);
+        $this->scopeReadModel->persist();
+        $this->roleReadModel->persist();
     }
 }

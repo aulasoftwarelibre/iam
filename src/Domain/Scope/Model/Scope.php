@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\Role;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
@@ -89,6 +92,11 @@ class Scope extends AggregateRoot
     public function isRemoved(): bool
     {
         return $this->isRemoved;
+    }
+
+    public function addRole(RoleId $roleId, RoleName $name): Role
+    {
+        return Role::add($roleId, $this->scopeId, $name);
     }
 
     protected function aggregateId(): string

@@ -66,9 +66,9 @@ class RoleContext implements Context
     }
 
     /**
-     * @Then /^the role "([^"]*)" in this scope should be available$/
+     * @Then /^the role "([^"]*)" in (this scope) should be available$/
      */
-    public function theRoleInThisScopeShouldBeAvailable(string $roleName)
+    public function theRoleInThisScopeShouldBeAvailable(string $roleName, ScopeId $scopeId)
     {
         /** @var RoleWasAdded $event */
         $event = $this->eventsRecorder->getLastMessage()->event();
@@ -80,6 +80,7 @@ class RoleContext implements Context
         ));
 
         Assert::true($event->name()->equals(RoleName::fromString($roleName)));
+        Assert::true($event->scopeId()->equals($scopeId));
     }
 
     /**

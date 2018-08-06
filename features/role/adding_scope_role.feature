@@ -1,4 +1,4 @@
-@role @application
+@role @application @api
 Feature: Adding roles
     In order to add capabilities to scopes
     As a sysadmin

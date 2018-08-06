@@ -3,3 +3,4 @@ imports:
     - 'suites/application/scope.yaml'
     - 'suites/application/role.yaml'
     - 'suites/api/scope.yaml'
+    - 'suites/api/role.yaml'

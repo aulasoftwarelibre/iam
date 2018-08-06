@@ -6,12 +6,15 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
+                    one_stream_per_aggregate: true
 
     projection_managers:
         default:

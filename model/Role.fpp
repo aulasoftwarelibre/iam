@@ -26,3 +26,12 @@ namespace AulaSoftwareLibre\Iam\Application\Role\Command {
         \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
     } deriving (Command);
 }
+
+namespace AulaSoftwareLibre\Iam\Application\Role\Query {
+    data GetRoles = GetRoles {
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
+    } deriving (Query);
+    data GetRole = GetRole {
+        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId,
+    } deriving (Query);
+}

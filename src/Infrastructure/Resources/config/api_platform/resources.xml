@@ -16,5 +16,26 @@
             shortName="Scope"
             description="Scopes"
     >
+        <property name="roles">
+            <subresource resourceClass="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView"
+                         collection="true"
+                         maxDepth="1"/>
+        </property>
+    </resource>
+
+    <resource
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView"
+            shortName="Role"
+            description="Roles"
+    >
+        <itemOperations>
+            <itemOperation name="get" />
+            <itemOperation name="delete" />
+        </itemOperations>
+        <collectionOperations>
+            <collectionOperation name="post" />
+        </collectionOperations>
     </resource>
 </resources>
+
+

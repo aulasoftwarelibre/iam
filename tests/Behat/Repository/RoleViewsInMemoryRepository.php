@@ -35,7 +35,7 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
 
     public function findByScopeId(string $scopeId): array
     {
-        return $this->findBy('scopeId', $scopeId);
+        return $this->findBy('getScopeId', $scopeId);
     }
 
     public function findOneByRoleName(string $scopeId, string $roleName): ?RoleView

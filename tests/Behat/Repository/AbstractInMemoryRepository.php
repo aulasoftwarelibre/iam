@@ -36,11 +36,6 @@ class AbstractInMemoryRepository
         $this->users = [];
     }
 
-    public function findAll(): array
-    {
-        return \array_values($this->stack);
-    }
-
     protected function _add($id, $object)
     {
         $this->stack[$id] = $object;
@@ -58,6 +53,18 @@ class AbstractInMemoryRepository
         }
     }
 
+    public function findAll(): array
+    {
+        return \array_values($this->stack);
+    }
+
+    protected function findBy($field, $value): array
+    {
+        return \array_values(\array_filter($this->stack, function ($item) use ($field, $value) {
+            return $item->$field() === $value;
+        }));
+    }
+
     protected function findOneBy($field, $value)
     {
         $instance = current($this->findBy($field, $value));
@@ -67,12 +74,5 @@ class AbstractInMemoryRepository
         }
 
         return $instance;
-    }
-
-    protected function findBy($field, $value): array
-    {
-        return \array_filter($this->stack, function ($item) use ($field, $value) {
-            return $item->$field() === $value;
-        });
     }
 }

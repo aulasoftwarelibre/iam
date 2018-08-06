@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
-use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Application\Role\Query\GetRole;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
 use Prooph\ServiceBus\QueryBus;
-use React\Promise\Promise;
 
-class ScopeCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
+class RoleItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
      * @var QueryBus
@@ -34,21 +34,20 @@ class ScopeCollectionDataProvider implements CollectionDataProviderInterface, Re
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return ScopeView::class === $resourceClass && 'get' === $operationName;
+        return RoleView::class === $resourceClass;
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null)
+    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
-        /** @var Promise $promise */
         $promise = $this->queryBus->dispatch(
-            new GetScopes()
+            GetRole::with(RoleId::fromString($id))
         );
 
-        $scopes = [];
-        $promise->then(function ($result) use (&$scopes) {
-            $scopes = $result;
+        $role = null;
+        $promise->then(function ($result) use (&$role) {
+            $role = $result;
         });
 
-        return $scopes;
+        return $role;
     }
 }

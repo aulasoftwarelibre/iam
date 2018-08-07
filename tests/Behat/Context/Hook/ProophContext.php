@@ -13,22 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Hook;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\RoleReadModel;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\ScopeReadModel;
 use Behat\Behat\Context\Context;
 use Prooph\EventStore\Projection\ProjectionManager;
 
 class ProophContext implements Context
 {
     private $runner;
-    /**
-     * @var ScopeReadModel
-     */
-    private $scopeReadModel;
-    /**
-     * @var RoleReadModel
-     */
-    private $roleReadModel;
 
     public function __construct(
         ProjectionManager $projectionManager,
@@ -39,12 +31,9 @@ class ProophContext implements Context
             ->createProjection('$all')
             ->fromAll()
             ->whenAny(function ($state, $event) use ($scopeReadModel, $roleReadModel): void {
-                $scopeReadModel->stack('apply', $event);
-                $roleReadModel->stack('apply', $event);
-            })
-        ;
-        $this->scopeReadModel = $scopeReadModel;
-        $this->roleReadModel = $roleReadModel;
+                $scopeReadModel($event);
+                $roleReadModel($event);
+            });
     }
 
     /**
@@ -52,8 +41,6 @@ class ProophContext implements Context
      */
     public function runProjection(): void
     {
-        $this->runner->run(false);
-        $this->scopeReadModel->persist();
-        $this->roleReadModel->persist();
+//        $this->runner->run(false);
     }
 }

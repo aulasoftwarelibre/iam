@@ -30,3 +30,9 @@ services:
         namespace: 'AulaSoftwareLibre\Iam\Application\'
         tags:
         - { name: 'prooph_service_bus.default_query_bus.route_target', message_detection: true }
+
+    event_handlers:
+        resource: '../../src/Infrastructure/ReadModel/Projection'
+        namespace: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\'
+        tags:
+            - { name: 'prooph_service_bus.default_event_bus.route_target', message_detection: true }

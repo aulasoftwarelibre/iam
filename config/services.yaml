@@ -26,8 +26,5 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\:
-        resource: '../src/Infrastructure/ReadModel/**/Projection'
-
     AulaSoftwareLibre\Iam\DummyDataPersist:
         decorates: api_platform.doctrine.orm.data_persister

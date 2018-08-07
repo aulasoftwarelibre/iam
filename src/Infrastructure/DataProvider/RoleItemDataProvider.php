@@ -17,7 +17,7 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use AulaSoftwareLibre\Iam\Application\Role\Query\GetRole;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Prooph\ServiceBus\QueryBus;
 
 class RoleItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface

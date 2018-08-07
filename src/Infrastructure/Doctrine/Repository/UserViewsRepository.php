@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 

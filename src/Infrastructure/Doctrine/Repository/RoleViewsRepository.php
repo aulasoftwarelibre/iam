@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 

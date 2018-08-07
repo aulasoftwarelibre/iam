@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
 class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements ScopeViews
 {

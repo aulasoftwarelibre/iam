@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Application\Scope\Command\RemoveScope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Prooph\ServiceBus\CommandBus;
 
 class ScopeDataPersister implements DataPersisterInterface

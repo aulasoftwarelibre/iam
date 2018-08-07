@@ -18,7 +18,7 @@ use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\CommandDispatchException;
 

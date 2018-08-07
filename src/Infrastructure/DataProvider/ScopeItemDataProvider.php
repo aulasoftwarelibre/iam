@@ -17,7 +17,7 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Prooph\ServiceBus\QueryBus;
 
 class ScopeItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface

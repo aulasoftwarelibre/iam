@@ -21,8 +21,8 @@ use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

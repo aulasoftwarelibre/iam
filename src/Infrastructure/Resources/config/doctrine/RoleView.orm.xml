@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
     
-    <entity name="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView" table="scope_view">
+    <entity name="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView" table="role_view">
         <id name="id" column="id" type="string" />
+        <field name="scopeId" type="string" />
         <field name="name" type="string" />
-        <field name="shortName" type="string" unique="true" />
     </entity>
-     
 </doctrine-mapping>

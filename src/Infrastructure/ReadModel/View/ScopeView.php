@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View;
 
-class RoleView
+class ScopeView
 {
     /**
      * @var string
@@ -22,24 +22,21 @@ class RoleView
     /**
      * @var string
      */
-    private $scopeId;
+    private $name;
     /**
      * @var string
      */
-    private $name;
-
+    private $shortName;
     /**
-     * RoleView constructor.
-     *
-     * @param string $id
-     * @param string $scopeId
-     * @param string $name
+     * @var RoleView[]|array
      */
-    public function __construct(string $id, string $scopeId, string $name)
+    private $roles;
+
+    public function __construct(string $id, string $name, string $shortName)
     {
         $this->id = $id;
-        $this->scopeId = $scopeId;
         $this->name = $name;
+        $this->shortName = $shortName;
     }
 
     /**
@@ -53,16 +50,24 @@ class RoleView
     /**
      * @return string
      */
-    public function getScopeId(): string
+    public function getName(): string
     {
-        return $this->scopeId;
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getShortName(): string
     {
-        return $this->name;
+        return $this->shortName;
     }
 }

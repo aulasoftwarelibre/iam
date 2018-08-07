@@ -16,7 +16,7 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Prooph\ServiceBus\QueryBus;
 use React\Promise\Promise;
 

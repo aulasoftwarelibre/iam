@@ -16,8 +16,8 @@ namespace spec\AulaSoftwareLibre\Iam\Application\Scope\Query;
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopeHandler;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use PhpSpec\ObjectBehavior;
 use React\Promise\Deferred;
 

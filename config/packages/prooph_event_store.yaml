@@ -44,6 +44,6 @@ services:
     AulaSoftwareLibre\Iam\Application\Role\Repository\Roles: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore'
 
     ## Read model
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'

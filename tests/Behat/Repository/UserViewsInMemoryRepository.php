@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 
 class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements UserViews
 {

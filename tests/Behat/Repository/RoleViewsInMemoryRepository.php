@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 
 class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements RoleViews
 {

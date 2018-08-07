@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 
 final class AddRoleHandler
 {

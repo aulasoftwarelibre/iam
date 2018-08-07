@@ -34,6 +34,6 @@ services:
     # Repositories
 
     ## Read model (in memory)
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@Tests\Behat\Repository\UserViewsInMemoryRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewsInMemoryRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@Tests\Behat\Repository\RoleViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews: '@Tests\Behat\Repository\UserViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews: '@Tests\Behat\Repository\RoleViewsInMemoryRepository'

@@ -18,7 +18,7 @@ use AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredExce
 use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 
 final class RegisterUserHandler
 {

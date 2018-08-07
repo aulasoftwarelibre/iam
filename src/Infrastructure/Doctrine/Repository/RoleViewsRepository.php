@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\Doctrine\SchemaManagerORMTrait;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 class RoleViewsRepository extends ServiceEntityRepository implements RoleViews
 {
-    use SchemaManagerORMTrait;
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, RoleView::class);

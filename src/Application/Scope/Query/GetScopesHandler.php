@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Scope\Query;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use React\Promise\Deferred;
 
 class GetScopesHandler

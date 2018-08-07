@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Role\Query;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use React\Promise\Deferred;
 
 class GetRoleHandler

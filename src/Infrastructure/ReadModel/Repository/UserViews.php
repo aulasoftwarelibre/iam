@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\SchemaManagerInterface;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 
-interface UserViews extends SchemaManagerInterface
+interface UserViews
 {
     public function add(UserView $userView): void;
 

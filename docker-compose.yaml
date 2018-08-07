@@ -3,40 +3,10 @@ services:
     database:
         image: 'postgres:9'
         ports:
-            - '5432'
+            - '32770:5432'
         volumes:
             - './vendor/prooph/pdo-event-store/scripts/postgres:/docker-entrypoint-initdb.d'
             - './var/run/postgresql:/run/postgresql'
         environment:
             - 'POSTGRES_USER=iam'
             - 'POSTGRES_PASSWORD'
-
-    user_projection:
-        build: 'docker/php'
-        volumes:
-            - '.:/app'
-        depends_on:
-            - 'database'
-        environment:
-            - 'DATABASE_URL'
-        command: 'sh -c ".docker/wait-for database:5432 -- php bin/console event-store:projection:run user_projection"'
-
-    scope_projection:
-        build: 'docker/php'
-        volumes:
-            - '.:/app'
-        depends_on:
-            - 'database'
-        environment:
-            - 'DATABASE_URL'
-        command: 'sh -c ".docker/wait-for database:5432 -- php bin/console event-store:projection:run scope_projection"'
-
-    role_projection:
-        build: 'docker/php'
-        volumes:
-            - '.:/app'
-        depends_on:
-            - 'database'
-        environment:
-            - 'DATABASE_URL'
-        command: 'sh -c ".docker/wait-for database:5432 -- php bin/console event-store:projection:run role_projection"'

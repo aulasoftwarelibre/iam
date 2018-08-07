@@ -19,7 +19,7 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

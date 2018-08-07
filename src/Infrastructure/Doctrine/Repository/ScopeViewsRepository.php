@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\Doctrine\SchemaManagerORMTrait;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
 {
-    use SchemaManagerORMTrait;
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ScopeView::class);

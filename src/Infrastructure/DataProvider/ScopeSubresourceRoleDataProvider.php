@@ -17,7 +17,7 @@ use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use AulaSoftwareLibre\Iam\Application\Role\Query\GetRoles;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Prooph\ServiceBus\QueryBus;
 
 class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterface

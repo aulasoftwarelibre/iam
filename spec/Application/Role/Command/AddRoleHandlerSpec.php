@@ -25,8 +25,8 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use PhpSpec\ObjectBehavior;
 use Tests\Spec\Fixtures;
 

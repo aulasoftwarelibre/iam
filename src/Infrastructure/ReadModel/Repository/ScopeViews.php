@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\SchemaManagerInterface;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
-interface ScopeViews extends SchemaManagerInterface
+interface ScopeViews
 {
     public function add(ScopeView $scopeView): void;
 

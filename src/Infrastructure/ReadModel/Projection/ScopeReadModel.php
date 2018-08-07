@@ -11,19 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
-class ScopeReadModel extends AbstractReadModel
+class ScopeReadModel
 {
-    use ApplyMethodDispatcherTrait;
+    use ApplyMethodDispatcherTrait {
+        applyMessage as public __invoke;
+    }
 
     /**
      * @var ScopeViews
@@ -33,8 +34,6 @@ class ScopeReadModel extends AbstractReadModel
     public function __construct(ScopeViews $scopeViews)
     {
         $this->scopeViews = $scopeViews;
-
-        parent::__construct($scopeViews);
     }
 
     public function applyScopeWasCreated(ScopeWasCreated $event): void

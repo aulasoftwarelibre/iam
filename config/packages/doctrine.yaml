@@ -17,5 +17,5 @@ doctrine:
                 is_bundle: false
                 type: 'xml'
                 dir: '%kernel.root_dir%/Resources/config/doctrine'
-                prefix: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel'
+                prefix: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View'
                 alias: 'ReadModel'

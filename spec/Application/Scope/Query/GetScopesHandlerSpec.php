@@ -15,7 +15,7 @@ namespace spec\AulaSoftwareLibre\Iam\Application\Scope\Query;
 
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes;
 use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopesHandler;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use PhpSpec\ObjectBehavior;
 
 class GetScopesHandlerSpec extends ObjectBehavior

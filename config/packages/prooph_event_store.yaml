@@ -13,21 +13,6 @@ prooph_event_store:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
 
-    projection_managers:
-        default:
-            event_store: 'Prooph\EventStore\Pdo\PostgresEventStore'
-            connection: 'doctrine.pdo.connection'
-            projections:
-                user_projection:
-                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserReadModel'
-                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection\UserProjection'
-                scope_projection:
-                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeReadModel'
-                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Projection\ScopeProjection'
-                role_projection:
-                    read_model: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleReadModel'
-                    projection: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection\RoleProjection'
-
 services:
     _defaults:
         public: false
@@ -59,6 +44,6 @@ services:
     AulaSoftwareLibre\Iam\Application\Role\Repository\Roles: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore'
 
     ## Read model
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'

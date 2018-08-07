@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam;
+namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 

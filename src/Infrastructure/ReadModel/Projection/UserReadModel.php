@@ -11,17 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Projection;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 
-class UserReadModel extends AbstractReadModel
+class UserReadModel
 {
-    use ApplyMethodDispatcherTrait;
+    use ApplyMethodDispatcherTrait {
+        applyMessage as public __invoke;
+    }
 
     /**
      * @var UserViews
@@ -31,8 +32,6 @@ class UserReadModel extends AbstractReadModel
     public function __construct(UserViews $userViews)
     {
         $this->userViews = $userViews;
-
-        parent::__construct($userViews);
     }
 
     public function applyUserWasCreated(UserWasCreated $event): void

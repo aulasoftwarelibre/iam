@@ -2,7 +2,7 @@
 
 <resources xmlns="https://api-platform.com/schema/metadata">
     <resource
-            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView"
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView"
             shortName="User"
             description="Users"
     >
@@ -12,19 +12,19 @@
     </resource>
 
     <resource
-            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\View\ScopeView"
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView"
             shortName="Scope"
             description="Scopes"
     >
         <property name="roles">
-            <subresource resourceClass="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView"
+            <subresource resourceClass="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView"
                          collection="true"
                          maxDepth="1"/>
         </property>
     </resource>
 
     <resource
-            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView"
+            class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView"
             shortName="Role"
             description="Roles"
     >

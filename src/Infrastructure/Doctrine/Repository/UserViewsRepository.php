@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\Doctrine\SchemaManagerORMTrait;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 class UserViewsRepository extends ServiceEntityRepository implements UserViews
 {
-    use SchemaManagerORMTrait;
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserView::class);

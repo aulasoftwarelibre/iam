@@ -11,12 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository;
 
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\SchemaManagerInterface;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 
-interface RoleViews extends SchemaManagerInterface
+interface RoleViews
 {
     public function add(RoleView $roleView): void;
 

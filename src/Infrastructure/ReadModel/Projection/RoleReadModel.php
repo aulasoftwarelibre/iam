@@ -11,18 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Projection;
+namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
-use AulaSoftwareLibre\DDD\Infrastructure\ReadModel\AbstractReadModel;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\Repository\RoleViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Role\View\RoleView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 
-class RoleReadModel extends AbstractReadModel
+final class RoleReadModel
 {
-    use ApplyMethodDispatcherTrait;
+    use ApplyMethodDispatcherTrait {
+        applyMessage as public __invoke;
+    }
 
     /**
      * @var RoleViews
@@ -32,8 +33,6 @@ class RoleReadModel extends AbstractReadModel
     public function __construct(RoleViews $roleViews)
     {
         $this->roleViews = $roleViews;
-
-        parent::__construct($roleViews);
     }
 
     public function applyRoleWasAdded(RoleWasAdded $event): void

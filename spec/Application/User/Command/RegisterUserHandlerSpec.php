@@ -21,8 +21,8 @@ use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\Repository\UserViews;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\User\View\UserView;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

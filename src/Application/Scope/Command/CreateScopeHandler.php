@@ -16,7 +16,7 @@ namespace AulaSoftwareLibre\Iam\Application\Scope\Command;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ShortNameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Scope\Repository\ScopeViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 
 final class CreateScopeHandler
 {

@@ -41,6 +41,6 @@ class ProophContext implements Context
      */
     public function runProjection(): void
     {
-//        $this->runner->run(false);
+        $this->runner->run(false);
     }
 }

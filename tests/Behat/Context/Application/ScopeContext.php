@@ -18,6 +18,8 @@ use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RemoveScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
+use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
@@ -137,5 +139,21 @@ class ScopeContext implements Context
             \get_class($event)
         ));
         Assert::true($event->scopeId()->equals($scopeId));
+    }
+
+    /**
+     * @Then /^(the scope) should not be available neither (the role)$/
+     */
+    public function theScopeShouldNotBeAvailableNeitherTheRole(ScopeId $scopeId, RoleId $roleId)
+    {
+        /** @var RoleWasRemoved $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, RoleWasRemoved::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            RoleWasRemoved::class,
+            \get_class($event)
+        ));
+        Assert::true($event->roleId()->equals($roleId));
     }
 }

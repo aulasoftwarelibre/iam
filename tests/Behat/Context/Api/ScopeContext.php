@@ -15,6 +15,7 @@ namespace Tests\Behat\Context\Api;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\HttpClient;
 use AulaSoftwareLibre\DDD\TestsBundle\Service\ResponseAsserter;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
@@ -138,6 +139,18 @@ class ScopeContext implements Context
             $this->client->response(),
             Response::HTTP_OK,
             $expectedContent
+        );
+    }
+
+    /**
+     * @Then /^(the scope) should not be available neither (the role)$/
+     */
+    public function theScopeShouldNotBeAvailableNeitherTheRole(ScopeId $scopeId, RoleId $roleId)
+    {
+        $this->client->get('/api/roles/'.$roleId->toString());
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_NOT_FOUND
         );
     }
 }

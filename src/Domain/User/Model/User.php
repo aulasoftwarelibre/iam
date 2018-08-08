@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Domain\User\Model;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\Role;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use Prooph\EventSourcing\AggregateRoot;
 
 class User extends AggregateRoot
@@ -33,6 +37,10 @@ class User extends AggregateRoot
      * @var Email
      */
     private $email;
+    /**
+     * @var Role[]|array
+     */
+    private $roles;
 
     public static function add(UserId $userId, Username $username, Email $email): self
     {
@@ -63,6 +71,29 @@ class User extends AggregateRoot
         return $this->email;
     }
 
+    public function promote(RoleId $roleId): void
+    {
+        if ($this->hasRole($roleId)) {
+            return;
+        }
+
+        $this->recordThat(UserWasPromoted::with($this->userId, $roleId));
+    }
+
+    public function demote(RoleId $roleId): void
+    {
+        if (!$this->hasRole($roleId)) {
+            return;
+        }
+
+        $this->recordThat(UserWasDemoted::with($this->userId, $roleId));
+    }
+
+    public function hasRole(RoleId $roleId): bool
+    {
+        return \in_array($roleId, $this->roles, false);
+    }
+
     protected function aggregateId(): string
     {
         return $this->userId->toString();
@@ -73,5 +104,18 @@ class User extends AggregateRoot
         $this->userId = $event->userId();
         $this->username = $event->username();
         $this->email = $event->email();
+        $this->roles = [];
+    }
+
+    protected function applyUserWasPromoted(UserWasPromoted $event): void
+    {
+        $this->roles[] = $event->roleId();
+    }
+
+    protected function applyUserWasDemoted(UserWasDemoted $event): void
+    {
+        $this->roles = \array_filter($this->roles, function (RoleId $roleId) use ($event) {
+            return !$event->roleId()->equals($roleId);
+        });
     }
 }

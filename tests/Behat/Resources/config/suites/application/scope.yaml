@@ -6,8 +6,10 @@ default:
 
                 - 'tests.behat.context.hook.prooph_context'
 
+                - 'tests.behat.context.setup.role_context'
                 - 'tests.behat.context.setup.scope_context'
 
+                - 'tests.behat.context.transform.role_context'
                 - 'tests.behat.context.transform.scope_context'
             filters:
                 tags: '@scope && @application'

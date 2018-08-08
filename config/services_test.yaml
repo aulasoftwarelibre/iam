@@ -6,7 +6,3 @@ services:
 
     Tests\Behat\Repository\:
         resource: '../tests/Behat/Repository'
-
-    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\:
-        public: true
-        resource: '../src/Infrastructure/ReadModel/**/Projection'

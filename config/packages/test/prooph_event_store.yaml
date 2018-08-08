@@ -1,35 +1,12 @@
-prooph_event_store:
-    stores:
-        default:
-            event_store: 'Prooph\EventStore\InMemoryEventStore'
-            repositories:
-                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore:
-                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\User\Model\User'
-                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-                    one_stream_per_aggregate: true
-                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore:
-                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope'
-                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-                    one_stream_per_aggregate: true
-                AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore:
-                    aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
-                    aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-                    one_stream_per_aggregate: true
-
 services:
     _defaults:
         public: false
 
     # Event Store (in memory)
     Prooph\EventStore\InMemoryEventStore: ~
-    Prooph\EventStore\EventStore: '@Prooph\EventStore\InMemoryEventStore'
-
-    Prooph\EventStore\Projection\InMemoryProjectionManager:
+    Prooph\EventStore\EventStore:
+        alias: 'Prooph\EventStore\InMemoryEventStore'
         public: true
-        arguments:
-        - '@Prooph\EventStore\EventStore'
-    Prooph\EventStore\Projection\ProjectionManager: '@Prooph\EventStore\Projection\InMemoryProjectionManager'
-
 
     # Repositories
 

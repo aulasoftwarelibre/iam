@@ -1,6 +1,6 @@
 default:
     suites:
-        scope_application_features:
+        role_application_features:
             contexts_services:
             - 'tests.behat.context.application.role_context'
 

@@ -4,9 +4,9 @@ services:
 
     Prooph\EventStoreBusBridge\EventPublisher:
         arguments:
-            - '@prooph_service_bus.default_event_bus'
+        - '@prooph_service_bus.default_event_bus'
         tags:
-            - { name: 'prooph_event_store.default.plugin' }
+        - { name: 'prooph_event_store.default.plugin' }
 
     # The app.event_store.default service must be configured with a
     # Prooph\EventStore\TransactionalEventStore instance in order to user the following plugin.

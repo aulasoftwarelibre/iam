@@ -13,34 +13,28 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Context\Hook;
 
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\RoleReadModel;
-use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\ScopeReadModel;
 use Behat\Behat\Context\Context;
-use Prooph\EventStore\Projection\ProjectionManager;
+use Prooph\EventStore\EventStore;
+use Prooph\EventStore\Stream;
+use Prooph\EventStore\StreamName;
 
 class ProophContext implements Context
 {
-    private $runner;
+    /**
+     * @var EventStore
+     */
+    private $eventStore;
 
-    public function __construct(
-        ProjectionManager $projectionManager,
-        ScopeReadModel $scopeReadModel,
-        RoleReadModel $roleReadModel
-    ) {
-        $this->runner = $projectionManager
-            ->createProjection('$all')
-            ->fromAll()
-            ->whenAny(function ($state, $event) use ($scopeReadModel, $roleReadModel): void {
-                $scopeReadModel($event);
-                $roleReadModel($event);
-            });
+    public function __construct(EventStore $eventStore)
+    {
+        $this->eventStore = $eventStore;
     }
 
     /**
-     * @AfterStep
+     * @BeforeScenario
      */
-    public function runProjection(): void
+    public function createStream()
     {
-        $this->runner->run(false);
+        $this->eventStore->create(new Stream(new StreamName('event_stream'), new \ArrayIterator([])));
     }
 }

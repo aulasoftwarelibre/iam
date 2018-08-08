@@ -6,9 +6,7 @@
 
     <services>
         <service id="tests.behat.context.hook.prooph_context" class="Tests\Behat\Context\Hook\ProophContext">
-            <argument type="service" id="__symfony__.Prooph\EventStore\Projection\InMemoryProjectionManager" />
-            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\ScopeReadModel" />
-            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection\RoleReadModel" />
+            <argument type="service" id="__symfony__.Prooph\EventStore\EventStore" />
             <tag name="fob.context_service" />
         </service>
     </services>

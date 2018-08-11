@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Tests\Behat\Context\Transform;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\SharedStorage;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 
 final class UserContext implements Context
 {
@@ -30,10 +30,10 @@ final class UserContext implements Context
     }
 
     /**
-     * @Then /^the user should be available$/
+     * @Transform
      */
-    public function theUserShouldBeAvailable()
+    public function getUserFromSharedStorage(): UserId
     {
-        throw new PendingException();
+        return $this->sharedStorage->get('userId');
     }
 }

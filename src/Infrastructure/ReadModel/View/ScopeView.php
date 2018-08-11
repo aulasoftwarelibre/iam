@@ -31,6 +31,10 @@ class ScopeView
      * @var RoleView[]|array
      */
     private $roles;
+    /**
+     * @var UserView[]|array
+     */
+    private $users;
 
     public function __construct(string $id, string $name, string $shortName)
     {

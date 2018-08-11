@@ -58,7 +58,7 @@ class RoleViewsRepository extends ServiceEntityRepository implements RoleViews
         return $this->findBy(['scopeId' => $scopeId]);
     }
 
-    public function findOneByRoleName(string $scopeId, string $roleName): ?RoleView
+    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
     {
         return $this->findOneBy(['scopeId' => $scopeId, 'name' => $roleName]);
     }

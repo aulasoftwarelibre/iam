@@ -16,6 +16,7 @@
 
         <service id="tests.behat.context.transform.role_context" class="Tests\Behat\Context\Transform\RoleContext">
             <argument type="service" id="__symfony__.aulasl.shared_storage"/>
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Application\Role\Repository\Roles"/>
             <tag name="fob.context_service" />
         </service>
     </services>

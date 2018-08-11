@@ -1,4 +1,4 @@
-@user
+@user @api
 Feature: Adding an user
     In order to use the infrastructure
     As an user

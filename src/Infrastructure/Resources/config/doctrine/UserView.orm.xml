@@ -5,6 +5,7 @@
         <id name="id" column="id" type="string" />
         <field name="username" type="string" unique="true" />
         <field name="email" type="string" unique="true" />
+        <field name="roles" type="json" />
     </entity>
      
 </doctrine-mapping>

@@ -1,7 +1,9 @@
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Model {
     data ScopeId = ScopeId deriving (Uuid);
     data Name = String deriving (ToString, FromString, Equals);
-    data ShortName = String deriving (ToString, FromString, Equals);
+    data ShortName = String deriving (ToString, FromString, Equals) where
+        _:
+            | 1 === preg_match("/[^a-z]/", $value) => "Short name only accepts [a-z] characters";
     data Description = String deriving (ToString, FromString, Equals);
 }
 

@@ -22,6 +22,10 @@ final class ShortName
 
     public function __construct(string $value)
     {
+        if (1 === preg_match('/[^a-z]/', $value)) {
+            throw new \InvalidArgumentException('Short name only accepts [a-z] characters');
+        }
+
         $this->value = $value;
     }
 

@@ -16,6 +16,6 @@ namespace Tests\Spec\Fixtures;
 final class Role
 {
     public const ROLE_ID = 'e408bda0-5bed-4c50-85a8-662fa596aebf';
-    public const NAME = 'ROLE_USER';
+    public const NAME = 'ROLE_IAM_USER';
     public const DESCRIPTION = 'Role user';
 }

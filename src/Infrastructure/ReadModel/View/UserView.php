@@ -38,7 +38,7 @@ class UserView
     /**
      * @return string
      */
-    public function id(): string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -46,7 +46,7 @@ class UserView
     /**
      * @return string
      */
-    public function username(): string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -54,7 +54,7 @@ class UserView
     /**
      * @return string
      */
-    public function email(): string
+    public function getEmail(): string
     {
         return $this->email;
     }

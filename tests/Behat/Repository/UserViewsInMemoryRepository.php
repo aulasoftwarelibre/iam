@@ -18,9 +18,11 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 
 class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements UserViews
 {
+    protected static $stack = [];
+
     public function add(UserView $userView): void
     {
-        $this->_add($userView->id(), $userView);
+        $this->_add($userView->getId(), $userView);
     }
 
     public function get(string $userId): UserView
@@ -30,11 +32,16 @@ class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements 
 
     public function findByUsername(string $username): ?UserView
     {
-        return $this->findOneBy('username', $username);
+        return $this->findOneBy('getUsername', $username);
     }
 
     public function findByEmail(string $email): ?UserView
     {
-        return $this->findOneBy('email', $email);
+        return $this->findOneBy('getEmail', $email);
+    }
+
+    public function save(UserView $userView): void
+    {
+        $this->_add($userView->getId(), $userView);
     }
 }

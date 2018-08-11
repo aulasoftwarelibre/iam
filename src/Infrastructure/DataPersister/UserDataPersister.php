@@ -51,9 +51,9 @@ class UserDataPersister implements DataPersisterInterface
         try {
             $this->commandBus->dispatch(
                 RegisterUser::with(
-                    UserId::fromString($data->id()),
-                    Username::fromString($data->username()),
-                    Email::fromString($data->email())
+                    UserId::fromString($data->getId()),
+                    Username::fromString($data->getUsername()),
+                    Email::fromString($data->getEmail())
                 )
             );
         } catch (CommandDispatchException $e) {

@@ -71,9 +71,8 @@ class UserReadModel
         $roleId = $event->roleId()->toString();
 
         $userView = $this->userViews->get($userId);
-        $roleView = $this->roleViews->get($roleId);
 
-        $userView->removeRole($roleView);
+        $userView->removeRole($roleId);
         $this->userViews->save($userView);
     }
 }

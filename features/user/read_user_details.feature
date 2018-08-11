@@ -6,6 +6,6 @@ Feature: Show user details
 
     Scenario: Get details from an user
         Given an account with username "johndoe" and email "johndoe@mail.com"
-        When I check its details
+        When I check the user details
         Then I should see than the username is "johndoe" and the email "johndoe@mail.com"
 

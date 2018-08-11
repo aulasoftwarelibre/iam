@@ -84,7 +84,7 @@ class RoleContext implements Context
     }
 
     /**
-     * @When /^I remove (it)$/
+     * @When /^I remove (the role)$/
      */
     public function iRemoveIt(RoleId $roleId)
     {

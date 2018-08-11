@@ -74,13 +74,13 @@ class UserView
 
     public function addRole(RoleView $roleView): void
     {
-        $this->roles[] = $roleView->getName();
+        $this->roles[] = $roleView;
     }
 
-    public function removeRole(RoleView $roleView): void
+    public function removeRole(string $roleId): void
     {
-        $this->roles = \array_filter($this->roles, function (string $roleName) use ($roleView) {
-            return $roleName !== $roleView->getName();
+        $this->roles = \array_filter($this->roles, function (RoleView $roleView) use ($roleId) {
+            return $roleId !== $roleView->getId();
         });
     }
 }

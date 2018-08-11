@@ -81,7 +81,7 @@ class UserContext implements Context
     }
 
     /**
-     * @When /^I check (its) details$/
+     * @When /^I check (the user) details$/
      */
     public function iCheckItsDetails(UserId $userId): void
     {
@@ -117,7 +117,7 @@ class UserContext implements Context
     {
         $this->client->get('/api/users/'.$userId->toString());
 
-        $expectedResponse = sprintf('{"id":"%s","username":"@string@","email":"@string@","roles":["%s"]}', $userId->toString(), $role->name()->toString());
+        $expectedResponse = sprintf('{"id":"%s","username":"@string@","email":"@string@","roles":[{"id":"%s","scopeId":"@string@","name":"@string@"}]}', $userId->toString(), $role->roleId()->toString());
 
         $this->asserter->assertResponse(
             $this->client->response(),

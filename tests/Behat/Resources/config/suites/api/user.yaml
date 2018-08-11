@@ -2,6 +2,7 @@ default:
     suites:
         user_api_features:
             contexts_services:
+                - 'tests.behat.context.api.role_context'
                 - 'tests.behat.context.api.user_context'
 
                 - 'tests.behat.context.hook.database_context'

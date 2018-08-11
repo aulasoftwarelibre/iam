@@ -102,4 +102,25 @@ class RoleContext implements Context
             $expectedContent
         );
     }
+
+    /**
+     * @When /^I remove (the role)$/
+     */
+    public function iRemoveIt(RoleId $roleId)
+    {
+        $this->client->delete('/api/roles/'.$roleId->toString());
+    }
+
+    /**
+     * @Then /^(the role) should not be available$/
+     */
+    public function theRoleShouldNotBeAvailable(RoleId $roleId)
+    {
+        $this->client->get('/api/roles/'.$roleId->toString());
+
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_NOT_FOUND
+        );
+    }
 }

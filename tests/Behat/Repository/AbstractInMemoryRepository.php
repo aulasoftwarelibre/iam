@@ -15,52 +15,38 @@ namespace Tests\Behat\Repository;
 
 class AbstractInMemoryRepository
 {
-    protected $stack = [];
-
-    public function init(): void
-    {
-    }
-
-    public function isInitialized(): bool
-    {
-        return true;
-    }
+    protected static $stack = [];
 
     public function reset(): void
     {
-        $this->users = [];
-    }
-
-    public function delete(): void
-    {
-        $this->users = [];
+        static::$stack = [];
     }
 
     protected function _add($id, $object)
     {
-        $this->stack[$id] = $object;
+        static::$stack[$id] = $object;
     }
 
     protected function _get(string $id)
     {
-        return $this->stack[$id] ?? null;
+        return static::$stack[$id] ?? null;
     }
 
     protected function _remove(string $id)
     {
-        if (\array_key_exists($id, $this->stack)) {
-            unset($this->stack[$id]);
+        if (\array_key_exists($id, static::$stack)) {
+            unset(static::$stack[$id]);
         }
     }
 
     public function findAll(): array
     {
-        return \array_values($this->stack);
+        return \array_values(static::$stack);
     }
 
     protected function findBy($field, $value): array
     {
-        return \array_values(\array_filter($this->stack, function ($item) use ($field, $value) {
+        return \array_values(\array_filter(static::$stack, function ($item) use ($field, $value) {
             return $item->$field() === $value;
         }));
     }

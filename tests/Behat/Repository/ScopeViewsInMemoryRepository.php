@@ -18,6 +18,8 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
 class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements ScopeViews
 {
+    protected static $stack = [];
+
     public function add(ScopeView $scopeView): void
     {
         $this->_add($scopeView->getId(), $scopeView);

@@ -4,6 +4,7 @@ default:
             contexts_services:
                 - 'tests.behat.context.application.user_context'
 
+                - 'tests.behat.context.hook.database_context'
                 - 'tests.behat.context.hook.prooph_context'
 
                 - 'tests.behat.context.transform.user_context'

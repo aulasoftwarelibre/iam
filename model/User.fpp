@@ -39,3 +39,9 @@ namespace AulaSoftwareLibre\Iam\Application\User\Command {
         \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
     } deriving (Command);
 }
+
+namespace AulaSoftwareLibre\Iam\Application\User\Query {
+    data GetUser = GetUser {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId
+    } deriving (Query);
+}

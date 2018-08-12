@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\User\Exception;
 
-class UserNotFoundException extends \DomainException
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
+
+class UserNotFoundException extends \InvalidArgumentException
 {
+    public static function withUserId(UserId $userId): self
+    {
+        return new self(sprintf('User with id %s does not exists', $userId->toString()));
+    }
 }

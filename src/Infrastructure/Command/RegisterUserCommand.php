@@ -15,7 +15,6 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\Command;
 
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Prooph\ServiceBus\CommandBus;
 use Symfony\Component\Console\Command\Command;
@@ -49,7 +48,6 @@ class RegisterUserCommand extends Command
             ->setName('iam:user:create')
             ->setDescription('Create a new user')
             ->addArgument('username', InputArgument::REQUIRED, 'Set username')
-            ->addArgument('email', InputArgument::REQUIRED, 'Set email')
         ;
     }
 
@@ -59,13 +57,11 @@ class RegisterUserCommand extends Command
 
         $userId = $this->users->nextIdentity();
         $username = Username::fromString($input->getArgument('username'));
-        $email = Email::fromString($input->getArgument('email'));
 
         $this->commandBus->dispatch(
             RegisterUser::with(
                 $userId,
-                $username,
-                $email
+                $username
             )
         );
 

@@ -24,19 +24,14 @@ class UserView
      */
     private $username;
     /**
-     * @var string
-     */
-    private $email;
-    /**
      * @var string[]|array
      */
     private $roles;
 
-    public function __construct(string $id, string $username, string $email)
+    public function __construct(string $id, string $username)
     {
         $this->id = $id;
         $this->username = $username;
-        $this->email = $email;
         $this->roles = [];
     }
 
@@ -54,14 +49,6 @@ class UserView
     public function getUsername(): string
     {
         return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 
     /**

@@ -5,7 +5,6 @@ Feature: Show user details
     I want to see user details
 
     Scenario: Get details from an user
-        Given an account with username "johndoe" and email "johndoe@mail.com"
+        Given an account with username "johndoe"
         When I check the user details
-        Then I should see than the username is "johndoe" and the email "johndoe@mail.com"
-
+        Then I should see than the username is "johndoe"

@@ -15,21 +15,19 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Application\User\Query\GetUser;
-use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
-use Prooph\ServiceBus\QueryBus;
 
 class UserItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
-     * @var QueryBus
+     * @var UserViews
      */
-    private $queryBus;
+    private $userViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(UserViews $userViews)
     {
-        $this->queryBus = $queryBus;
+        $this->userViews = $userViews;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -39,15 +37,6 @@ class UserItemDataProvider implements ItemDataProviderInterface, RestrictedDataP
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
-        $promise = $this->queryBus->dispatch(
-            GetUser::with(UserId::fromString($id))
-        );
-
-        $user = null;
-        $promise->then(function ($result) use (&$user) {
-            $user = $result;
-        });
-
-        return $user;
+        return $this->userViews->ofId($id);
     }
 }

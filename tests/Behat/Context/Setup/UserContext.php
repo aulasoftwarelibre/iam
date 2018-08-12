@@ -18,7 +18,6 @@ use AulaSoftwareLibre\Iam\Application\User\Command\PromoteUser;
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
@@ -49,17 +48,16 @@ class UserContext implements Context
     }
 
     /**
-     * @Given /^an account with username "([^"]*)" and email "([^"]*)"$/
+     * @Given /^an account with username "([^"]*)"$/
      */
-    public function anAccountWithUsernameAndEmail(string $username, string $email)
+    public function anAccountWithUsername(string $username)
     {
         $userId = $this->users->nextIdentity();
 
         $this->commandBus->dispatch(
             RegisterUser::with(
                 $userId,
-                Username::fromString($username),
-                Email::fromString($email)
+                Username::fromString($username)
             )
         );
 
@@ -69,11 +67,11 @@ class UserContext implements Context
     }
 
     /**
-     * @Given /^an account with username "([^"]*)" and email "([^"]*)" and (this role)$/
+     * @Given /^an account with username "([^"]*)" and (this role)$/
      */
-    public function anAccountWithUsernameAndEmailAndThisRole(string $username, string $email, RoleId $roleId)
+    public function anAccountWithUsernameAndThisRole(string $username, RoleId $roleId)
     {
-        $userId = $this->anAccountWithUsernameAndEmail($username, $email);
+        $userId = $this->anAccountWithUsername($username);
 
         $this->commandBus->dispatch(
             PromoteUser::with(

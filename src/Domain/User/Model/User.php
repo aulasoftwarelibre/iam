@@ -33,19 +33,15 @@ class User extends AggregateRoot
      */
     private $username;
     /**
-     * @var Email
-     */
-    private $email;
-    /**
      * @var RoleId[]|array
      */
     private $roles;
 
-    public static function add(UserId $userId, Username $username, Email $email): self
+    public static function add(UserId $userId, Username $username): self
     {
         $user = new self();
 
-        $user->recordThat(UserWasCreated::with($userId, $username, $email));
+        $user->recordThat(UserWasCreated::with($userId, $username));
 
         return $user;
     }
@@ -63,11 +59,6 @@ class User extends AggregateRoot
     public function username(): Username
     {
         return $this->username;
-    }
-
-    public function email(): Email
-    {
-        return $this->email;
     }
 
     public function promote(RoleId $roleId): void
@@ -102,7 +93,6 @@ class User extends AggregateRoot
     {
         $this->userId = $event->userId();
         $this->username = $event->username();
-        $this->email = $event->email();
         $this->roles = [];
     }
 

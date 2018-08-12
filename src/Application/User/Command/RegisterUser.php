@@ -34,17 +34,11 @@ final class RegisterUser extends \Prooph\Common\Messaging\Command
         return \AulaSoftwareLibre\Iam\Domain\User\Model\Username::fromString($this->payload['username']);
     }
 
-    public function email(): \AulaSoftwareLibre\Iam\Domain\User\Model\Email
-    {
-        return \AulaSoftwareLibre\Iam\Domain\User\Model\Email::fromString($this->payload['email']);
-    }
-
-    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username, \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email): RegisterUser
+    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username): RegisterUser
     {
         return new self([
             'userId' => $userId->toString(),
             'username' => $username->toString(),
-            'email' => $email->toString(),
         ]);
     }
 
@@ -56,10 +50,6 @@ final class RegisterUser extends \Prooph\Common\Messaging\Command
 
         if (!isset($payload['username']) || !\is_string($payload['username'])) {
             throw new \InvalidArgumentException("Key 'username' is missing in payload or is not a string");
-        }
-
-        if (!isset($payload['email']) || !\is_string($payload['email'])) {
-            throw new \InvalidArgumentException("Key 'email' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

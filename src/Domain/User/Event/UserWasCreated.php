@@ -26,7 +26,6 @@ final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
 
     private $userId;
     private $username;
-    private $email;
 
     public function userId(): \AulaSoftwareLibre\Iam\Domain\User\Model\UserId
     {
@@ -46,20 +45,10 @@ final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
         return $this->username;
     }
 
-    public function email(): \AulaSoftwareLibre\Iam\Domain\User\Model\Email
-    {
-        if (null === $this->email) {
-            $this->email = \AulaSoftwareLibre\Iam\Domain\User\Model\Email::fromString($this->payload['email']);
-        }
-
-        return $this->email;
-    }
-
-    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username, \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email): UserWasCreated
+    public static function with(\AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId, \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username): UserWasCreated
     {
         return new self($userId->toString(), [
             'username' => $username->toString(),
-            'email' => $email->toString(),
         ]);
     }
 
@@ -67,10 +56,6 @@ final class UserWasCreated extends \Prooph\EventSourcing\AggregateChanged
     {
         if (!isset($payload['username']) || !\is_string($payload['username'])) {
             throw new \InvalidArgumentException("Key 'username' is missing in payload or is not a string");
-        }
-
-        if (!isset($payload['email']) || !\is_string($payload['email'])) {
-            throw new \InvalidArgumentException("Key 'email' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

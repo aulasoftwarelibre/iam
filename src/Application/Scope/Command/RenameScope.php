@@ -29,12 +29,12 @@ final class RenameScope extends \Prooph\Common\Messaging\Command
         return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId::fromString($this->payload['scopeId']);
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName
     {
-        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name::fromString($this->payload['name']);
+        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName::fromString($this->payload['name']);
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name): RenameScope
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name): RenameScope
     {
         return new self([
             'scopeId' => $scopeId->toString(),

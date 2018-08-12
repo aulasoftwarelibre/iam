@@ -18,7 +18,6 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use PhpSpec\ObjectBehavior;
@@ -27,24 +26,18 @@ use Tests\Spec\Fixtures;
 
 class UserSpec extends ObjectBehavior
 {
-    const USER_ID = 'e8a68535-3e17-468f-acc3-8a3e0fa04a59';
-    const USERNAME = 'johndoe';
-    const EMAIL = 'john@doe.com';
-
     public function let(): void
     {
         $this->beConstructedThrough('add', [
             UserId::fromString(Fixtures\User::USER_ID),
             Username::fromString(Fixtures\User::USERNAME),
-            Email::fromString(Fixtures\User::EMAIL),
         ]);
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             UserWasCreated::with(
                 UserId::fromString(Fixtures\User::USER_ID),
-                Username::fromString(Fixtures\User::USERNAME),
-                Email::fromString(Fixtures\User::EMAIL)
+                Username::fromString(Fixtures\User::USERNAME)
             )
         );
     }
@@ -67,11 +60,6 @@ class UserSpec extends ObjectBehavior
     public function it_has_an_username(): void
     {
         $this->username()->shouldBeLike(Username::fromString(Fixtures\User::USERNAME));
-    }
-
-    public function it_has_an_email(): void
-    {
-        $this->email()->shouldBeLike(Email::fromString(Fixtures\User::EMAIL));
     }
 
     public function it_can_promote_user(): void

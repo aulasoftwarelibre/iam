@@ -47,14 +47,14 @@ class ScopeContext implements Context
     }
 
     /**
-     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
+     * @When /^I register an scope with name "([^"]*)" and alias "([^"]*)"$/
      */
-    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
+    public function iRegisterAnScopeWithNameAndAlias(string $name, string $alias): void
     {
         $this->client->post('/api/scopes', [], [
             'id' => ScopeId::generate()->toString(),
             'name' => $name,
-            'shortName' => $shortName,
+            'alias' => $alias,
         ]);
     }
 
@@ -68,6 +68,7 @@ class ScopeContext implements Context
 
     /**
      * @When /^I remove (it)$/
+     * @When /^I remove (it) again$/
      */
     public function iRemoveIt(ScopeId $scopeId)
     {
@@ -85,9 +86,9 @@ class ScopeContext implements Context
     /**
      * @Then /^I should see the "([^"]*)" scope$/
      */
-    public function iShouldSeeTheScope(string $shortName): void
+    public function iShouldSeeTheScope(string $alias): void
     {
-        $expectedContent = sprintf('[{"id":"@string@","name":"@string@","shortName":"%s"}]', $shortName);
+        $expectedContent = sprintf('[{"id":"@string@","name":"@string@","alias":"%s"}]', $alias);
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -99,17 +100,17 @@ class ScopeContext implements Context
     /**
      * @Then /^the scope "([^"]*)" with name "([^"]*)" should be available$/
      */
-    public function theScopeWithNameShouldBeAvailable(string $shortName, string $name): void
+    public function theScopeWithNameShouldBeAvailable(string $alias, string $name): void
     {
         $this->asserter->assertResponseCode($this->client->response(), Response::HTTP_CREATED);
     }
 
     /**
-     * @Then /^I should see than the name is "([^"]*)" and the short name "([^"]*)"$/
+     * @Then /^I should see than the name is "([^"]*)" and the alias "([^"]*)"$/
      */
-    public function iShouldSeeThanTheNameIsAndTheShortName(string $name, string $shortName)
+    public function iShouldSeeThanTheNameIsAndTheAlias(string $name, string $alias)
     {
-        $expectedContent = sprintf('{"id":"@string@","name":"%s","shortName":"%s"}', $name, $shortName);
+        $expectedContent = sprintf('{"id":"@string@","name":"%s","alias":"%s"}', $name, $alias);
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -134,7 +135,7 @@ class ScopeContext implements Context
      */
     public function itShouldBeRenamedTo(ScopeId $scopeId, string $name): void
     {
-        $expectedContent = sprintf('{"id":"%s","name":"%s","shortName":"@string@"}', $scopeId->toString(), $name);
+        $expectedContent = sprintf('{"id":"%s","name":"%s","alias":"@string@"}', $scopeId->toString(), $name);
         $this->asserter->assertResponse(
             $this->client->response(),
             Response::HTTP_OK,
@@ -148,6 +149,28 @@ class ScopeContext implements Context
     public function theScopeShouldNotBeAvailableNeitherTheRole(ScopeId $scopeId, RoleId $roleId)
     {
         $this->client->get('/api/roles/'.$roleId->toString());
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
+     * @Then /^I should not allowed to do it$/
+     */
+    public function iShouldNotAllowedToDoIt()
+    {
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_BAD_REQUEST
+        );
+    }
+
+    /**
+     * @Then /^I should receive a not found error$/
+     */
+    public function iShouldReceiveANotFoundError()
+    {
         $this->asserter->assertResponseCode(
             $this->client->response(),
             Response::HTTP_NOT_FOUND

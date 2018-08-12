@@ -22,7 +22,6 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
@@ -55,15 +54,14 @@ class UserContext implements Context
     }
 
     /**
-     * @When /^I register an account with the "([^"]*)" username and "([^"]*)" email$/
+     * @When /^I register an account with username "([^"]*)"$/
      */
-    public function iRegisterAnAccountWithTheUsernameAndEmail($username, $email)
+    public function iRegisterAnAccountWithUsername($username)
     {
         $this->commandBus->dispatch(
             RegisterUser::with(
                 $this->users->nextIdentity(),
-                Username::fromString($username),
-                Email::fromString($email)
+                Username::fromString($username)
             )
         );
     }

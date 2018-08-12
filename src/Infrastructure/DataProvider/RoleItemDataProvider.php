@@ -15,21 +15,19 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Application\Role\Query\GetRole;
-use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
-use Prooph\ServiceBus\QueryBus;
 
 class RoleItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
-     * @var QueryBus
+     * @var RoleViews
      */
-    private $queryBus;
+    private $roleViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(RoleViews $roleViews)
     {
-        $this->queryBus = $queryBus;
+        $this->roleViews = $roleViews;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -39,15 +37,6 @@ class RoleItemDataProvider implements ItemDataProviderInterface, RestrictedDataP
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
-        $promise = $this->queryBus->dispatch(
-            GetRole::with(RoleId::fromString($id))
-        );
-
-        $role = null;
-        $promise->then(function ($result) use (&$role) {
-            $role = $result;
-        });
-
-        return $role;
+        return $this->roleViews->ofId($id);
     }
 }

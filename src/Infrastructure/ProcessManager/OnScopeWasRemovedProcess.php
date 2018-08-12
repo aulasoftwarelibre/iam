@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\ProcessManager;
 
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
-use AulaSoftwareLibre\Iam\Application\Role\Query\GetRoles;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Prooph\ServiceBus\CommandBus;
-use Prooph\ServiceBus\QueryBus;
 
 final class OnScopeWasRemovedProcess
 {
@@ -28,30 +27,25 @@ final class OnScopeWasRemovedProcess
      */
     private $commandBus;
     /**
-     * @var QueryBus
+     * @var RoleViews
      */
-    private $queryBus;
+    private $roleViews;
 
-    public function __construct(CommandBus $commandBus, QueryBus $queryBus)
+    public function __construct(CommandBus $commandBus, RoleViews $roleViews)
     {
         $this->commandBus = $commandBus;
-        $this->queryBus = $queryBus;
+        $this->roleViews = $roleViews;
     }
 
     public function __invoke(ScopeWasRemoved $event): void
     {
-        $promise = $this->queryBus->dispatch(
-            GetRoles::with($event->scopeId())
-        );
+        $roles = $this->roleViews->ofScopeId($event->scopeId()->toString());
 
         $commandBus = $this->commandBus;
-        $promise->then(function ($result) use ($commandBus) {
-            /** @var RoleView $role */
-            foreach ($result as $role) {
-                $commandBus->dispatch(
-                    RemoveRole::with(RoleId::fromString($role->getId()))
-                );
-            }
+        array_walk($roles, function (RoleView $roleView) use ($commandBus) {
+            $commandBus->dispatch(
+                RemoveRole::with(RoleId::fromString($roleView->getId()))
+            );
         });
     }
 }

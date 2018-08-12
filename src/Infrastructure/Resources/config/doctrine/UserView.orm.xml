@@ -4,7 +4,6 @@
     <entity name="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView" table="user_view">
         <id name="id" column="id" type="string" />
         <field name="username" type="string" unique="true" />
-        <field name="email" type="string" unique="true" />
         <field name="roles" type="json" />
     </entity>
      

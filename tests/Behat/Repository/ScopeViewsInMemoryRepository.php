@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
+use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
@@ -25,9 +27,20 @@ class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements
         $this->_add($scopeView->getId(), $scopeView);
     }
 
-    public function get(string $scopeId): ?ScopeView
+    public function get(string $scopeId): ScopeView
     {
-        return $this->_get($scopeId);
+        $scope = $this->_ofId($scopeId);
+
+        if (!$scope instanceof ScopeView) {
+            throw ScopeNotFoundException::withScopeId(ScopeId::fromString($scopeId));
+        }
+
+        return $scope;
+    }
+
+    public function ofId(string $scopeId): ?ScopeView
+    {
+        return $this->_ofId($scopeId);
     }
 
     public function remove(string $scopeId): void
@@ -44,8 +57,8 @@ class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements
         $this->_add($scopeId, $scopeView);
     }
 
-    public function findOneByShortName(string $shortName): ?ScopeView
+    public function ofAlias(string $alias): ?ScopeView
     {
-        return $this->findOneBy('getShortName', $shortName);
+        return $this->findOneBy('getAlias', $alias);
     }
 }

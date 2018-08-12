@@ -1,22 +1,21 @@
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Model {
     data ScopeId = ScopeId deriving (Uuid);
-    data Name = String deriving (ToString, FromString, Equals);
-    data ShortName = String deriving (ToString, FromString, Equals) where
+    data ScopeName = String deriving (ToString, FromString, Equals);
+    data ScopeAlias = String deriving (ToString, FromString, Equals) where
         _:
-            | 1 === preg_match("/[^a-z]/", $value) => "Short name only accepts [a-z] characters";
-    data Description = String deriving (ToString, FromString, Equals);
+            | 1 === preg_match("/[^a-z]/", $value) => "Scope alias only accepts [a-z] characters";
 }
 
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Event {
     data ScopeWasCreated = ScopeWasCreated {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName $shortName
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name,
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias $alias
     } deriving (AggregateChanged);
 
     data ScopeWasRenamed = ScopeWasRenamed {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name
     } deriving (AggregateChanged);
 
     data ScopeWasRemoved = ScopeWasRemoved {
@@ -27,24 +26,16 @@ namespace AulaSoftwareLibre\Iam\Domain\Scope\Event {
 namespace AulaSoftwareLibre\Iam\Application\Scope\Command {
     data CreateScope = CreateScope {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName $shortName
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name,
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias $alias
     } deriving (Command);
 
     data RenameScope = RenameScope {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name,
+        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name,
     } deriving (Command);
 
     data RemoveScope = RemoveScope {
         \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
     } deriving (Command);
-}
-
-namespace AulaSoftwareLibre\Iam\Application\Scope\Query {
-    data GetScopes = GetScopes {
-    } deriving (Query);
-    data GetScope = GetScope {
-        \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId,
-    } deriving (Query);
 }

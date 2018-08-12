@@ -46,8 +46,7 @@ class UserReadModel
     {
         $userView = new UserView(
             $event->userId()->toString(),
-            $event->username()->toString(),
-            $event->email()->toString()
+            $event->username()->toString()
         );
 
         $this->userViews->add($userView);
@@ -58,8 +57,8 @@ class UserReadModel
         $userId = $event->userId()->toString();
         $roleId = $event->roleId()->toString();
 
-        $userView = $this->userViews->get($userId);
-        $roleView = $this->roleViews->get($roleId);
+        $userView = $this->userViews->ofId($userId);
+        $roleView = $this->roleViews->ofId($roleId);
 
         $userView->addRole($roleView);
         $this->userViews->save($userView);
@@ -70,7 +69,7 @@ class UserReadModel
         $userId = $event->userId()->toString();
         $roleId = $event->roleId()->toString();
 
-        $userView = $this->userViews->get($userId);
+        $userView = $this->userViews->ofId($userId);
 
         $userView->removeRole($roleId);
         $this->userViews->save($userView);

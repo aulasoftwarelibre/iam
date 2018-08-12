@@ -41,7 +41,7 @@ class ScopeReadModel
         $scopeView = new ScopeView(
             $event->scopeId()->toString(),
             $event->name()->toString(),
-            $event->shortName()->toString()
+            $event->alias()->toString()
         );
 
         $this->scopeViews->add($scopeView);

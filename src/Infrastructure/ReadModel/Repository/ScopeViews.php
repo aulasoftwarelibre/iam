@@ -19,13 +19,15 @@ interface ScopeViews
 {
     public function add(ScopeView $scopeView): void;
 
+    public function get(string $scopeId): ScopeView;
+
     public function remove(string $scopeId): void;
 
     public function rename(string $scopeId, string $name): void;
 
-    public function get(string $scopeId): ?ScopeView;
+    public function ofId(string $scopeId): ?ScopeView;
 
-    public function findAll(): array;
+    public function ofAlias(string $alias): ?ScopeView;
 
-    public function findOneByShortName(string $shortName): ?ScopeView;
+    public function all(): array;
 }

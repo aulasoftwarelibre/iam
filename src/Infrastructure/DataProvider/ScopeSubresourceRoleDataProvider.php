@@ -15,24 +15,28 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
-use AulaSoftwareLibre\Iam\Application\Role\Query\GetRoles;
-use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\QueryBus;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterface
 {
     /**
-     * @var QueryBus
+     * @var ScopeViews
      */
-    private $queryBus;
+    private $scopeViews;
+    /**
+     * @var RoleViews
+     */
+    private $roleViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(ScopeViews $scopeViews, RoleViews $roleViews)
     {
-        $this->queryBus = $queryBus;
+        $this->scopeViews = $scopeViews;
+        $this->roleViews = $roleViews;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
@@ -48,31 +52,11 @@ class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterfa
             throw new \InvalidArgumentException(sprintf('Invalid identifiers array: %s', json_encode($identifiers)));
         }
 
-        $promise = $this->queryBus->dispatch(
-            GetScope::with(
-                ScopeId::fromString($scopeId)
-            )
-        );
-        $scope = null;
-        $promise->then(function ($result) use (&$scope) {
-            $scope = $result;
-        });
-
+        $scope = $this->scopeViews->ofId($scopeId);
         if (!$scope instanceof ScopeView) {
             throw new NotFoundHttpException('Not Found');
         }
 
-        $promise = $this->queryBus->dispatch(
-            GetRoles::with(
-                ScopeId::fromString($scopeId)
-            )
-        );
-
-        $roles = [];
-        $promise->then(function ($result) use (&$roles) {
-            $roles = $result;
-        });
-
-        return $roles;
+        return $this->roleViews->ofScopeId($scopeId);
     }
 }

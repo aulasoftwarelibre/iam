@@ -1,14 +1,12 @@
 namespace AulaSoftwareLibre\Iam\Domain\User\Model {
     data UserId = UserId deriving (Uuid);
     data Username = String deriving (ToString, FromString, Equals);
-    data Email = String deriving (ToString, FromString, Equals);
 }
 
 namespace AulaSoftwareLibre\Iam\Domain\User\Event {
     data UserWasCreated = UserWasCreated {
         \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
-        \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username,
-        \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email
+        \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username
     } deriving (AggregateChanged);
 
     data UserWasPromoted = UserWasPromoted {
@@ -25,8 +23,7 @@ namespace AulaSoftwareLibre\Iam\Domain\User\Event {
 namespace AulaSoftwareLibre\Iam\Application\User\Command {
     data RegisterUser = RegisterUser {
         \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
-        \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username,
-        \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email
+        \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username
     } deriving (Command);
 
     data PromoteUser = PromoteUser {
@@ -38,10 +35,4 @@ namespace AulaSoftwareLibre\Iam\Application\User\Command {
         \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
         \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
     } deriving (Command);
-}
-
-namespace AulaSoftwareLibre\Iam\Application\User\Query {
-    data GetUser = GetUser {
-        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId
-    } deriving (Query);
 }

@@ -17,5 +17,5 @@ final class Scope
 {
     public const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
     public const NAME = 'Identity and Access Management';
-    public const SHORT_NAME = 'iam';
+    public const ALIAS = 'iam';
 }

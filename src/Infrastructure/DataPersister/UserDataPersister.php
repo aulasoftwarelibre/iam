@@ -15,12 +15,15 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
-use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredException;
+use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use Prooph\ServiceBus\CommandBus;
-use Prooph\ServiceBus\Exception\CommandDispatchException;
+use Prooph\ServiceBus\Exception\MessageDispatchException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserDataPersister implements DataPersisterInterface
 {
@@ -49,15 +52,18 @@ class UserDataPersister implements DataPersisterInterface
     public function persist($data)
     {
         try {
-            $this->commandBus->dispatch(
-                RegisterUser::with(
-                    UserId::fromString($data->getId()),
-                    Username::fromString($data->getUsername()),
-                    Email::fromString($data->getEmail())
-                )
-            );
-        } catch (CommandDispatchException $e) {
-            throw $e->getPrevious();
+            try {
+                $this->commandBus->dispatch(
+                    RegisterUser::with(
+                        UserId::fromString($data->getId()),
+                        Username::fromString($data->getUsername())
+                    )
+                );
+            } catch (MessageDispatchException $e) {
+                throw $e->getPrevious();
+            }
+        } catch (UserIdAlreadyRegisteredException | UsernameAlreadyRegisteredException $e) {
+            throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
 
         return $data;
@@ -65,6 +71,6 @@ class UserDataPersister implements DataPersisterInterface
 
     public function remove($data)
     {
-        // TODO: Implement remove() method.
+        throw new HttpException(Response::HTTP_NOT_IMPLEMENTED);
     }
 }

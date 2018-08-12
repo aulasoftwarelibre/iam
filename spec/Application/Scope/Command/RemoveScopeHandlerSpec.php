@@ -23,8 +23,6 @@ use Tests\Spec\Fixtures;
 
 class RemoveScopeHandlerSpec extends ObjectBehavior
 {
-    private const SCOPE_ID = '5cd2a872-d88d-45a2-a5d2-5daa71f0d685';
-
     public function let(Scopes $scopes): void
     {
         $this->beConstructedWith($scopes);
@@ -37,7 +35,7 @@ class RemoveScopeHandlerSpec extends ObjectBehavior
 
     public function it_removes_a_scope(Scopes $scopes, Scope $scope): void
     {
-        $scopes->get(ScopeId::fromString(Fixtures\Scope::SCOPE_ID))->willReturn($scope);
+        $scopes->get(ScopeId::fromString(Fixtures\Scope::SCOPE_ID))->shouldBeCalled()->willReturn($scope);
         $scope->remove()->shouldBeCalled();
         $scopes->save($scope)->shouldBeCalled();
 

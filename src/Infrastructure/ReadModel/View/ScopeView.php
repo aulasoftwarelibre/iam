@@ -26,7 +26,7 @@ class ScopeView
     /**
      * @var string
      */
-    private $shortName;
+    private $alias;
     /**
      * @var RoleView[]|array
      */
@@ -36,11 +36,11 @@ class ScopeView
      */
     private $users;
 
-    public function __construct(string $id, string $name, string $shortName)
+    public function __construct(string $id, string $name, string $alias)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->shortName = $shortName;
+        $this->alias = $alias;
     }
 
     /**
@@ -70,8 +70,8 @@ class ScopeView
     /**
      * @return string
      */
-    public function getShortName(): string
+    public function getAlias(): string
     {
-        return $this->shortName;
+        return $this->alias;
     }
 }

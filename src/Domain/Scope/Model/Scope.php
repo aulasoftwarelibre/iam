@@ -31,22 +31,22 @@ class Scope extends AggregateRoot
      */
     private $scopeId;
     /**
-     * @var Name
+     * @var ScopeName
      */
     private $name;
     /**
-     * @var ShortName
+     * @var ScopeAlias
      */
-    private $shortName;
+    private $alias;
     /**
      * @var bool
      */
     private $isRemoved;
 
-    public static function add(ScopeId $scopeId, Name $name, ShortName $shortName): self
+    public static function add(ScopeId $scopeId, ScopeName $name, ScopeAlias $alias): self
     {
         $scope = new self();
-        $scope->recordThat(ScopeWasCreated::with($scopeId, $name, $shortName));
+        $scope->recordThat(ScopeWasCreated::with($scopeId, $name, $alias));
 
         return $scope;
     }
@@ -61,17 +61,17 @@ class Scope extends AggregateRoot
         return $this->scopeId;
     }
 
-    public function name(): Name
+    public function name(): ScopeName
     {
         return $this->name;
     }
 
-    public function shortName(): ShortName
+    public function alias(): ScopeAlias
     {
-        return $this->shortName;
+        return $this->alias;
     }
 
-    public function rename(Name $name): void
+    public function rename(ScopeName $name): void
     {
         if ($this->name()->equals($name)) {
             return;
@@ -108,7 +108,7 @@ class Scope extends AggregateRoot
     {
         $this->scopeId = $event->scopeId();
         $this->name = $event->name();
-        $this->shortName = $event->shortName();
+        $this->alias = $event->alias();
         $this->isRemoved = false;
     }
 

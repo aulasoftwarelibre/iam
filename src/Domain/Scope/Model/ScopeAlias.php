@@ -16,12 +16,16 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
-final class Name
+final class ScopeAlias
 {
     private $value;
 
     public function __construct(string $value)
     {
+        if (1 === preg_match('/[^a-z]/', $value)) {
+            throw new \InvalidArgumentException('Scope alias only accepts [a-z] characters');
+        }
+
         $this->value = $value;
     }
 
@@ -40,17 +44,17 @@ final class Name
         return $this->value;
     }
 
-    public static function fromString(string $name): Name
+    public static function fromString(string $scopeAlias): ScopeAlias
     {
-        return new self($name);
+        return new self($scopeAlias);
     }
 
-    public function equals(Name $name): bool
+    public function equals(ScopeAlias $scopeAlias): bool
     {
-        if (\get_class($this) !== \get_class($name)) {
+        if (\get_class($this) !== \get_class($scopeAlias)) {
             return false;
         }
 
-        return $this->value === $name->value;
+        return $this->value === $scopeAlias->value;
     }
 }

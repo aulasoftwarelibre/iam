@@ -21,9 +21,9 @@ interface UserViews
 
     public function get(string $userId): UserView;
 
+    public function ofId(string $userId): ?UserView;
+
     public function save(UserView $userView): void;
 
-    public function findByUsername(string $username): ?UserView;
-
-    public function findByEmail(string $email): ?UserView;
+    public function ofUsername(string $username): ?UserView;
 }

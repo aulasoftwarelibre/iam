@@ -3,8 +3,6 @@ prooph_service_bus:
         default_command_bus: ~
     event_buses:
         default_event_bus: ~
-    query_buses:
-        default_query_bus: ~
 
 services:
     _defaults:
@@ -14,7 +12,6 @@ services:
 
     Prooph\ServiceBus\CommandBus: '@prooph_service_bus.default_command_bus'
     Prooph\ServiceBus\EventBus: '@prooph_service_bus.default_event_bus'
-    Prooph\ServiceBus\QueryBus: '@prooph_service_bus.default_query_bus'
 
     # Autoregister your message handlers here
     # Make sure AulaSoftwareLibre\Iam\Messaging\* services are not overriden in `config/services.yaml`
@@ -25,12 +22,6 @@ services:
         namespace: 'AulaSoftwareLibre\Iam\Application\'
         tags:
         - { name: 'prooph_service_bus.default_command_bus.route_target', message_detection: true }
-
-    query_handlers:
-        resource: '../../src/Application/**/Query/*Handler.php'
-        namespace: 'AulaSoftwareLibre\Iam\Application\'
-        tags:
-        - { name: 'prooph_service_bus.default_query_bus.route_target', message_detection: true }
 
     event_handlers:
         resource: '../../src/Infrastructure/ReadModel/Projection'

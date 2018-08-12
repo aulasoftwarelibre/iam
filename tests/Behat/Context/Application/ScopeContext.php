@@ -23,9 +23,9 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
 use Webmozart\Assert\Assert;
@@ -56,15 +56,15 @@ class ScopeContext implements Context
     }
 
     /**
-     * @When /^I register an scope with name "([^"]*)" and short name "([^"]*)"$/
+     * @When /^I register an scope with name "([^"]*)" and alias "([^"]*)"$/
      */
-    public function iRegisterAnScopeWithNameAndShortname(string $name, string $shortName): void
+    public function iRegisterAnScopeWithNameAndAlias(string $name, string $alias): void
     {
         $this->commandBus->dispatch(
             CreateScope::with(
                 $this->scopes->nextIdentity(),
-                Name::fromString($name),
-                ShortName::fromString($shortName)
+                ScopeName::fromString($name),
+                ScopeAlias::fromString($alias)
             )
         );
     }
@@ -72,7 +72,7 @@ class ScopeContext implements Context
     /**
      * @Then /^the scope "([^"]*)" with name "([^"]*)" should be available$/
      */
-    public function theScopeWithNameShouldBeAvailable(string $shortName, string $name): void
+    public function theScopeWithNameShouldBeAvailable(string $alias, string $name): void
     {
         /** @var ScopeWasCreated $event */
         $event = $this->eventsRecorder->getLastMessage()->event();
@@ -83,8 +83,8 @@ class ScopeContext implements Context
             \get_class($event)
         ));
 
-        Assert::true($event->name()->equals(Name::fromString($name)));
-        Assert::true($event->shortName()->equals(ShortName::fromString($shortName)));
+        Assert::true($event->name()->equals(ScopeName::fromString($name)));
+        Assert::true($event->alias()->equals(ScopeAlias::fromString($alias)));
     }
 
     /**
@@ -94,7 +94,7 @@ class ScopeContext implements Context
     {
         $this->commandBus->dispatch(RenameScope::with(
             $scopeId,
-            Name::fromString($name)
+            ScopeName::fromString($name)
         ));
     }
 
@@ -112,7 +112,7 @@ class ScopeContext implements Context
             \get_class($event)
         ));
         Assert::true($event->scopeId()->equals($scopeId));
-        Assert::true($event->name()->equals(Name::fromString($name)));
+        Assert::true($event->name()->equals(ScopeName::fromString($name)));
     }
 
     /**

@@ -36,16 +36,16 @@ final class ScopeWasRenamed extends \Prooph\EventSourcing\AggregateChanged
         return $this->scopeId;
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName
     {
         if (null === $this->name) {
-            $this->name = \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name::fromString($this->payload['name']);
+            $this->name = \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName::fromString($this->payload['name']);
         }
 
         return $this->name;
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name): ScopeWasRenamed
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name): ScopeWasRenamed
     {
         return new self($scopeId->toString(), [
             'name' => $name->toString(),

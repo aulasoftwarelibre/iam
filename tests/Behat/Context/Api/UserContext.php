@@ -39,14 +39,13 @@ class UserContext implements Context
     }
 
     /**
-     * @When /^I register an account with the "([^"]*)" username and "([^"]*)" email$/
+     * @When /^I register an account with username "([^"]*)"$/
      */
-    public function iRegisterAnAccountWithTheUsernameAndEmail(string $username, string $email): void
+    public function iRegisterAnAccountWithUsername($username)
     {
         $this->client->post('/api/users', [], [
             'id' => UserId::generate()->toString(),
             'username' => $username,
-            'email' => $email,
         ]);
     }
 
@@ -71,7 +70,7 @@ class UserContext implements Context
      */
     public function iShouldSeeTheUsername(string $username): void
     {
-        $expectedResponse = sprintf('[{"id":"@string@","username":"%s","email":"@string@"}]', $username);
+        $expectedResponse = sprintf('[{"id":"@string@","username":"%s"}]', $username);
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -89,11 +88,11 @@ class UserContext implements Context
     }
 
     /**
-     * @Then /^I should see than the username is "([^"]*)" and the email "([^"]*)"$/
+     * @Then /^I should see than the username is "([^"]*)"$/
      */
-    public function iShouldSeeThanTheUsernameIsAndTheEmail(string $username, string $email): void
+    public function iShouldSeeThanTheUsernameIs(string $username): void
     {
-        $expectedResponse = sprintf('{"id":"@string@","username":"%s","email":"%s","roles":[]}', $username, $email);
+        $expectedResponse = sprintf('{"id":"@string@","username":"%s","roles":[]}', $username);
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -117,7 +116,7 @@ class UserContext implements Context
     {
         $this->client->get('/api/users/'.$userId->toString());
 
-        $expectedResponse = sprintf('{"id":"%s","username":"@string@","email":"@string@","roles":[{"id":"%s","scopeId":"@string@","name":"@string@"}]}', $userId->toString(), $role->roleId()->toString());
+        $expectedResponse = sprintf('{"id":"%s","username":"@string@","roles":[{"id":"%s","scopeId":"@string@","name":"@string@"}]}', $userId->toString(), $role->roleId()->toString());
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -141,7 +140,7 @@ class UserContext implements Context
     {
         $this->client->get('/api/users/'.$userId->toString());
 
-        $expectedResponse = sprintf('{"id":"%s","username":"@string@","email":"@string@","roles":[]}', $userId->toString());
+        $expectedResponse = sprintf('{"id":"%s","username":"@string@","roles":[]}', $userId->toString());
 
         $this->asserter->assertResponse(
             $this->client->response(),

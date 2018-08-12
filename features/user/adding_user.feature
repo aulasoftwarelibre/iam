@@ -6,5 +6,5 @@ Feature: Adding an user
 
     @application
     Scenario: Adding an user
-        When I register an account with the "johndoe" username and "johndoe@mail.com" email
+        When I register an account with username "johndoe"
         Then the user "johndoe" should be available

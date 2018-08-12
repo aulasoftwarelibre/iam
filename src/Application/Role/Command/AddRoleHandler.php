@@ -54,7 +54,7 @@ final class AddRoleHandler
             throw RoleIdAlreadyRegisteredException::withRoleId($roleId);
         }
 
-        if ($this->roleViews->findOneByScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
+        if ($this->roleViews->ofScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
             throw RoleNameAlreadyExistsException::withRoleName($roleName);
         }
 
@@ -63,9 +63,9 @@ final class AddRoleHandler
             throw ScopeNotFoundException::withScopeId($scopeId);
         }
 
-        $prefix = 'ROLE_'.mb_strtoupper($scope->shortName()->toString()).'_';
+        $prefix = 'ROLE_'.mb_strtoupper($scope->alias()->toString()).'_';
         if (!preg_match('/^'.$prefix.'/', $addRole->name()->toString())) {
-            throw ScopeRoleNameInvalid::withRoleName($scope->shortName(), $roleName);
+            throw ScopeRoleNameInvalid::withRoleName($scope->alias(), $roleName);
         }
 
         $role = $scope->addRole($roleId, $roleName);

@@ -17,5 +17,4 @@ final class User
 {
     public const USER_ID = 'e8a68535-3e17-468f-acc3-8a3e0fa04a59';
     public const USERNAME = 'johndoe';
-    public const EMAIL = 'john@doe.com';
 }

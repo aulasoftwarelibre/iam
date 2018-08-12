@@ -15,21 +15,19 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\QueryBus;
 
 class ScopeItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
-     * @var QueryBus
+     * @var ScopeViews
      */
-    private $queryBus;
+    private $scopeViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(ScopeViews $scopeViews)
     {
-        $this->queryBus = $queryBus;
+        $this->scopeViews = $scopeViews;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -39,15 +37,6 @@ class ScopeItemDataProvider implements ItemDataProviderInterface, RestrictedData
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?ScopeView
     {
-        $promise = $this->queryBus->dispatch(
-            GetScope::with(ScopeId::fromString($id))
-        );
-
-        $scope = null;
-        $promise->then(function ($result) use (&$scope) {
-            $scope = $result;
-        });
-
-        return $scope;
+        return $this->scopeViews->ofId($id);
     }
 }

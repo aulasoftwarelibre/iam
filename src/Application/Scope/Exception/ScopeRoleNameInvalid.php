@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Application\Scope\Exception;
 
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 
 class ScopeRoleNameInvalid extends \InvalidArgumentException
 {
-    public static function withRoleName(ShortName $name, RoleName $roleName): self
+    public static function withRoleName(ScopeAlias $alias, RoleName $roleName): self
     {
-        $prefix = 'ROLE_'.mb_strtoupper($name->toString());
+        $prefix = 'ROLE_'.mb_strtoupper($alias->toString());
 
         return new self(sprintf('Role name %s is not valid, must begin with \'%s\'', $roleName->toString(), $prefix));
     }

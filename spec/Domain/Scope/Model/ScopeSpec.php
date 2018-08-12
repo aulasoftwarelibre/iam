@@ -20,9 +20,9 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
 use PhpSpec\ObjectBehavior;
 use Prooph\EventSourcing\AggregateRoot;
 use Tests\Spec\Fixtures;
@@ -33,16 +33,16 @@ class ScopeSpec extends ObjectBehavior
     {
         $this->beConstructedThrough('add', [
             ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
-            Name::fromString(Fixtures\Scope::NAME),
-            ShortName::fromString(Fixtures\Scope::SHORT_NAME),
+            ScopeName::fromString(Fixtures\Scope::NAME),
+            ScopeAlias::fromString(Fixtures\Scope::ALIAS),
         ]);
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             ScopeWasCreated::with(
                 ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
-                Name::fromString(Fixtures\Scope::NAME),
-                ShortName::fromString(Fixtures\Scope::SHORT_NAME)
+                ScopeName::fromString(Fixtures\Scope::NAME),
+                ScopeAlias::fromString(Fixtures\Scope::ALIAS)
             )
         );
     }
@@ -64,32 +64,59 @@ class ScopeSpec extends ObjectBehavior
 
     public function it_has_a_name(): void
     {
-        $this->name()->shouldBeLike(Name::fromString(Fixtures\Scope::NAME));
+        $this->name()->shouldBeLike(ScopeName::fromString(Fixtures\Scope::NAME));
     }
 
-    public function it_has_a_short_name(): void
+    public function it_has_an_alias(): void
     {
-        $this->shortName()->shouldBeLike(ShortName::fromString(Fixtures\Scope::SHORT_NAME));
+        $this->alias()->shouldBeLike(ScopeAlias::fromString(Fixtures\Scope::ALIAS));
+    }
+
+    public function it_is_not_removed_by_defautl(): void
+    {
+        $this->isRemoved()->shouldBe(false);
     }
 
     public function it_can_be_renamed(): void
     {
-        $this->rename(Name::fromString('AulaSL Identity and Access Management'));
+        $this->rename(ScopeName::fromString('AulaSL Identity and Access Management'));
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
             $this->getWrappedObject(),
             ScopeWasRenamed::with(
                 ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
-                Name::fromString('AulaSL Identity and Access Management')
+                ScopeName::fromString('AulaSL Identity and Access Management')
             )
         );
     }
 
-    public function it_can_removed(): void
+    public function it_ignores_if_name_does_not_change()
+    {
+        $this->rename(ScopeName::fromString(Fixtures\Scope::NAME));
+
+        (new AggregateAsserter())->assertAggregateHasNotProducedEvent(
+            $this->getWrappedObject(),
+            ScopeWasRenamed::with(
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID),
+                ScopeName::fromString('AulaSL Identity and Access Management')
+            )
+        );
+    }
+
+    public function it_can_be_removed(): void
     {
         $this->remove();
 
         (new AggregateAsserter())->assertAggregateHasProducedEvent(
+            $this->getWrappedObject(),
+            ScopeWasRemoved::with(
+                ScopeId::fromString(Fixtures\Scope::SCOPE_ID)
+            )
+        );
+
+        $this->remove();
+
+        (new AggregateAsserter())->assertAggregateHasNotProducedEvent(
             $this->getWrappedObject(),
             ScopeWasRemoved::with(
                 ScopeId::fromString(Fixtures\Scope::SCOPE_ID)

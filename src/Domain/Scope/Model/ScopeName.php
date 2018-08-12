@@ -14,9 +14,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Domain\User\Model;
+namespace AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
-final class Email
+final class ScopeName
 {
     private $value;
 
@@ -40,17 +40,17 @@ final class Email
         return $this->value;
     }
 
-    public static function fromString(string $email): Email
+    public static function fromString(string $scopeName): ScopeName
     {
-        return new self($email);
+        return new self($scopeName);
     }
 
-    public function equals(Email $email): bool
+    public function equals(ScopeName $scopeName): bool
     {
-        if (\get_class($this) !== \get_class($email)) {
+        if (\get_class($this) !== \get_class($scopeName)) {
             return false;
         }
 
-        return $this->value === $email->value;
+        return $this->value === $scopeName->value;
     }
 }

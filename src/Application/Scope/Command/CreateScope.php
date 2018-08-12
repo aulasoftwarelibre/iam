@@ -29,22 +29,22 @@ final class CreateScope extends \Prooph\Common\Messaging\Command
         return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId::fromString($this->payload['scopeId']);
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName
     {
-        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name::fromString($this->payload['name']);
+        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName::fromString($this->payload['name']);
     }
 
-    public function shortName(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName
+    public function alias(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias
     {
-        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName::fromString($this->payload['shortName']);
+        return \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias::fromString($this->payload['alias']);
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName $shortName): CreateScope
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias $alias): CreateScope
     {
         return new self([
             'scopeId' => $scopeId->toString(),
             'name' => $name->toString(),
-            'shortName' => $shortName->toString(),
+            'alias' => $alias->toString(),
         ]);
     }
 
@@ -58,8 +58,8 @@ final class CreateScope extends \Prooph\Common\Messaging\Command
             throw new \InvalidArgumentException("Key 'name' is missing in payload or is not a string");
         }
 
-        if (!isset($payload['shortName']) || !\is_string($payload['shortName'])) {
-            throw new \InvalidArgumentException("Key 'shortName' is missing in payload or is not a string");
+        if (!isset($payload['alias']) || !\is_string($payload['alias'])) {
+            throw new \InvalidArgumentException("Key 'alias' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

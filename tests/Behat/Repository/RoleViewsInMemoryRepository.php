@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
+use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNotFoundException;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 
@@ -25,9 +26,20 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
         $this->_add($roleView->getId(), $roleView);
     }
 
-    public function get(string $roleId): ?RoleView
+    public function get(string $roleId): RoleView
     {
-        return $this->_get($roleId);
+        $role = $this->ofId($roleId);
+
+        if (!$role instanceof RoleView) {
+            throw RoleNotFoundException::withRoleId($roleId);
+        }
+
+        return $role;
+    }
+
+    public function ofId(string $roleId): ?RoleView
+    {
+        return $this->_ofId($roleId);
     }
 
     public function remove(string $roleId): void
@@ -35,12 +47,12 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
         $this->_remove($roleId);
     }
 
-    public function findByScopeId(string $scopeId): array
+    public function ofScopeId(string $scopeId): array
     {
         return $this->findBy('getScopeId', $scopeId);
     }
 
-    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
+    public function ofScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
     {
         $found = \array_reduce(
             static::$stack,

@@ -62,7 +62,7 @@ class ScopeDataPersister implements DataPersisterInterface
     {
         $scopeView = $this->scopeViews->ofId($data->getId());
 
-        if ($scopeView) {
+        if ($scopeView instanceof ScopeView) {
             return $this->update($data);
         }
 
@@ -79,7 +79,7 @@ class ScopeDataPersister implements DataPersisterInterface
                 throw $e->getPrevious();
             }
         } catch (ScopeIdAlreadyRegisteredException | ScopeAliasAlreadyRegisteredException $e) {
-            throw new HttpException(Response::HTTP_CONFLICT, $e->getMessage());
+            throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
 
         return new ScopeView($data->getId(), $data->getName(), $data->getAlias());

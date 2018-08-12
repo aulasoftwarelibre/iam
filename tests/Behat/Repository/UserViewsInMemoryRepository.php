@@ -27,7 +27,7 @@ class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements 
 
     public function get(string $userId): UserView
     {
-        return $this->_get($userId);
+        return $this->_ofId($userId);
     }
 
     public function findByUsername(string $username): ?UserView

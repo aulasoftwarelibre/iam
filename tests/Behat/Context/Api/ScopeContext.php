@@ -162,7 +162,7 @@ class ScopeContext implements Context
     {
         $this->asserter->assertResponseCode(
             $this->client->response(),
-            Response::HTTP_CONFLICT
+            Response::HTTP_BAD_REQUEST
         );
     }
 

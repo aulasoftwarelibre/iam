@@ -15,29 +15,28 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
-use AulaSoftwareLibre\Iam\Application\Role\Query\GetRoles;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\QueryBus;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterface
 {
     /**
-     * @var QueryBus
-     */
-    private $queryBus;
-    /**
      * @var ScopeViews
      */
     private $scopeViews;
+    /**
+     * @var RoleViews
+     */
+    private $roleViews;
 
-    public function __construct(QueryBus $queryBus, ScopeViews $scopeViews)
+    public function __construct(ScopeViews $scopeViews, RoleViews $roleViews)
     {
-        $this->queryBus = $queryBus;
         $this->scopeViews = $scopeViews;
+        $this->roleViews = $roleViews;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
@@ -58,17 +57,6 @@ class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterfa
             throw new NotFoundHttpException('Not Found');
         }
 
-        $promise = $this->queryBus->dispatch(
-            GetRoles::with(
-                ScopeId::fromString($scopeId)
-            )
-        );
-
-        $roles = [];
-        $promise->then(function ($result) use (&$roles) {
-            $roles = $result;
-        });
-
-        return $roles;
+        return $this->roleViews->ofScopeId($scopeId);
     }
 }

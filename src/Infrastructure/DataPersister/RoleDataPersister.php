@@ -16,11 +16,18 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use AulaSoftwareLibre\Iam\Application\Role\Command\AddRole;
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
+use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredException;
+use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNameAlreadyExistsException;
+use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
+use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeRoleNameInvalid;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Prooph\ServiceBus\CommandBus;
+use Prooph\ServiceBus\Exception\MessageDispatchException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RoleDataPersister implements DataPersisterInterface
 {
@@ -42,17 +49,33 @@ class RoleDataPersister implements DataPersisterInterface
     /**
      * @param RoleView $data
      *
+     * @throws \Exception|HttpException
+     *
      * @return RoleView
      */
     public function persist($data): RoleView
     {
-        $this->commandBus->dispatch(
-            AddRole::with(
-                RoleId::fromString($data->getId()),
-                ScopeId::fromString($data->getScopeId()),
-                RoleName::fromString($data->getName())
-            )
-        );
+        try {
+            try {
+                $this->commandBus->dispatch(
+                    AddRole::with(
+                        RoleId::fromString($data->getId()),
+                        ScopeId::fromString($data->getScopeId()),
+                        RoleName::fromString($data->getName())
+                    )
+                );
+            } catch (MessageDispatchException $e) {
+                throw $e->getPrevious();
+            }
+        } catch (
+            \InvalidArgumentException |
+            RoleIdAlreadyRegisteredException |
+            RoleNameAlreadyExistsException |
+            ScopeNotFoundException |
+            ScopeRoleNameInvalid $e
+        ) {
+            throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage());
+        }
 
         return $data;
     }

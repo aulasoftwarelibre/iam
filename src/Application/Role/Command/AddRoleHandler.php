@@ -54,7 +54,7 @@ final class AddRoleHandler
             throw RoleIdAlreadyRegisteredException::withRoleId($roleId);
         }
 
-        if ($this->roleViews->findOneByScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
+        if ($this->roleViews->ofScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
             throw RoleNameAlreadyExistsException::withRoleName($roleName);
         }
 

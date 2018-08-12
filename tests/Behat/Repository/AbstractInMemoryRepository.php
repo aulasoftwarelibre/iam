@@ -27,7 +27,7 @@ class AbstractInMemoryRepository
         static::$stack[$id] = $object;
     }
 
-    protected function _get(string $id)
+    protected function _ofId(string $id)
     {
         return static::$stack[$id] ?? null;
     }
@@ -39,7 +39,7 @@ class AbstractInMemoryRepository
         }
     }
 
-    public function findAll(): array
+    public function all(): array
     {
         return \array_values(static::$stack);
     }

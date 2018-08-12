@@ -21,11 +21,13 @@ interface RoleViews
 
     public function remove(string $roleId): void;
 
-    public function get(string $roleId): ?RoleView;
+    public function get(string $roleId): RoleView;
 
-    public function findAll(): array;
+    public function ofId(string $roleId): ?RoleView;
 
-    public function findByScopeId(string $scopeId): array;
+    public function all(): array;
 
-    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView;
+    public function ofScopeId(string $scopeId): array;
+
+    public function ofScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView;
 }

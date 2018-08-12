@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Behat\Repository;
 
+use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
@@ -27,23 +29,18 @@ class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements
 
     public function get(string $scopeId): ScopeView
     {
-        $item = $this->_get($scopeId);
+        $scope = $this->_ofId($scopeId);
 
-        if (!$item) {
-            throw new \InvalidArgumentException('ScopeId not found');
+        if (!$scope instanceof ScopeView) {
+            throw ScopeNotFoundException::withScopeId(ScopeId::fromString($scopeId));
         }
 
-        return $item;
+        return $scope;
     }
 
     public function ofId(string $scopeId): ?ScopeView
     {
-        return $this->_get($scopeId);
-    }
-
-    public function all(): array
-    {
-        return $this->findAll();
+        return $this->_ofId($scopeId);
     }
 
     public function remove(string $scopeId): void

@@ -123,4 +123,23 @@ class RoleContext implements Context
             Response::HTTP_NOT_FOUND
         );
     }
+
+    /**
+     * @When /^I add a "([^"]*)" to a non existent scope$/
+     */
+    public function iAddAToANonExistentScope(string $roleName)
+    {
+        $this->iAddAToIt($roleName, ScopeId::generate());
+    }
+
+    /**
+     * @Then /^I should receive an error$/
+     */
+    public function iShouldReceiveANotFoundError()
+    {
+        $this->asserter->assertResponseCode(
+            $this->client->response(),
+            Response::HTTP_BAD_REQUEST
+        );
+    }
 }

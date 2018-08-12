@@ -59,7 +59,7 @@ class UserReadModel
         $roleId = $event->roleId()->toString();
 
         $userView = $this->userViews->get($userId);
-        $roleView = $this->roleViews->get($roleId);
+        $roleView = $this->roleViews->ofId($roleId);
 
         $userView->addRole($roleView);
         $this->userViews->save($userView);

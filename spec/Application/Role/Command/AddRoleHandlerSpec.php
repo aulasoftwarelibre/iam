@@ -39,7 +39,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($roles, $roleViews, $scopes);
 
         $roles->find(RoleId::fromString(Fixtures\Role::ROLE_ID))->willReturn(null);
-        $roleViews->findOneByScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->willReturn(null);
+        $roleViews->ofScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->willReturn(null);
         $scopes->find(ScopeId::fromString(Fixtures\Scope::SCOPE_ID))->willReturn($scope);
     }
 
@@ -85,7 +85,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
 
     public function it_checks_role_name_is_unique_by_scope(RoleViews $roleViews): void
     {
-        $roleViews->findOneByScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->shouldBeCalled()->willReturn(
+        $roleViews->ofScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->shouldBeCalled()->willReturn(
             new RoleView(Fixtures\Role::ROLE_ID, Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)
         );
 

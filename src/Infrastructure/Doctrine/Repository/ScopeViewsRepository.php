@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
+use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -40,8 +42,8 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
     {
         $scopeView = $this->find($scopeId);
 
-        if (!$scopeView) {
-            throw new \InvalidArgumentException('ScopeId does not exists');
+        if (!$scopeView instanceof ScopeView) {
+            throw ScopeNotFoundException::withScopeId(ScopeId::fromString($scopeId));
         }
 
         return $scopeView;

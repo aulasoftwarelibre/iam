@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository;
 
+use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNotFoundException;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -31,19 +33,30 @@ class RoleViewsRepository extends ServiceEntityRepository implements RoleViews
         $this->_em->flush();
     }
 
-    public function get(string $roleId): ?RoleView
+    public function get(string $roleId): RoleView
+    {
+        $role = $this->ofId($roleId);
+
+        if (!$role instanceof RoleView) {
+            throw RoleNotFoundException::withRoleId(RoleId::fromString($roleId));
+        }
+
+        return $role;
+    }
+
+    public function ofId(string $roleId): ?RoleView
     {
         return $this->find($roleId);
     }
 
-    public function findAll(): array
+    public function all(): array
     {
         return parent::findAll();
     }
 
     public function remove(string $roleId): void
     {
-        $role = $this->get($roleId);
+        $role = $this->ofId($roleId);
 
         if (!$role instanceof RoleView) {
             return;
@@ -53,12 +66,12 @@ class RoleViewsRepository extends ServiceEntityRepository implements RoleViews
         $this->_em->flush();
     }
 
-    public function findByScopeId(string $scopeId): array
+    public function ofScopeId(string $scopeId): array
     {
         return $this->findBy(['scopeId' => $scopeId]);
     }
 
-    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
+    public function ofScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
     {
         return $this->findOneBy(['scopeId' => $scopeId, 'name' => $roleName]);
     }

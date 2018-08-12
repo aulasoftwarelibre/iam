@@ -19,6 +19,6 @@ class UsernameAlreadyRegisteredException extends \InvalidArgumentException
 {
     public static function withUsername(Username $username): UsernameAlreadyRegisteredException
     {
-        return new self(sprintf('Username %s already taken', $username->toString()));
+        return new self(sprintf('Username "%s" already taken', $username->toString()));
     }
 }

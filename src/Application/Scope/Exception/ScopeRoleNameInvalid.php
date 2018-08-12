@@ -22,6 +22,6 @@ class ScopeRoleNameInvalid extends \InvalidArgumentException
     {
         $prefix = 'ROLE_'.mb_strtoupper($alias->toString());
 
-        return new self(sprintf('Role name %s is not valid, must begin with \'%s\'', $roleName->toString(), $prefix));
+        return new self(sprintf('Role name "%s" is not valid, must begin with \'%s\'', $roleName->toString(), $prefix));
     }
 }

@@ -19,6 +19,6 @@ class UserIdAlreadyRegisteredException extends \InvalidArgumentException
 {
     public static function withUserId(UserId $userId): UserIdAlreadyRegisteredException
     {
-        return new self(sprintf('UserId %s already taken', $userId->toString()));
+        return new self(sprintf('UserId "%s" already taken', $userId->toString()));
     }
 }

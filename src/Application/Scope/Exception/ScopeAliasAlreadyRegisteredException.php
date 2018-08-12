@@ -19,6 +19,6 @@ class ScopeAliasAlreadyRegisteredException extends \InvalidArgumentException
 {
     public static function withAlias(ScopeAlias $alias): ScopeAliasAlreadyRegisteredException
     {
-        return new self(sprintf('Scope alias %s already taken', $alias->toString()));
+        return new self(sprintf('Scope alias "%s" already taken', $alias->toString()));
     }
 }

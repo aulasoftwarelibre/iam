@@ -19,6 +19,6 @@ class RoleNameAlreadyExistsException extends \InvalidArgumentException
 {
     public static function withRoleName(RoleName $roleName): self
     {
-        return new self(sprintf('Role name %s already taken', $roleName->toString()));
+        return new self(sprintf('Role name "%s" already taken', $roleName->toString()));
     }
 }

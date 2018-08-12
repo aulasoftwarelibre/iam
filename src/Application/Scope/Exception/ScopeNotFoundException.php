@@ -19,6 +19,6 @@ class ScopeNotFoundException extends \InvalidArgumentException
 {
     public static function withScopeId(ScopeId $scopeId): self
     {
-        return new self(sprintf('Scope with id %s does not exists', $scopeId->toString()));
+        return new self(sprintf('Scope with id "%s" does not exists', $scopeId->toString()));
     }
 }

@@ -14,10 +14,16 @@ declare(strict_types=1);
 namespace Tests\Behat\Context\Application;
 
 use AulaSoftwareLibre\DDD\TestsBundle\Service\Prooph\Plugin\EventsRecorder;
+use AulaSoftwareLibre\Iam\Application\User\Command\DemoteUser;
+use AulaSoftwareLibre\Iam\Application\User\Command\PromoteUser;
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
+use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
+use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Email;
+use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
@@ -77,5 +83,67 @@ class UserContext implements Context
         ));
 
         Assert::true($event->username()->equals(Username::fromString($username)));
+    }
+
+    /**
+     * @When /^I assign (the role) to (the user)$/
+     */
+    public function iAssignTheRoleToTheUser(RoleId $roleId, UserId $userId)
+    {
+        $this->commandBus->dispatch(
+            PromoteUser::with(
+                $userId,
+                $roleId
+            )
+        );
+    }
+
+    /**
+     * @Then /^I should see that (the user) has (the role)$/
+     */
+    public function iShouldSeeThatTheUserHasTheRole(UserId $userId, RoleId $roleId)
+    {
+        /** @var UserWasPromoted $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, UserWasPromoted::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            UserWasPromoted::class,
+            get_class($event)
+        ));
+
+        Assert::true($event->userId()->equals($userId));
+        Assert::true($event->roleId()->equals($roleId));
+    }
+
+    /**
+     * @When /^I remove (the role) to (the user)$/
+     */
+    public function iRemoveTheRoleToTheUser(RoleId $roleId, UserId $userId)
+    {
+        $this->commandBus->dispatch(
+            DemoteUser::with(
+                $userId,
+                $roleId
+            )
+        );
+    }
+
+    /**
+     * @Then /^I shouldn't see that (the user) has (the role)$/
+     */
+    public function iShouldnTSeeThatTheUserHasTheRole(UserId $userId, RoleId $roleId)
+    {
+        /** @var UserWasDemoted $event */
+        $event = $this->eventsRecorder->getLastMessage()->event();
+
+        Assert::isInstanceOf($event, UserWasDemoted::class, sprintf(
+            'Event has to be of class %s, but %s given',
+            UserWasDemoted::class,
+            get_class($event)
+        ));
+
+        Assert::true($event->userId()->equals($userId));
+        Assert::true($event->roleId()->equals($roleId));
     }
 }

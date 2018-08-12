@@ -31,6 +31,11 @@ class UserViewsRepository extends ServiceEntityRepository implements UserViews
         $this->_em->flush();
     }
 
+    public function save(UserView $userView): void
+    {
+        $this->_em->flush();
+    }
+
     public function get(string $userId): UserView
     {
         return $this->find($userId);

@@ -19,3 +19,19 @@ doctrine:
                 dir: '%kernel.root_dir%/Resources/config/doctrine'
                 prefix: 'AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View'
                 alias: 'ReadModel'
+
+services:
+    _defaults:
+        public: true
+    # Repositories
+
+    ## Write model
+    AulaSoftwareLibre\Iam\Application\User\Repository\Users: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore'
+    AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\ScopesEventStore'
+    AulaSoftwareLibre\Iam\Application\Role\Repository\Roles: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore'
+
+    ## Read model
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\GrantViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\UserViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\ScopeViewsRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews: '@AulaSoftwareLibre\Iam\Infrastructure\Doctrine\Repository\RoleViewsRepository'

@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+
+
+    ## In memory read model repositories
+    Tests\Behat\Repository\:
+        resource: '%kernel.project_dir%/tests/Behat/Repository'
+
+    ## Read model interfaces
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews: '@Tests\Behat\Repository\GrantViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews: '@Tests\Behat\Repository\UserViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews: '@Tests\Behat\Repository\ScopeViewsInMemoryRepository'
+    AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews: '@Tests\Behat\Repository\RoleViewsInMemoryRepository'

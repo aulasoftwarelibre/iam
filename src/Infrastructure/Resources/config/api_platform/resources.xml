@@ -4,30 +4,85 @@
     <resource
             class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView"
             shortName="User"
-            description="Users"
-    >
+            description="Users">
         <itemOperations>
             <itemOperation name="get" />
+            <itemOperation name="promote">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/users/{id}/promote/{roleId}.{_format}</attribute>
+                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\UserPromote</attribute>
+                <attribute name="defaults">
+                    <attribute name="_api_receive">false</attribute>
+                </attribute>
+
+                <attribute name="swagger_context">
+                    <attribute name="summary">Promote the user with the given role</attribute>
+                    <attribute name="parameters">
+                        <attribute name="0">
+                            <attribute name="name">id</attribute>
+                            <attribute name="description">User id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                        <attribute name="1">
+                            <attribute name="name">roleId</attribute>
+                            <attribute name="description">Role id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="demote">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/users/{id}/demote/{roleId}.{_format}</attribute>
+                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\UserDemote</attribute>
+                <attribute name="defaults">
+                    <attribute name="_api_receive">false</attribute>
+                </attribute>
+
+                <attribute name="swagger_context">
+                    <attribute name="summary">Demote the user from the given role</attribute>
+                    <attribute name="parameters">
+                        <attribute name="0">
+                            <attribute name="name">id</attribute>
+                            <attribute name="description">User id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                        <attribute name="1">
+                            <attribute name="name">roleId</attribute>
+                            <attribute name="description">Role id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
+        <collectionOperations>
+            <collectionOperation name="post" />
+        </collectionOperations>
     </resource>
 
     <resource
             class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView"
             shortName="Scope"
-            description="Scopes"
-    >
+            description="Scopes">
         <property name="roles">
             <subresource resourceClass="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView"
-                         collection="true"
-                         maxDepth="1"/>
+                         collection="true" />
         </property>
     </resource>
 
     <resource
             class="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView"
             shortName="Role"
-            description="Roles"
-    >
+            description="Roles">
         <itemOperations>
             <itemOperation name="get" />
             <itemOperation name="delete" />
@@ -37,5 +92,3 @@
         </collectionOperations>
     </resource>
 </resources>
-
-

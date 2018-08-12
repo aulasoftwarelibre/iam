@@ -10,6 +10,16 @@ namespace AulaSoftwareLibre\Iam\Domain\User\Event {
         \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username,
         \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email
     } deriving (AggregateChanged);
+
+    data UserWasPromoted = UserWasPromoted {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
+        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
+    } deriving (AggregateChanged);
+
+    data UserWasDemoted = UserWasDemoted {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
+        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
+    } deriving (AggregateChanged);
 }
 
 namespace AulaSoftwareLibre\Iam\Application\User\Command {
@@ -18,4 +28,20 @@ namespace AulaSoftwareLibre\Iam\Application\User\Command {
         \AulaSoftwareLibre\Iam\Domain\User\Model\Username $username,
         \AulaSoftwareLibre\Iam\Domain\User\Model\Email $email
     } deriving (Command);
+
+    data PromoteUser = PromoteUser {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
+        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
+    } deriving (Command);
+
+    data DemoteUser = DemoteUser {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId,
+        \AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId $roleId
+    } deriving (Command);
+}
+
+namespace AulaSoftwareLibre\Iam\Application\User\Query {
+    data GetUser = GetUser {
+        \AulaSoftwareLibre\Iam\Domain\User\Model\UserId $userId
+    } deriving (Query);
 }

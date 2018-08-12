@@ -47,7 +47,7 @@ class RoleContext implements Context
     }
 
     /**
-     * @Given /^the role "([^"]*)" from (this) scope$/
+     * @Given /^the role "([^"]*)" from (this scope)$/
      */
     public function theRoleFromThisScope($roleName, ScopeId $scopeId)
     {

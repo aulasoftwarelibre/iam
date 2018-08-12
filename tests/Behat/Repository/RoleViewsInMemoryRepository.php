@@ -18,6 +18,8 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 
 class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements RoleViews
 {
+    protected static $stack = [];
+
     public function add(RoleView $roleView): void
     {
         $this->_add($roleView->getId(), $roleView);
@@ -38,10 +40,10 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
         return $this->findBy('getScopeId', $scopeId);
     }
 
-    public function findOneByRoleName(string $scopeId, string $roleName): ?RoleView
+    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
     {
         $found = \array_reduce(
-            $this->stack,
+            static::$stack,
             function (?RoleView $found, RoleView $roleView) use ($scopeId, $roleName) {
                 return (
                         $roleView->getScopeId() === $scopeId

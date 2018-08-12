@@ -1,6 +1,8 @@
 namespace AulaSoftwareLibre\Iam\Domain\Role\Model {
     data RoleId = RoleId deriving (Uuid);
-    data RoleName = String deriving (ToString, FromString, Equals);
+    data RoleName = String deriving (ToString, FromString, Equals) where
+        _:
+            | 0 === preg_match("/^ROLE_[A-Z]+_[A-Z_]+$/", $value) => "Invalid role name format";
 }
 
 namespace AulaSoftwareLibre\Iam\Domain\Role\Event {

@@ -27,18 +27,23 @@ class UserView
      * @var string
      */
     private $email;
+    /**
+     * @var string[]|array
+     */
+    private $roles;
 
     public function __construct(string $id, string $username, string $email)
     {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
+        $this->roles = [];
     }
 
     /**
      * @return string
      */
-    public function id(): string
+    public function getId(): string
     {
         return $this->id;
     }
@@ -46,7 +51,7 @@ class UserView
     /**
      * @return string
      */
-    public function username(): string
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -54,8 +59,28 @@ class UserView
     /**
      * @return string
      */
-    public function email(): string
+    public function getEmail(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function addRole(RoleView $roleView): void
+    {
+        $this->roles[] = $roleView;
+    }
+
+    public function removeRole(string $roleId): void
+    {
+        $this->roles = \array_filter($this->roles, function (RoleView $roleView) use ($roleId) {
+            return $roleId !== $roleView->getId();
+        });
     }
 }

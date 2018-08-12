@@ -27,5 +27,5 @@ interface RoleViews
 
     public function findByScopeId(string $scopeId): array;
 
-    public function findOneByRoleName(string $scopeId, string $roleName): ?RoleView;
+    public function findOneByScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView;
 }

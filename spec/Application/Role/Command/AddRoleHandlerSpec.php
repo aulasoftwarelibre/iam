@@ -23,8 +23,10 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\Role;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use PhpSpec\ObjectBehavior;
@@ -37,7 +39,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
         $this->beConstructedWith($roles, $roleViews, $scopes);
 
         $roles->find(RoleId::fromString(Fixtures\Role::ROLE_ID))->willReturn(null);
-        $roleViews->findOneByRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->willReturn(null);
+        $roleViews->findOneByScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->willReturn(null);
         $scopes->find(ScopeId::fromString(Fixtures\Scope::SCOPE_ID))->willReturn($scope);
     }
 
@@ -51,6 +53,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
         Scope $scope,
         Role $role
     ): void {
+        $scope->shortName()->shouldBeCalled()->willReturn(ShortName::fromString('iam'));
         $scope->addRole(
             RoleId::fromString(Fixtures\Role::ROLE_ID),
             RoleName::fromString(Fixtures\Role::NAME)
@@ -82,7 +85,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
 
     public function it_checks_role_name_is_unique_by_scope(RoleViews $roleViews): void
     {
-        $roleViews->findOneByRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->shouldBeCalled()->willReturn(
+        $roleViews->findOneByScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->shouldBeCalled()->willReturn(
             new RoleView(Fixtures\Role::ROLE_ID, Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)
         );
 

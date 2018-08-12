@@ -22,6 +22,10 @@ final class RoleName
 
     public function __construct(string $value)
     {
+        if (0 === preg_match('/^ROLE_[A-Z]+_[A-Z_]+$/', $value)) {
+            throw new \InvalidArgumentException('Invalid role name format');
+        }
+
         $this->value = $value;
     }
 

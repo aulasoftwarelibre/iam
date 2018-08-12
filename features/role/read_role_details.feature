@@ -6,6 +6,6 @@ Feature: Show role details
 
     Scenario: Get details from a role
         Given the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_USER" from this scope
+        And the role "ROLE_IAM_USER" from this scope
         When I check its details
-        Then I should see than the role name is "ROLE_USER"
+        Then I should see than the role name is "ROLE_IAM_USER"

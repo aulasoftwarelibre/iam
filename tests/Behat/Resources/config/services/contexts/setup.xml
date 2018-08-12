@@ -4,6 +4,13 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="tests.behat.context.setup.user_context" class="Tests\Behat\Context\Setup\UserContext">
+            <argument type="service" id="__symfony__.prooph_service_bus.default_command_bus" />
+            <argument type="service" id="__symfony__.aulasl.shared_storage" />
+            <argument type="service" id="__symfony__.AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\UsersEventStore" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="tests.behat.context.setup.scope_context" class="Tests\Behat\Context\Setup\ScopeContext">
             <argument type="service" id="__symfony__.prooph_service_bus.default_command_bus" />
             <argument type="service" id="__symfony__.aulasl.shared_storage" />

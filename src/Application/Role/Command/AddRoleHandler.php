@@ -63,9 +63,9 @@ final class AddRoleHandler
             throw ScopeNotFoundException::withScopeId($scopeId);
         }
 
-        $prefix = 'ROLE_'.mb_strtoupper($scope->shortName()->toString()).'_';
+        $prefix = 'ROLE_'.mb_strtoupper($scope->alias()->toString()).'_';
         if (!preg_match('/^'.$prefix.'/', $addRole->name()->toString())) {
-            throw ScopeRoleNameInvalid::withRoleName($scope->shortName(), $roleName);
+            throw ScopeRoleNameInvalid::withRoleName($scope->alias(), $roleName);
         }
 
         $role = $scope->addRole($roleId, $roleName);

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Scope\Exception;
 
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 
-class ShortNameAlreadyRegisteredException extends \InvalidArgumentException
+class ScopeAliasAlreadyRegisteredException extends \InvalidArgumentException
 {
-    public static function withShortName(ShortName $shortName): ShortNameAlreadyRegisteredException
+    public static function withAlias(ScopeAlias $alias): ScopeAliasAlreadyRegisteredException
     {
-        return new self(sprintf('Short name %s already taken', $shortName->toString()));
+        return new self(sprintf('Scope alias %s already taken', $alias->toString()));
     }
 }

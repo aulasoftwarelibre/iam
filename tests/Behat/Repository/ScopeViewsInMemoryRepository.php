@@ -25,9 +25,25 @@ class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements
         $this->_add($scopeView->getId(), $scopeView);
     }
 
-    public function get(string $scopeId): ?ScopeView
+    public function get(string $scopeId): ScopeView
+    {
+        $item = $this->_get($scopeId);
+
+        if (!$item) {
+            throw new \InvalidArgumentException('ScopeId not found');
+        }
+
+        return $item;
+    }
+
+    public function ofId(string $scopeId): ?ScopeView
     {
         return $this->_get($scopeId);
+    }
+
+    public function all(): array
+    {
+        return $this->findAll();
     }
 
     public function remove(string $scopeId): void
@@ -44,8 +60,8 @@ class ScopeViewsInMemoryRepository extends AbstractInMemoryRepository implements
         $this->_add($scopeId, $scopeView);
     }
 
-    public function findOneByShortName(string $shortName): ?ScopeView
+    public function ofAlias(string $alias): ?ScopeView
     {
-        return $this->findOneBy('getShortName', $shortName);
+        return $this->findOneBy('getAlias', $alias);
     }
 }

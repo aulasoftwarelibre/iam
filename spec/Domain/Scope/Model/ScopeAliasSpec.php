@@ -15,7 +15,7 @@ namespace spec\AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
 use PhpSpec\ObjectBehavior;
 
-class ShortNameSpec extends ObjectBehavior
+class ScopeAliasSpec extends ObjectBehavior
 {
     public function it_accepts_valid_names()
     {

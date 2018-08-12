@@ -15,21 +15,19 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScopes;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\QueryBus;
-use React\Promise\Promise;
 
 class ScopeCollectionDataProvider implements CollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     /**
-     * @var QueryBus
+     * @var ScopeViews
      */
-    private $queryBus;
+    private $scopeViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(ScopeViews $scopeViews)
     {
-        $this->queryBus = $queryBus;
+        $this->scopeViews = $scopeViews;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -39,16 +37,6 @@ class ScopeCollectionDataProvider implements CollectionDataProviderInterface, Re
 
     public function getCollection(string $resourceClass, string $operationName = null)
     {
-        /** @var Promise $promise */
-        $promise = $this->queryBus->dispatch(
-            new GetScopes()
-        );
-
-        $scopes = [];
-        $promise->then(function ($result) use (&$scopes) {
-            $scopes = $result;
-        });
-
-        return $scopes;
+        return $this->scopeViews->all();
     }
 }

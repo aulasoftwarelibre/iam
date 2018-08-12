@@ -3,7 +3,7 @@ suites:
         namespace: AulaSoftwareLibre\Iam
         psr4_prefix: AulaSoftwareLibre\Iam
 
-formatter.name: pretty
+formatter.name: dot
 
 extensions:
     LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
@@ -16,7 +16,6 @@ extensions:
         whitelist:
             - 'src/Application'
             - 'src/Domain'
-            - 'src/Infrastructure/ReadModel'
         blacklist:
             - 'src/Domain/ApplyMethodDispatcherTrait.php'
             - 'src/Infrastructure/ReadModel/AbstractReadModel.php'

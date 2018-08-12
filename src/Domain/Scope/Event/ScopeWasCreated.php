@@ -26,7 +26,7 @@ final class ScopeWasCreated extends \Prooph\EventSourcing\AggregateChanged
 
     private $scopeId;
     private $name;
-    private $shortName;
+    private $alias;
 
     public function scopeId(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId
     {
@@ -37,29 +37,29 @@ final class ScopeWasCreated extends \Prooph\EventSourcing\AggregateChanged
         return $this->scopeId;
     }
 
-    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name
+    public function name(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName
     {
         if (null === $this->name) {
-            $this->name = \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name::fromString($this->payload['name']);
+            $this->name = \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName::fromString($this->payload['name']);
         }
 
         return $this->name;
     }
 
-    public function shortName(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName
+    public function alias(): \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias
     {
-        if (null === $this->shortName) {
-            $this->shortName = \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName::fromString($this->payload['shortName']);
+        if (null === $this->alias) {
+            $this->alias = \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias::fromString($this->payload['alias']);
         }
 
-        return $this->shortName;
+        return $this->alias;
     }
 
-    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\Name $name, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName $shortName): ScopeWasCreated
+    public static function with(\AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId $scopeId, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName $name, \AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias $alias): ScopeWasCreated
     {
         return new self($scopeId->toString(), [
             'name' => $name->toString(),
-            'shortName' => $shortName->toString(),
+            'alias' => $alias->toString(),
         ]);
     }
 
@@ -69,8 +69,8 @@ final class ScopeWasCreated extends \Prooph\EventSourcing\AggregateChanged
             throw new \InvalidArgumentException("Key 'name' is missing in payload or is not a string");
         }
 
-        if (!isset($payload['shortName']) || !\is_string($payload['shortName'])) {
-            throw new \InvalidArgumentException("Key 'shortName' is missing in payload or is not a string");
+        if (!isset($payload['alias']) || !\is_string($payload['alias'])) {
+            throw new \InvalidArgumentException("Key 'alias' is missing in payload or is not a string");
         }
 
         $this->payload = $payload;

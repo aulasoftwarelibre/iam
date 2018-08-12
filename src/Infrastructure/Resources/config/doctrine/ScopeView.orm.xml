@@ -4,7 +4,7 @@
     <entity name="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView" table="scope_view">
         <id name="id" column="id" type="string" />
         <field name="name" type="string" />
-        <field name="shortName" type="string" unique="true" />
+        <field name="alias" type="string" unique="true" />
     </entity>
      
 </doctrine-mapping>

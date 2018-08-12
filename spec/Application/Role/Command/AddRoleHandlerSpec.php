@@ -25,8 +25,8 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use PhpSpec\ObjectBehavior;
@@ -53,7 +53,7 @@ class AddRoleHandlerSpec extends ObjectBehavior
         Scope $scope,
         Role $role
     ): void {
-        $scope->shortName()->shouldBeCalled()->willReturn(ShortName::fromString('iam'));
+        $scope->alias()->shouldBeCalled()->willReturn(ScopeAlias::fromString('iam'));
         $scope->addRole(
             RoleId::fromString(Fixtures\Role::ROLE_ID),
             RoleName::fromString(Fixtures\Role::NAME)

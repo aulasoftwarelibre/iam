@@ -16,8 +16,8 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\DataProvider;
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use AulaSoftwareLibre\Iam\Application\Role\Query\GetRoles;
-use AulaSoftwareLibre\Iam\Application\Scope\Query\GetScope;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
+use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use Prooph\ServiceBus\QueryBus;
@@ -29,10 +29,15 @@ class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterfa
      * @var QueryBus
      */
     private $queryBus;
+    /**
+     * @var ScopeViews
+     */
+    private $scopeViews;
 
-    public function __construct(QueryBus $queryBus)
+    public function __construct(QueryBus $queryBus, ScopeViews $scopeViews)
     {
         $this->queryBus = $queryBus;
+        $this->scopeViews = $scopeViews;
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
@@ -48,16 +53,7 @@ class ScopeSubresourceRoleDataProvider implements SubresourceDataProviderInterfa
             throw new \InvalidArgumentException(sprintf('Invalid identifiers array: %s', json_encode($identifiers)));
         }
 
-        $promise = $this->queryBus->dispatch(
-            GetScope::with(
-                ScopeId::fromString($scopeId)
-            )
-        );
-        $scope = null;
-        $promise->then(function ($result) use (&$scope) {
-            $scope = $result;
-        });
-
+        $scope = $this->scopeViews->ofId($scopeId);
         if (!$scope instanceof ScopeView) {
             throw new NotFoundHttpException('Not Found');
         }

@@ -31,12 +31,23 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
         $this->_em->flush();
     }
 
-    public function get(string $scopeId): ?ScopeView
+    public function ofId(string $scopeId): ?ScopeView
     {
         return $this->find($scopeId);
     }
 
-    public function findAll(): array
+    public function get(string $scopeId): ScopeView
+    {
+        $scopeView = $this->find($scopeId);
+
+        if (!$scopeView) {
+            throw new \InvalidArgumentException('ScopeId does not exists');
+        }
+
+        return $scopeView;
+    }
+
+    public function all(): array
     {
         return parent::findAll();
     }
@@ -61,8 +72,8 @@ class ScopeViewsRepository extends ServiceEntityRepository implements ScopeViews
         $this->_em->flush();
     }
 
-    public function findOneByShortName(string $shortName): ?ScopeView
+    public function ofAlias(string $alias): ?ScopeView
     {
-        return $this->findOneBy(['shortName' => $shortName]);
+        return $this->findOneBy(['alias' => $alias]);
     }
 }

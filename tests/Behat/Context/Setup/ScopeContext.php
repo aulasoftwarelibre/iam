@@ -16,8 +16,8 @@ namespace Tests\Behat\Context\Setup;
 use AulaSoftwareLibre\DDD\TestsBundle\Service\SharedStorage;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\Name;
-use AulaSoftwareLibre\Iam\Domain\Scope\Model\ShortName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
 use Behat\Behat\Context\Context;
 use Prooph\ServiceBus\CommandBus;
 
@@ -49,14 +49,14 @@ class ScopeContext implements Context
     /**
      * @Given /^the scope "([^"]*)" with name "([^"]*)"$/
      */
-    public function theScopeWithName(string $shortName, string $name): void
+    public function theScopeWithName(string $alias, string $name): void
     {
         $scopeId = $this->scopes->nextIdentity();
 
         $this->commandBus->dispatch(CreateScope::with(
             $scopeId,
-            Name::fromString($name),
-            ShortName::fromString($shortName)
+            ScopeName::fromString($name),
+            ScopeAlias::fromString($alias)
         ));
 
         $this->sharedStorage->set('scopeId', $scopeId);

@@ -16,16 +16,12 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Domain\Scope\Model;
 
-final class ShortName
+final class ScopeName
 {
     private $value;
 
     public function __construct(string $value)
     {
-        if (1 === preg_match('/[^a-z]/', $value)) {
-            throw new \InvalidArgumentException('Short name only accepts [a-z] characters');
-        }
-
         $this->value = $value;
     }
 
@@ -44,17 +40,17 @@ final class ShortName
         return $this->value;
     }
 
-    public static function fromString(string $shortName): ShortName
+    public static function fromString(string $scopeName): ScopeName
     {
-        return new self($shortName);
+        return new self($scopeName);
     }
 
-    public function equals(ShortName $shortName): bool
+    public function equals(ScopeName $scopeName): bool
     {
-        if (\get_class($this) !== \get_class($shortName)) {
+        if (\get_class($this) !== \get_class($scopeName)) {
             return false;
         }
 
-        return $this->value === $shortName->value;
+        return $this->value === $scopeName->value;
     }
 }

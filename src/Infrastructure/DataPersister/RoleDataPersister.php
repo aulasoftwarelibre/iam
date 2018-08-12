@@ -18,8 +18,8 @@ use AulaSoftwareLibre\Iam\Application\Role\Command\AddRole;
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNameAlreadyExistsException;
+use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNamePrefixInvalidException;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
-use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeRoleNameInvalid;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
@@ -72,7 +72,7 @@ class RoleDataPersister implements DataPersisterInterface
             RoleIdAlreadyRegisteredException |
             RoleNameAlreadyExistsException |
             ScopeNotFoundException |
-            ScopeRoleNameInvalid $e
+            RoleNamePrefixInvalidException $e
         ) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }

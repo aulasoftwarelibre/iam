@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace AulaSoftwareLibre\Iam\Application\Scope\Exception;
+namespace AulaSoftwareLibre\Iam\Application\Role\Exception;
 
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 
-class ScopeRoleNameInvalid extends \InvalidArgumentException
+class RoleNamePrefixInvalidException extends \InvalidArgumentException
 {
     public static function withRoleName(ScopeAlias $alias, RoleName $roleName): self
     {

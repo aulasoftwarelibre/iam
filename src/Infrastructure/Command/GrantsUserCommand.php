@@ -56,7 +56,7 @@ class GrantsUserCommand extends Command
             ->setName('iam:user:grants')
             ->setDescription('Gives all user grants in a scope.')
             ->addArgument('username', InputArgument::REQUIRED, 'Username.')
-            ->addArgument('scope', InputArgument::REQUIRED, 'Scope alias.')
+            ->addArgument('scope', InputArgument::OPTIONAL, 'Scope alias.', null)
         ;
     }
 
@@ -73,30 +73,39 @@ class GrantsUserCommand extends Command
         }
 
         $scopeAlias = $input->getArgument('scope');
-        $scopeViews = $this->scopeViews->ofAlias($scopeAlias);
-        if (!$scopeViews instanceof ScopeView) {
-            $io->error(sprintf('Scope alias "%s" not found.', $scopeAlias));
+        if ($scopeAlias) {
+            $scopeView = $this->scopeViews->ofAlias($scopeAlias);
+            if (!$scopeView instanceof ScopeView) {
+                $io->error(sprintf('Scope alias "%s" not found.', $scopeAlias));
 
-            return;
+                return;
+            }
+            $scopeViews = [$scopeView];
+        } else {
+            $scopeViews = $this->scopeViews->all();
         }
 
-        $grants = $this->grantViews->ofScopeIdAndUserId($scopeViews->getId(), $userView->getId());
-        if (empty($grants)) {
-            $io->error('No available roles in this scope.');
-
-            return;
-        }
-
-        $io->title(sprintf('List of available roles in "%s" scope:', $scopeAlias));
+        $io->title(sprintf('List of "%s" grants:', $username));
         $table = new Table($output);
-        $table->setHeaders(['Id.', 'Name']);
+        $table->setHeaders(['Scope', 'Roles']);
 
-        /** @var GrantView $grant */
-        foreach ($grants as $grant) {
-            $table->addRow([$grant->getRoleId(), $grant->getRoleName()]);
+        /** @var ScopeView $scopeView */
+        foreach ($scopeViews as $scopeView) {
+            $grants = $this->grantViews->ofScopeIdAndUserId($scopeView->getId(), $userView->getId());
+            if (empty($grants) && $scopeAlias) {
+                $io->error('No available roles in this scope.');
+
+                return;
+            }
+
+            $table->addRow([
+                $scopeView->getAlias(),
+                ltrim(\array_reduce($grants, function ($carry, GrantView $grantView) {
+                    return $carry.', '.$grantView->getRoleName();
+                }, ''), ', '),
+            ]);
         }
 
         $table->render();
-        $io->success(sprintf('Total %s role(s)', count($grants)));
     }
 }

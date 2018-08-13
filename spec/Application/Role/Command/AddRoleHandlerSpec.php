@@ -53,7 +53,6 @@ class AddRoleHandlerSpec extends ObjectBehavior
         Scope $scope,
         Role $role
     ): void {
-        $scope->alias()->shouldBeCalled()->willReturn(ScopeAlias::fromString('iam'));
         $scope->addRole(
             RoleId::fromString(Fixtures\Role::ROLE_ID),
             RoleName::fromString(Fixtures\Role::NAME)
@@ -83,11 +82,13 @@ class AddRoleHandlerSpec extends ObjectBehavior
         ]);
     }
 
-    public function it_checks_role_name_is_unique_by_scope(RoleViews $roleViews): void
+    public function it_checks_role_name_is_unique_by_scope(RoleViews $roleViews, Scope $scope): void
     {
         $roleViews->ofScopeIdAndRoleName(Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)->shouldBeCalled()->willReturn(
             new RoleView(Fixtures\Role::ROLE_ID, Fixtures\Scope::SCOPE_ID, Fixtures\Role::NAME)
         );
+
+        $scope->alias()->shouldBeCalled()->willReturn(ScopeAlias::fromString('iam'));
 
         $this->shouldThrow(RoleNameAlreadyExistsException::class)->during('__invoke', [
             AddRole::with(

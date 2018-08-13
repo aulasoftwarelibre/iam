@@ -19,6 +19,6 @@ class RoleIdAlreadyRegisteredException extends \InvalidArgumentException
 {
     public static function withRoleId(RoleId $roleId): RoleIdAlreadyRegisteredException
     {
-        return new self(sprintf('RoleId %s already taken', $roleId->toString()));
+        return new self(sprintf('RoleId "%s" already taken', $roleId->toString()));
     }
 }

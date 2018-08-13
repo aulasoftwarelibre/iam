@@ -43,8 +43,30 @@ class GrantViewsRepository extends ServiceEntityRepository implements GrantViews
         $this->_em->flush();
     }
 
-    public function findByRoleId(string $roleId): array
+    public function ofRoleId(string $roleId): array
     {
         return $this->findBy(['roleId' => $roleId]);
+    }
+
+    public function distinctUsersOfScopeId(string $scopeId): array
+    {
+        $qb = $this->createQueryBuilder('g');
+        $qb
+            ->select('g.userId')
+            ->distinct(true)
+            ->addSelect('g.username')
+            ->where($qb->expr()->eq('g.scopeId', ':scopeId'))
+            ->setParameter('scopeId', $scopeId)
+        ;
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function ofScopeIdAndUserId(string $scopeId, string $userId): array
+    {
+        return $this->findBy([
+            'scopeId' => $scopeId,
+            'userId' => $userId,
+        ]);
     }
 }

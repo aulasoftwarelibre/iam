@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Application\Role\Exception;
 
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
+use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 
 class RoleNameAlreadyExistsException extends \InvalidArgumentException
 {
-    public static function withRoleName(RoleName $roleName): self
+    public static function withScopeAliasAndRoleName(ScopeAlias $scopeAlias, RoleName $roleName): self
     {
-        return new self(sprintf('Role name %s already taken', $roleName->toString()));
+        return new self(sprintf('Role name "%s" already taken in scope "%s"', $roleName->toString(), $scopeAlias->toString()));
     }
 }

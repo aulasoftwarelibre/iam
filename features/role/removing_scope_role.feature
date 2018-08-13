@@ -6,6 +6,6 @@ Feature: Removing a role
 
     Scenario: Removing a scope
         Given the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_IAM_ADMIN" from this scope
+        And the role "ROLE_ADMIN" from this scope
         When I remove the role
         Then the role should not be available

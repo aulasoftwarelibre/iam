@@ -19,6 +19,6 @@ class ScopeIdAlreadyRegisteredException extends \InvalidArgumentException
 {
     public static function withScopeId(ScopeId $scopeId): ScopeIdAlreadyRegisteredException
     {
-        return new self(sprintf('ScopeId %s already taken', $scopeId->toString()));
+        return new self(sprintf('ScopeId "%s" already taken', $scopeId->toString()));
     }
 }

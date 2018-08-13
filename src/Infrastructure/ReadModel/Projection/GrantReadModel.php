@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
+use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews;
@@ -29,17 +31,33 @@ class GrantReadModel
      * @var GrantViews
      */
     private $grantViews;
+    /**
+     * @var Roles
+     */
+    private $roles;
+    /**
+     * @var Users
+     */
+    private $users;
 
-    public function __construct(GrantViews $grantViews)
+    public function __construct(GrantViews $grantViews, Roles $roles, Users $users)
     {
         $this->grantViews = $grantViews;
+        $this->roles = $roles;
+        $this->users = $users;
     }
 
     public function applyUserWasPromoted(UserWasPromoted $event): void
     {
+        $role = $this->roles->get($event->roleId());
+        $user = $this->users->get($event->userId());
+
         $this->grantViews->add(new GrantView(
-            $event->userId()->toString(),
-            $event->roleId()->toString()
+            $user->userId()->toString(),
+            $user->username()->toString(),
+            $role->scopeId()->toString(),
+            $role->roleId()->toString(),
+            $role->name()->toString()
         ));
     }
 

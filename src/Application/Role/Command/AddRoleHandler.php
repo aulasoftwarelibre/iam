@@ -17,7 +17,6 @@ use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredExce
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNameAlreadyExistsException;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeNotFoundException;
-use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeRoleNameInvalid;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
@@ -54,18 +53,13 @@ final class AddRoleHandler
             throw RoleIdAlreadyRegisteredException::withRoleId($roleId);
         }
 
-        if ($this->roleViews->ofScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
-            throw RoleNameAlreadyExistsException::withRoleName($roleName);
-        }
-
         $scope = $this->scopes->find($scopeId);
         if (!$scope instanceof Scope) {
             throw ScopeNotFoundException::withScopeId($scopeId);
         }
 
-        $prefix = 'ROLE_'.mb_strtoupper($scope->alias()->toString()).'_';
-        if (!preg_match('/^'.$prefix.'/', $addRole->name()->toString())) {
-            throw ScopeRoleNameInvalid::withRoleName($scope->alias(), $roleName);
+        if ($this->roleViews->ofScopeIdAndRoleName($scopeId->toString(), $roleName->toString())) {
+            throw RoleNameAlreadyExistsException::withScopeAliasAndRoleName($scope->alias(), $roleName);
         }
 
         $role = $scope->addRole($roleId, $roleName);

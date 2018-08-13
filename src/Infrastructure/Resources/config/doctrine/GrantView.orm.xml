@@ -2,11 +2,10 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
     
     <entity name="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\GrantView" table="grant_view">
-        <unique-constraints>
-            <unique-constraint columns="user_id,role_id"></unique-constraint>
-        </unique-constraints>
-        <id name="id" column="id" type="string" />
-        <field name="userId" type="string" />
-        <field name="roleId" type="string" />
+        <id name="userId" type="string" />
+        <field name="username" type="string" />
+        <field name="scopeId" type="string" />
+        <id name="roleId" type="string" />
+        <field name="roleName" type="string" />
     </entity>
 </doctrine-mapping>

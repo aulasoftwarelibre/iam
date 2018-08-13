@@ -41,7 +41,7 @@ class OnRoleWasRemovedProcess
     public function __invoke(RoleWasRemoved $event): void
     {
         /** @var GrantView[] $grantViews */
-        $grantViews = $this->grantViews->findByRoleId($event->roleId()->toString());
+        $grantViews = $this->grantViews->ofRoleId($event->roleId()->toString());
 
         foreach ($grantViews as $grantView) {
             $this->commandBus->dispatch(

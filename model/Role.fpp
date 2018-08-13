@@ -2,7 +2,7 @@ namespace AulaSoftwareLibre\Iam\Domain\Role\Model {
     data RoleId = RoleId deriving (Uuid);
     data RoleName = String deriving (ToString, FromString, Equals) where
         _:
-            | 0 === preg_match("/^ROLE_[A-Z]+_[A-Z_]+$/", $value) => "Invalid role name format";
+            | 0 === preg_match("/^ROLE_[A-Z_]+$/", $value) => "Role name must begin with \"ROLE_\" prefix";
 }
 
 namespace AulaSoftwareLibre\Iam\Domain\Role\Event {

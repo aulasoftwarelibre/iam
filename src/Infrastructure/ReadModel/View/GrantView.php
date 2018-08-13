@@ -13,14 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View;
 
-use Ramsey\Uuid\Uuid;
-
 class GrantView
 {
-    /**
-     * @var string
-     */
-    private $id;
     /**
      * @var string
      */
@@ -28,21 +22,27 @@ class GrantView
     /**
      * @var string
      */
-    private $roleId;
-
-    public function __construct(string $userId, string $roleId)
-    {
-        $this->id = Uuid::uuid4()->toString();
-        $this->userId = $userId;
-        $this->roleId = $roleId;
-    }
-
+    private $username;
     /**
-     * @return string
+     * @var string
      */
-    public function getId(): string
+    private $roleId;
+    /**
+     * @var string
+     */
+    private $roleName;
+    /**
+     * @var string
+     */
+    private $scopeId;
+
+    public function __construct(string $userId, string $username, string $scopeId, string $roleId, string $roleName)
     {
-        return $this->id;
+        $this->userId = $userId;
+        $this->username = $username;
+        $this->roleId = $roleId;
+        $this->scopeId = $scopeId;
+        $this->roleName = $roleName;
     }
 
     /**
@@ -56,8 +56,32 @@ class GrantView
     /**
      * @return string
      */
+    public function getScopeId(): string
+    {
+        return $this->scopeId;
+    }
+
+    /**
+     * @return string
+     */
     public function getRoleId(): string
     {
         return $this->roleId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRoleName(): string
+    {
+        return $this->roleName;
     }
 }

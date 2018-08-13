@@ -19,6 +19,6 @@ class RoleNotFoundException extends \InvalidArgumentException
 {
     public static function withRoleId(RoleId $roleId): self
     {
-        return new self(sprintf('Role with id %s does not exists', $roleId->toString()));
+        return new self(sprintf('Role with id "%s" does not exists', $roleId->toString()));
     }
 }

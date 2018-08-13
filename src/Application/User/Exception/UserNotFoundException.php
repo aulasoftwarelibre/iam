@@ -19,6 +19,6 @@ class UserNotFoundException extends \InvalidArgumentException
 {
     public static function withUserId(UserId $userId): self
     {
-        return new self(sprintf('User with id %s does not exists', $userId->toString()));
+        return new self(sprintf('User with id "%s" does not exists', $userId->toString()));
     }
 }

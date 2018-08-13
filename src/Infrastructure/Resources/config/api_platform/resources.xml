@@ -77,6 +77,67 @@
             <subresource resourceClass="AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView"
                          collection="true" />
         </property>
+        <collectionOperations>
+            <collectionOperation name="get" />
+            <collectionOperation name="post" />
+            <collectionOperation name="get_users">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/scopes/{id}/users.{_format}</attribute>
+                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\ScopesGetUsersCollection</attribute>
+                <attribute name="defaults">
+                    <attribute name="_api_receive">false</attribute>
+                    <attribute name="_api_resource_class">AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView</attribute>
+                </attribute>
+
+                <attribute name="swagger_context">
+                    <attribute name="summary">Get users in the given scope.</attribute>
+                    <attribute name="tags">
+                        <attribute name="0">Scope</attribute>
+                    </attribute>
+                    <attribute name="parameters">
+                        <attribute name="0">
+                            <attribute name="name">id</attribute>
+                            <attribute name="description">Scope id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+            <collectionOperation name="get_users_grants">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/scopes/{id}/users/{userId}/grants.{_format}</attribute>
+                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\ScopesGetUsersGrantsCollection</attribute>
+                <attribute name="defaults">
+                    <attribute name="_api_receive">false</attribute>
+                    <attribute name="_api_resource_class">AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView</attribute>
+                </attribute>
+
+                <attribute name="swagger_context">
+                    <attribute name="summary">Get user grants in the given scope.</attribute>
+                    <attribute name="tags">
+                        <attribute name="0">Scope</attribute>
+                    </attribute>
+                    <attribute name="parameters">
+                        <attribute name="0">
+                            <attribute name="name">id</attribute>
+                            <attribute name="description">Scope id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                        <attribute name="1">
+                            <attribute name="name">userId</attribute>
+                            <attribute name="description">User id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
     </resource>
 
     <resource

@@ -92,7 +92,7 @@ class UserContext implements Context
      */
     public function iShouldSeeThanTheUsernameIs(string $username): void
     {
-        $expectedResponse = sprintf('{"id":"@string@","username":"%s","roles":[]}', $username);
+        $expectedResponse = sprintf('{"id":"@string@","username":"%s"}', $username);
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -114,9 +114,12 @@ class UserContext implements Context
      */
     public function iShouldSeeThatTheUserHasTheRole(UserId $userId, Role $role)
     {
-        $this->client->get('/api/users/'.$userId->toString());
+        var_dump(__METHOD__.'::'.$userId->toString());
+        var_dump(__METHOD__.'::'.$role->roleId()->toString());
+        var_dump(__METHOD__.'::'.$role->scopeId()->toString());
+        $this->client->get(sprintf('/api/scopes/%s/users/%s/grants', $role->scopeId()->toString(), $userId->toString()));
 
-        $expectedResponse = sprintf('{"id":"%s","username":"@string@","roles":[{"id":"%s","scopeId":"@string@","name":"@string@"}]}', $userId->toString(), $role->roleId()->toString());
+        $expectedResponse = sprintf('[{"id":"%s","scopeId":"@string@","name":"@string@"}]', $role->roleId()->toString());
 
         $this->asserter->assertResponse(
             $this->client->response(),
@@ -140,7 +143,7 @@ class UserContext implements Context
     {
         $this->client->get('/api/users/'.$userId->toString());
 
-        $expectedResponse = sprintf('{"id":"%s","username":"@string@","roles":[]}', $userId->toString());
+        $expectedResponse = sprintf('{"id":"%s","username":"@string@"}', $userId->toString());
 
         $this->asserter->assertResponse(
             $this->client->response(),

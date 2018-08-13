@@ -86,11 +86,11 @@ EOF
 
         $io->title(sprintf('List of available roles in "%s" scope:', $scopeAlias));
         $table = new Table($output);
-        $table->setHeaders(['Alias']);
+        $table->setHeaders(['Id.', 'Alias']);
 
         /** @var RoleView $roleView */
         foreach ($roleViews as $roleView) {
-            $table->addRow([$roleView->getName()]);
+            $table->addRow([$roleView->getId(), $roleView->getName()]);
         }
 
         $table->render();

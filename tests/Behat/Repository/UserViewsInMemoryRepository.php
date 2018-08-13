@@ -24,7 +24,6 @@ class UserViewsInMemoryRepository extends AbstractInMemoryRepository implements 
 
     public function add(UserView $userView): void
     {
-        var_dump(__METHOD__.'::'.$userView->getId());
         $this->_add($userView->getId(), $userView);
     }
 

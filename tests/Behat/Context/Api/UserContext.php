@@ -114,9 +114,6 @@ class UserContext implements Context
      */
     public function iShouldSeeThatTheUserHasTheRole(UserId $userId, Role $role)
     {
-        var_dump(__METHOD__.'::'.$userId->toString());
-        var_dump(__METHOD__.'::'.$role->roleId()->toString());
-        var_dump(__METHOD__.'::'.$role->scopeId()->toString());
         $this->client->get(sprintf('/api/scopes/%s/users/%s/grants', $role->scopeId()->toString(), $userId->toString()));
 
         $expectedResponse = sprintf('[{"id":"%s","scopeId":"@string@","name":"@string@"}]', $role->roleId()->toString());

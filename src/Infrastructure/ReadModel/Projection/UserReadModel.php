@@ -15,8 +15,6 @@ namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
-use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
-use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
@@ -50,28 +48,5 @@ class UserReadModel
         );
 
         $this->userViews->add($userView);
-    }
-
-    public function applyUserWasPromoted(UserWasPromoted $event): void
-    {
-        $userId = $event->userId()->toString();
-        $roleId = $event->roleId()->toString();
-
-        $userView = $this->userViews->ofId($userId);
-        $roleView = $this->roleViews->ofId($roleId);
-
-        $userView->addRole($roleView);
-        $this->userViews->save($userView);
-    }
-
-    public function applyUserWasDemoted(UserWasDemoted $event): void
-    {
-        $userId = $event->userId()->toString();
-        $roleId = $event->roleId()->toString();
-
-        $userView = $this->userViews->ofId($userId);
-
-        $userView->removeRole($roleId);
-        $this->userViews->save($userView);
     }
 }

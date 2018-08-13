@@ -21,5 +21,9 @@ interface GrantViews
 
     public function remove(string $userId, string $roleId): void;
 
-    public function findByRoleId(string $roleId): array;
+    public function ofRoleId(string $roleId): array;
+
+    public function distinctUsersOfScopeId(string $scopeId): array;
+
+    public function ofScopeIdAndUserId(string $scopeId, string $userId): array;
 }

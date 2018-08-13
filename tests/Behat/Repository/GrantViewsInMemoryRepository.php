@@ -15,6 +15,7 @@ namespace Tests\Behat\Repository;
 
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\GrantView;
+use Ramsey\Uuid\Uuid;
 
 class GrantViewsInMemoryRepository extends AbstractInMemoryRepository implements GrantViews
 {
@@ -22,31 +23,57 @@ class GrantViewsInMemoryRepository extends AbstractInMemoryRepository implements
 
     public function add(GrantView $grantView): void
     {
-        $this->_add($grantView->getId(), $grantView);
+        $this->_add(Uuid::uuid4()->toString(), $grantView);
     }
 
     public function remove(string $userId, string $roleId): void
     {
-        $found = \array_reduce(
-            static::$stack,
-            function (?GrantView $found, GrantView $grantView) use ($userId, $roleId) {
-                return (
-                    $grantView->getUserId() === $userId
-                    && $grantView->getRoleId() === $roleId
-                ) ? $grantView : $found;
-            },
-            null
-        );
+        $found = false;
 
-        if (!$found instanceof GrantView) {
+        /**
+         * @var string
+         * @var GrantView $grantView
+         */
+        foreach (static::$stack as $key => $grantView) {
+            if ($grantView->getUserId() === $userId
+                && $grantView->getRoleId() === $roleId
+            ) {
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
             return;
         }
 
-        $this->_remove($found->getId());
+        $this->_remove($key);
     }
 
-    public function findByRoleId(string $roleId): array
+    public function ofRoleId(string $roleId): array
     {
         return $this->findBy('getRoleId', $roleId);
+    }
+
+    public function distinctUsersOfScopeId(string $scopeId): array
+    {
+        $users = [];
+        /** @var GrantView $grantView */
+        foreach (static::$stack as $grantView) {
+            $users[$grantView->getUserId()] = [
+                'userId' => $grantView->getUserId(),
+                'username' => $grantView->getUsername(),
+            ];
+        }
+
+        return \array_values($users);
+    }
+
+    public function ofScopeIdAndUserId(string $scopeId, string $userId): array
+    {
+        return \array_values(\array_filter(static::$stack, function (GrantView $grantView) use ($scopeId, $userId) {
+            return $grantView->getScopeId() === $scopeId
+                && $grantView->getUserId() === $userId;
+        }));
     }
 }

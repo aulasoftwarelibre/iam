@@ -23,10 +23,6 @@ class UserView
      * @var string
      */
     private $username;
-    /**
-     * @var string[]|array
-     */
-    private $roles;
 
     public function __construct(string $id, string $username)
     {
@@ -49,25 +45,5 @@ class UserView
     public function getUsername(): string
     {
         return $this->username;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
-    public function addRole(RoleView $roleView): void
-    {
-        $this->roles[] = $roleView;
-    }
-
-    public function removeRole(string $roleId): void
-    {
-        $this->roles = \array_filter($this->roles, function (RoleView $roleView) use ($roleId) {
-            return $roleId !== $roleView->getId();
-        });
     }
 }

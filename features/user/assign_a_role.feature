@@ -7,20 +7,20 @@ Feature: Manage user roles
     Scenario: Add a role to the user
         Given an account with username "johndoe"
         And the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_IAM_USER" from this scope
+        And the role "ROLE_USER" from this scope
         When I assign the role to the user
         Then I should see that the user has the role
 
     Scenario: Remove a role to the user
         Given the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_IAM_USER" from this scope
+        And the role "ROLE_USER" from this scope
         And an account with username "johndoe" and this role
         When I remove the role to the user
         Then I shouldn't see that the user has the role
 
     Scenario: Remove a role from a scope
         Given the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_IAM_USER" from this scope
+        And the role "ROLE_USER" from this scope
         And an account with username "johndoe" and this role
         When I remove the role
         Then I shouldn't see that the user has the role

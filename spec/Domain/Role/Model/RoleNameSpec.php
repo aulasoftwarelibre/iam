@@ -19,14 +19,14 @@ class RoleNameSpec extends ObjectBehavior
 {
     public function it_accepts_valid_names()
     {
-        $this->beConstructedWith('ROLE_SCOPE_NAME');
+        $this->beConstructedWith('ROLE_NAME');
         $this->shouldNotThrow(\InvalidArgumentException::class)
             ->duringInstantiation();
     }
 
     public function it_rejects_invalid_names()
     {
-        $invalidNames = ['ROLE_NAME', 'SCOPE_NAME', 'NAME', 'ROLE NAME'];
+        $invalidNames = ['SCOPE_NAME', 'NAME', 'ROLE NAME'];
 
         foreach ($invalidNames as $invalidName) {
             $this->beConstructedWith($invalidName);

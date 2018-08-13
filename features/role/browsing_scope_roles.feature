@@ -6,6 +6,6 @@ Feature: Browsing roles
 
     Scenario: Browsing roles
         Given the scope "iam" with name "Identity and Access Management"
-        And the role "ROLE_IAM_USER" from this scope
+        And the role "ROLE_USER" from this scope
         When I browse the roles in this scope
-        Then I should see the "ROLE_IAM_USER" role
+        Then I should see the "ROLE_USER" role

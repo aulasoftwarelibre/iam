@@ -29,6 +29,9 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "clue/stream-filter": {
+        "version": "v1.4.0"
+    },
     "coduo/php-matcher": {
         "version": "3.1.0"
     },
@@ -190,6 +193,24 @@
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
+    },
+    "php-http/curl-client": {
+        "version": "v1.7.1"
+    },
+    "php-http/discovery": {
+        "version": "1.4.0"
+    },
+    "php-http/httplug": {
+        "version": "v1.1.0"
+    },
+    "php-http/message": {
+        "version": "1.6.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -421,6 +442,9 @@
     },
     "symfony/property-info": {
         "version": "v4.1.1"
+    },
+    "symfony/psr-http-message-bridge": {
+        "version": "v1.0.2"
     },
     "symfony/routing": {
         "version": "4.0",

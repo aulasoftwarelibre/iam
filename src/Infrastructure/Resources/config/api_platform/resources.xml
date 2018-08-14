@@ -7,9 +7,9 @@
             description="Users">
         <itemOperations>
             <itemOperation name="get" />
-            <itemOperation name="promote">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/users/{id}/promote/{roleId}.{_format}</attribute>
+            <itemOperation name="roles_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/users/{id}/roles/{roleId}.{_format}</attribute>
                 <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\UserPromote</attribute>
                 <attribute name="defaults">
                     <attribute name="_api_receive">false</attribute>
@@ -35,9 +35,9 @@
                     </attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="demote">
+            <itemOperation name="roles_delete">
                 <attribute name="method">DELETE</attribute>
-                <attribute name="path">/users/{id}/demote/{roleId}.{_format}</attribute>
+                <attribute name="path">/users/{id}/roles/{roleId}.{_format}</attribute>
                 <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\UserDemote</attribute>
                 <attribute name="defaults">
                     <attribute name="_api_receive">false</attribute>
@@ -66,6 +66,35 @@
         </itemOperations>
         <collectionOperations>
             <collectionOperation name="post" />
+            <collectionOperation name="roles_scopes_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/users/{id}/scopes/{scopeId}/roles.{_format}</attribute>
+                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\ScopesGetUsersRolesCollection</attribute>
+                <attribute name="defaults">
+                    <attribute name="_api_receive">false</attribute>
+                    <attribute name="_api_resource_class">AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView</attribute>
+                </attribute>
+
+                <attribute name="swagger_context">
+                    <attribute name="summary">Get user grants in the given scope.</attribute>
+                    <attribute name="parameters">
+                        <attribute name="0">
+                            <attribute name="name">id</attribute>
+                            <attribute name="description">User id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                        <attribute name="1">
+                            <attribute name="name">scopeId</attribute>
+                            <attribute name="description">Scope id.</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="type">string</attribute>
+                            <attribute name="required">true</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
     </resource>
 
@@ -80,7 +109,7 @@
         <collectionOperations>
             <collectionOperation name="get" />
             <collectionOperation name="post" />
-            <collectionOperation name="get_users">
+            <collectionOperation name="scopes_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/scopes/{id}/users.{_format}</attribute>
                 <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\ScopesGetUsersCollection</attribute>
@@ -91,45 +120,10 @@
 
                 <attribute name="swagger_context">
                     <attribute name="summary">Get users in the given scope.</attribute>
-                    <attribute name="tags">
-                        <attribute name="0">Scope</attribute>
-                    </attribute>
                     <attribute name="parameters">
                         <attribute name="0">
                             <attribute name="name">id</attribute>
                             <attribute name="description">Scope id.</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="type">string</attribute>
-                            <attribute name="required">true</attribute>
-                        </attribute>
-                    </attribute>
-                </attribute>
-            </collectionOperation>
-            <collectionOperation name="get_users_grants">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/scopes/{id}/users/{userId}/grants.{_format}</attribute>
-                <attribute name="controller">AulaSoftwareLibre\Iam\Infrastructure\Controller\ScopesGetUsersGrantsCollection</attribute>
-                <attribute name="defaults">
-                    <attribute name="_api_receive">false</attribute>
-                    <attribute name="_api_resource_class">AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView</attribute>
-                </attribute>
-
-                <attribute name="swagger_context">
-                    <attribute name="summary">Get user grants in the given scope.</attribute>
-                    <attribute name="tags">
-                        <attribute name="0">Scope</attribute>
-                    </attribute>
-                    <attribute name="parameters">
-                        <attribute name="0">
-                            <attribute name="name">id</attribute>
-                            <attribute name="description">Scope id.</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="type">string</attribute>
-                            <attribute name="required">true</attribute>
-                        </attribute>
-                        <attribute name="1">
-                            <attribute name="name">userId</attribute>
-                            <attribute name="description">User id.</attribute>
                             <attribute name="in">path</attribute>
                             <attribute name="type">string</attribute>
                             <attribute name="required">true</attribute>

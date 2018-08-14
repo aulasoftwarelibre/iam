@@ -106,7 +106,7 @@ class UserContext implements Context
      */
     public function iAssignTheRoleToTheUser(RoleId $roleId, UserId $userId)
     {
-        $this->client->put('/api/users/'.$userId->toString().'/promote/'.$roleId->toString());
+        $this->client->post('/api/users/'.$userId->toString().'/roles/'.$roleId->toString());
     }
 
     /**
@@ -114,7 +114,7 @@ class UserContext implements Context
      */
     public function iShouldSeeThatTheUserHasTheRole(UserId $userId, Role $role)
     {
-        $this->client->get(sprintf('/api/scopes/%s/users/%s/grants', $role->scopeId()->toString(), $userId->toString()));
+        $this->client->get(sprintf('/api/users/%s/scopes/%s/roles', $userId->toString(), $role->scopeId()->toString()));
 
         $expectedResponse = sprintf('[{"id":"%s","scopeId":"@string@","name":"@string@"}]', $role->roleId()->toString());
 
@@ -130,7 +130,7 @@ class UserContext implements Context
      */
     public function iRemoveTheRoleToTheUser(RoleId $roleId, UserId $userId)
     {
-        $this->client->delete('/api/users/'.$userId->toString().'/demote/'.$roleId->toString());
+        $this->client->delete('/api/users/'.$userId->toString().'/roles/'.$roleId->toString());
     }
 
     /**

@@ -22,7 +22,7 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ScopesGetUsersGrantsCollection
+class ScopesGetUsersRolesCollection
 {
     /**
      * @var ScopeViews
@@ -44,19 +44,19 @@ class ScopesGetUsersGrantsCollection
         $this->grantViews = $grantViews;
     }
 
-    public function __invoke(string $id, string $userId)
+    public function __invoke(string $id, string $scopeId)
     {
-        $scope = $this->scopeViews->ofId($id);
+        $scope = $this->scopeViews->ofId($scopeId);
         if (!$scope instanceof ScopeView) {
-            throw new NotFoundHttpException(sprintf('Scope id "%s" not found.', $id));
+            throw new NotFoundHttpException(sprintf('Scope id "%s" not found.', $scopeId));
         }
 
-        $user = $this->userViews->ofId($userId);
+        $user = $this->userViews->ofId($id);
         if (!$user instanceof UserView) {
-            throw new NotFoundHttpException(sprintf('User id "%s" not found.', $id));
+            throw new NotFoundHttpException(sprintf('User id "%s" not found.', $scopeId));
         }
 
-        $grants = $this->grantViews->ofScopeIdAndUserId($id, $userId);
+        $grants = $this->grantViews->ofScopeIdAndUserId($scopeId, $id);
 
         return \array_map(function (GrantView $grantView) {
             return new RoleView(

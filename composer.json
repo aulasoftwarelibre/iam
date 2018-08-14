@@ -6,11 +6,15 @@
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
-        "ext-json": "*",
         "ext-iconv": "*",
+        "ext-json": "*",
         "api-platform/api-pack": "^1.1",
         "aulasoftwarelibre/ddd-base": "^1.0",
         "doctrine/collections": "^1.5",
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/curl-client": "^1.7",
+        "php-http/discovery": "^1.4",
+        "php-http/message": "^1.6",
         "prooph/event-sourcing": "^5.5",
         "prooph/event-store-bus-bridge": "^3.2",
         "prooph/event-store-symfony-bundle": "^0.5.0",
@@ -23,6 +27,7 @@
         "symfony/framework-bundle": "^4.1",
         "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
+        "symfony/psr-http-message-bridge": "^1.0",
         "symfony/yaml": "^4.1"
     },
     "require-dev": {
@@ -75,6 +80,17 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "generate": [
+            "vendor/bin/fpp model/",
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "fix": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "test": [
+            "vendor/bin/phpspec run",
+            "vendor/bin/behat"
         ]
     },
     "conflict": {

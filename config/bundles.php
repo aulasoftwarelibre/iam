@@ -16,4 +16,5 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     AulaSoftwareLibre\DDD\TestsBundle\TestBundle::class => ['test' => true],
+    AulaSoftwareLibre\Iam\Bundle\IamBundle\IamBundle::class => ['all' => true],
 ];

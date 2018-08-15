@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
-use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;
@@ -21,7 +22,7 @@ use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\GrantView;
 
-class GrantReadModel
+final class GrantReadModel implements EventHandler
 {
     use ApplyMethodDispatcherTrait {
         applyMessage as public __invoke;

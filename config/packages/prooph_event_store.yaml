@@ -12,27 +12,3 @@ prooph_event_store:
                 AulaSoftwareLibre\Iam\Infrastructure\Doctrine\EventStore\RolesEventStore:
                     aggregate_type: 'AulaSoftwareLibre\Iam\Domain\Role\Model\Role'
                     aggregate_translator: 'prooph_event_sourcing.aggregate_translator'
-
-services:
-    _defaults:
-        public: false
-
-    doctrine.pdo.connection:
-        class: '\PDO'
-        factory: ['@database_connection', 'getWrappedConnection']
-
-    prooph_event_sourcing.aggregate_translator:
-        class: 'Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator'
-
-    prooph_event_store.single_stream_strategy:
-        class: 'Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy'
-
-    # Event Store
-    Prooph\EventStore\Pdo\PostgresEventStore:
-        arguments:
-        - '@prooph_event_store.message_factory'
-        - '@doctrine.pdo.connection'
-        - '@prooph_event_store.single_stream_strategy'
-
-    Prooph\EventStore\EventStore: '@Prooph\EventStore\Pdo\PostgresEventStore'
-

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Domain\User\Model;
 
-use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasDemoted;

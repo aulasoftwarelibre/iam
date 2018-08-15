@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
-use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
 use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasCreated;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
 
-class UserReadModel
+final class UserReadModel implements EventHandler
 {
     use ApplyMethodDispatcherTrait {
         applyMessage as public __invoke;

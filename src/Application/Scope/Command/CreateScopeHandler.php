@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Scope\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeAliasAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 
-final class CreateScopeHandler
+final class CreateScopeHandler implements CommandHandler
 {
     /**
      * @var Scopes

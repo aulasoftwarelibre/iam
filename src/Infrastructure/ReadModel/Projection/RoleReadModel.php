@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
-use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 
-final class RoleReadModel
+final class RoleReadModel implements EventHandler
 {
     use ApplyMethodDispatcherTrait {
         applyMessage as public __invoke;

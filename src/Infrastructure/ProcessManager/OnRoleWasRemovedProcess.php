@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ProcessManager;
 
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
 use AulaSoftwareLibre\Iam\Application\User\Command\DemoteUser;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
@@ -21,7 +22,7 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\GrantView;
 use Prooph\ServiceBus\CommandBus;
 
-class OnRoleWasRemovedProcess
+final class OnRoleWasRemovedProcess implements EventHandler
 {
     /**
      * @var GrantViews

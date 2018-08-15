@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\User\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 
-class PromoteUserHandler
+final class PromoteUserHandler implements CommandHandler
 {
     /**
      * @var Users

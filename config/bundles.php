@@ -15,6 +15,7 @@ return [
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
+    AulaSoftwareLibre\DDD\BaseBundle\BaseBundle::class => ['all' => true],
     AulaSoftwareLibre\DDD\TestsBundle\TestBundle::class => ['test' => true],
     AulaSoftwareLibre\Iam\Bundle\IamBundle\IamBundle::class => ['all' => true],
 ];

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Domain\Role\Model;
 
-use AulaSoftwareLibre\DDD\Domain\ApplyMethodDispatcherTrait;
+use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasAdded;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;

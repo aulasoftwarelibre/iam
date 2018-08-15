@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Scope\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 
-final class RemoveScopeHandler
+final class RemoveScopeHandler implements CommandHandler
 {
     /**
      * @var Scopes

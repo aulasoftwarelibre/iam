@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ProcessManager;
 
+use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
@@ -20,7 +21,7 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use Prooph\ServiceBus\CommandBus;
 
-final class OnScopeWasRemovedProcess
+final class OnScopeWasRemovedProcess implements EventHandler
 {
     /**
      * @var CommandBus

@@ -66,6 +66,6 @@ class ListScopeCommand extends Command
 
         $table->render();
 
-        $io->success(sprintf('Total %s scope(s)', count($scopesViews)));
+        $io->success(sprintf('Total %s scope(s)', \count($scopesViews)));
     }
 }

@@ -95,6 +95,6 @@ EOF
 
         $table->render();
 
-        $io->success(sprintf('Total %s role(s)', count($roleViews)));
+        $io->success(sprintf('Total %s role(s)', \count($roleViews)));
     }
 }

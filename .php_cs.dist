@@ -17,6 +17,7 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('public/bundles')
     ->exclude('public/build')
     ->notPath('bin/console')
+    ->notPath('config/bootstrap.php')
     ->notPath('public/index.php')
 ;
 

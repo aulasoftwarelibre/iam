@@ -77,7 +77,7 @@ class UserContext implements Context
         Assert::isInstanceOf($event, UserWasCreated::class, sprintf(
             'Event has to be of class %s, but %s given',
             UserWasCreated::class,
-            get_class($event)
+            \get_class($event)
         ));
 
         Assert::true($event->username()->equals(Username::fromString($username)));
@@ -107,7 +107,7 @@ class UserContext implements Context
         Assert::isInstanceOf($event, UserWasPromoted::class, sprintf(
             'Event has to be of class %s, but %s given',
             UserWasPromoted::class,
-            get_class($event)
+            \get_class($event)
         ));
 
         Assert::true($event->userId()->equals($userId));
@@ -138,7 +138,7 @@ class UserContext implements Context
         Assert::isInstanceOf($event, UserWasDemoted::class, sprintf(
             'Event has to be of class %s, but %s given',
             UserWasDemoted::class,
-            get_class($event)
+            \get_class($event)
         ));
 
         Assert::true($event->userId()->equals($userId));

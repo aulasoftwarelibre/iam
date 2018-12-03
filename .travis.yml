@@ -23,7 +23,6 @@ install:
   - composer install
 
 script:
-  - composer validate --strict
   - mkdir -p build/logs
   - vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
   - vendor/bin/phpspec run --format=pretty --ansi --no-code-generation

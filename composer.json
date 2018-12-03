@@ -22,13 +22,13 @@
         "prooph/service-bus-symfony-bundle": "^0.7.0",
         "ramsey/uuid": "^3.7",
         "react/promise": "^2.7",
-        "symfony/console": "^4.1",
+        "symfony/console": "*",
+        "symfony/dotenv": "*",
         "symfony/flex": "^1.0",
-        "symfony/framework-bundle": "^4.1",
-        "symfony/lts": "^4@dev",
+        "symfony/framework-bundle": "*",
         "symfony/orm-pack": "^1.0",
         "symfony/psr-http-message-bridge": "^1.0",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "aulasoftwarelibre/ddd-test": "0.3.*",
@@ -43,9 +43,8 @@
         "phpspec/phpspec": "^4.3",
         "prolic/fpp": "dev-master",
         "prooph/standard-projections": "^1.1",
-        "symfony/debug-pack": "^1.0",
-        "symfony/dotenv": "^4.1",
-        "symfony/web-server-bundle": "^4.1"
+        "symfony/debug-pack": "*",
+        "symfony/web-server-bundle": "*"
     },
     "config": {
         "preferred-install": {
@@ -98,7 +97,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "require": "4.2.*"
         }
     }
 }

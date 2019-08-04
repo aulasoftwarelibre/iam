@@ -4,19 +4,3 @@ suites:
         psr4_prefix: AulaSoftwareLibre\Iam
 
 formatter.name: dot
-
-extensions:
-    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
-        format:
-            - 'clover'
-            - 'html'
-        output:
-            clover: 'build/logs/clover.xml'
-            html: 'build/coverage'
-        whitelist:
-            - 'src/Application'
-            - 'src/Domain'
-        blacklist:
-            - 'src/Domain/ApplyMethodDispatcherTrait.php'
-            - 'src/Infrastructure/ReadModel/AbstractReadModel.php'
-            - 'src/Infrastructure/ReadModel/AbstractReadModelProjector.php'

@@ -54,7 +54,7 @@ class RoleViewsInMemoryRepository extends AbstractInMemoryRepository implements 
 
     public function ofScopeIdAndRoleName(string $scopeId, string $roleName): ?RoleView
     {
-        $found = \array_reduce(
+        $found = array_reduce(
             static::$stack,
             function (?RoleView $found, RoleView $roleView) use ($scopeId, $roleName) {
                 return (

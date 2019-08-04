@@ -5,15 +5,16 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults public="true" />
+
         <service id="tests.behat.context.hook.prooph_context" class="Tests\Behat\Context\Hook\ProophContext">
-            <argument type="service" id="__symfony__.Prooph\EventStore\EventStore" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="Prooph\EventStore\EventStore" />
         </service>
+
         <service id="tests.behat.context.hook.database_context" class="Tests\Behat\Context\Hook\DatabaseContext">
-            <argument type="service" id="__symfony__.Tests\Behat\Repository\RoleViewsInMemoryRepository" />
-            <argument type="service" id="__symfony__.Tests\Behat\Repository\ScopeViewsInMemoryRepository" />
-            <argument type="service" id="__symfony__.Tests\Behat\Repository\UserViewsInMemoryRepository" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="Tests\Behat\Repository\RoleViewsInMemoryRepository" />
+            <argument type="service" id="Tests\Behat\Repository\ScopeViewsInMemoryRepository" />
+            <argument type="service" id="Tests\Behat\Repository\UserViewsInMemoryRepository" />
         </service>
     </services>
 </container>

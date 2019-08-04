@@ -20,12 +20,12 @@ use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
-use Prooph\ServiceBus\CommandBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class UserContext implements Context
 {
     /**
-     * @var CommandBus
+     * @var MessageBusInterface
      */
     private $commandBus;
     /**
@@ -38,7 +38,7 @@ class UserContext implements Context
     private $users;
 
     public function __construct(
-        CommandBus $commandBus,
+        MessageBusInterface $commandBus,
         SharedStorage $sharedStorage,
         Users $users
     ) {

@@ -4,22 +4,21 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="tests.behat.context.api.user_context" class="Tests\Behat\Context\Api\UserContext">
-            <argument type="service" id="__symfony__.aulasl.http_client" />
-            <argument type="service" id="__symfony__.aulasl.response_asserter"/>
-            <tag name="fob.context_service" />
+            <argument type="service" id="aulasl.http_client" />
+            <argument type="service" id="aulasl.response_asserter"/>
         </service>
 
         <service id="tests.behat.context.api.scope_context" class="Tests\Behat\Context\Api\ScopeContext">
-            <argument type="service" id="__symfony__.aulasl.http_client" />
-            <argument type="service" id="__symfony__.aulasl.response_asserter"/>
-            <tag name="fob.context_service" />
+            <argument type="service" id="aulasl.http_client" />
+            <argument type="service" id="aulasl.response_asserter"/>
         </service>
 
         <service id="tests.behat.context.api.role_context" class="Tests\Behat\Context\Api\RoleContext">
-            <argument type="service" id="__symfony__.aulasl.http_client" />
-            <argument type="service" id="__symfony__.aulasl.response_asserter"/>
-            <tag name="fob.context_service" />
+            <argument type="service" id="aulasl.http_client" />
+            <argument type="service" id="aulasl.response_asserter"/>
         </service>
     </services>
 </container>

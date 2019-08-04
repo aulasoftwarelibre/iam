@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\User\Command\PromoteUser;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
@@ -22,7 +23,6 @@ use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

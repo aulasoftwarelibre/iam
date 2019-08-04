@@ -14,7 +14,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 7.2
+    - php: 7.3
 
 before_install:
   - composer self-update
@@ -28,5 +28,3 @@ script:
   - vendor/bin/phpspec run --format=pretty --ansi --no-code-generation
   - vendor/bin/behat --strict --colors --no-snippets
 
-after_success:
-  - travis_retry php vendor/bin/php-coveralls

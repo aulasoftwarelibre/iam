@@ -1,7 +1,7 @@
 default:
     suites:
-        scope_application_features:
-            contexts_services:
+        domain_scope:
+            contexts:
                 - 'tests.behat.context.application.scope_context'
 
                 - 'tests.behat.context.hook.database_context'

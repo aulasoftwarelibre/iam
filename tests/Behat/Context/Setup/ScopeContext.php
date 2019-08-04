@@ -19,12 +19,12 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
 use Behat\Behat\Context\Context;
-use Prooph\ServiceBus\CommandBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class ScopeContext implements Context
 {
     /**
-     * @var CommandBus
+     * @var MessageBusInterface
      */
     private $commandBus;
     /**
@@ -37,7 +37,7 @@ class ScopeContext implements Context
     private $scopes;
 
     public function __construct(
-        CommandBus $commandBus,
+        MessageBusInterface $commandBus,
         SharedStorage $sharedStorage,
         Scopes $scopes
     ) {

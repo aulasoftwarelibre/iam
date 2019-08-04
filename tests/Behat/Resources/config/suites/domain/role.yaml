@@ -1,7 +1,7 @@
 default:
     suites:
-        role_application_features:
-            contexts_services:
+        domain_role:
+            contexts:
             - 'tests.behat.context.application.role_context'
 
             - 'tests.behat.context.hook.database_context'

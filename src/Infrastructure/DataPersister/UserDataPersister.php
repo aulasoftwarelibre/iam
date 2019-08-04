@@ -14,16 +14,17 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\User\Command\RegisterUser;
 use AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\UserView;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class UserDataPersister implements DataPersisterInterface
 {
@@ -59,7 +60,7 @@ class UserDataPersister implements DataPersisterInterface
                         Username::fromString($data->getUsername())
                     )
                 );
-            } catch (MessageDispatchException $e) {
+            } catch (MessageDispatchException | HandlerFailedException $e) {
                 throw $e->getPrevious();
             }
         } catch (UserIdAlreadyRegisteredException | UsernameAlreadyRegisteredException $e) {

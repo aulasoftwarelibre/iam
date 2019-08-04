@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Role\Command;
 
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandHandlerInterface;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
 
-final class RemoveRoleHandler implements CommandHandler
+final class RemoveRoleHandler implements CommandHandlerInterface
 {
     /**
      * @var Roles

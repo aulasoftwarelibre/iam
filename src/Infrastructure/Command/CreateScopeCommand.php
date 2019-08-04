@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeAliasAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Exception\ScopeIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeAlias;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

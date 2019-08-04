@@ -25,13 +25,13 @@ use AulaSoftwareLibre\Iam\Domain\User\Event\UserWasPromoted;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\Username;
 use Behat\Behat\Context\Context;
-use Prooph\ServiceBus\CommandBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 class UserContext implements Context
 {
     /**
-     * @var CommandBus
+     * @var MessageBusInterface
      */
     private $commandBus;
     /**
@@ -44,7 +44,7 @@ class UserContext implements Context
     private $users;
 
     public function __construct(
-        CommandBus $commandBus,
+        MessageBusInterface $commandBus,
         EventsRecorder $eventsRecorder,
         Users $users
     ) {

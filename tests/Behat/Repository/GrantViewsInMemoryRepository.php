@@ -66,12 +66,12 @@ class GrantViewsInMemoryRepository extends AbstractInMemoryRepository implements
             ];
         }
 
-        return \array_values($users);
+        return array_values($users);
     }
 
     public function ofScopeIdAndUserId(string $scopeId, string $userId): array
     {
-        return \array_values(\array_filter(static::$stack, function (GrantView $grantView) use ($scopeId, $userId) {
+        return array_values(array_filter(static::$stack, function (GrantView $grantView) use ($scopeId, $userId) {
             return $grantView->getScopeId() === $scopeId
                 && $grantView->getUserId() === $userId;
         }));

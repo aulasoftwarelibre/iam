@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\CreateScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RemoveScope;
 use AulaSoftwareLibre\Iam\Application\Scope\Command\RenameScope;
@@ -24,10 +25,10 @@ use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeName;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class ScopeDataPersister implements DataPersisterInterface
 {
@@ -75,10 +76,10 @@ class ScopeDataPersister implements DataPersisterInterface
                         ScopeAlias::fromString($data->getAlias())
                     )
                 );
-            } catch (MessageDispatchException $e) {
+            } catch (MessageDispatchException | HandlerFailedException $e) {
                 throw $e->getPrevious();
             }
-        } catch (ScopeIdAlreadyRegisteredException | ScopeAliasAlreadyRegisteredException $e) {
+        } catch (ScopeIdAlreadyRegisteredException | ScopeAliasAlreadyRegisteredException | \Exception $e) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, $e->getMessage());
         }
 

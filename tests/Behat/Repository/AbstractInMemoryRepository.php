@@ -41,12 +41,12 @@ class AbstractInMemoryRepository
 
     public function all(): array
     {
-        return \array_values(static::$stack);
+        return array_values(static::$stack);
     }
 
     protected function findBy($field, $value): array
     {
-        return \array_values(\array_filter(static::$stack, function ($item) use ($field, $value) {
+        return array_values(array_filter(static::$stack, function ($item) use ($field, $value) {
             return $item->$field() === $value;
         }));
     }

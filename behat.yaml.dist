@@ -3,17 +3,11 @@ imports:
 
 default:
     extensions:
-        FriendsOfBehat\CrossContainerExtension: ~
         FriendsOfBehat\VariadicExtension: ~
         FriendsOfBehat\SymfonyExtension:
-            env_file: .env.test
             kernel:
-                bootstrap: 'vendor/autoload.php'
                 class: 'AulaSoftwareLibre\Iam\Infrastructure\Kernel'
                 path: 'src/Infrastructure/Kernel.php'
                 debug: true
-        FriendsOfBehat\ContextServiceExtension:
-            imports:
-                - 'tests/Behat/Resources/config/services.xml'
     formatters:
         progress: ~

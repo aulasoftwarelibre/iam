@@ -6,10 +6,11 @@
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "api-platform/api-pack": "^1.1",
-        "aulasoftwarelibre/ddd-base": "0.4.*",
+        "aulasoftwarelibre/ddd-base": "^2.4",
         "doctrine/collections": "^1.5",
         "guzzlehttp/psr7": "^1.4",
         "php-http/curl-client": "^1.7",
@@ -21,30 +22,26 @@
         "prooph/pdo-event-store": "^1.8",
         "prooph/service-bus-symfony-bundle": "^0.7.0",
         "ramsey/uuid": "^3.7",
-        "react/promise": "^2.7",
-        "symfony/console": "*",
-        "symfony/dotenv": "*",
+        "symfony/console": "4.3.*",
+        "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.0",
-        "symfony/framework-bundle": "*",
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/http-client": "4.3.*",
         "symfony/orm-pack": "^1.0",
         "symfony/psr-http-message-bridge": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "4.3.*"
     },
     "require-dev": {
-        "aulasoftwarelibre/ddd-test": "0.3.*",
-        "friends-of-behat/context-service-extension": "^1.2",
-        "friends-of-behat/cross-container-extension": "^1.1",
-        "friends-of-behat/suite-settings-extension": "^1.0",
-        "friends-of-behat/symfony-extension": "^1.2",
+        "aulasoftwarelibre/ddd-test": "^1.2",
+        "friends-of-behat/symfony-extension": "^2.0.8",
         "friends-of-behat/variadic-extension": "^1.1",
         "friendsofphp/php-cs-fixer": "^2.12",
-        "leanphp/phpspec-code-coverage": "^4.2",
-        "php-coveralls/php-coveralls": "^2.1",
-        "phpspec/phpspec": "^4.3",
+        "phpspec/phpspec": "^5.1.0",
         "prolic/fpp": "dev-master",
         "prooph/standard-projections": "^1.1",
-        "symfony/debug-pack": "*",
-        "symfony/web-server-bundle": "*"
+        "roave/security-advisories": "dev-master",
+        "symfony/debug-pack": "^1.0",
+        "symfony/web-server-bundle": "4.3.*"
     },
     "config": {
         "preferred-install": {
@@ -63,6 +60,7 @@
         }
     },
     "replace": {
+        "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php71": "*",
@@ -98,7 +96,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.3.*"
         }
     }
 }

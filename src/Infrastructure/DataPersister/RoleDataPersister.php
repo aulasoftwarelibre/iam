@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\DataPersister;
 
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\Role\Command\AddRole;
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredException;
@@ -24,10 +25,10 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
 class RoleDataPersister implements DataPersisterInterface
 {
@@ -64,7 +65,7 @@ class RoleDataPersister implements DataPersisterInterface
                         RoleName::fromString($data->getName())
                     )
                 );
-            } catch (MessageDispatchException $e) {
+            } catch (MessageDispatchException | HandlerFailedException $e) {
                 throw $e->getPrevious();
             }
         } catch (

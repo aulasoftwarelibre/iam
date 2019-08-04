@@ -23,13 +23,13 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use Behat\Behat\Context\Context;
-use Prooph\ServiceBus\CommandBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 class RoleContext implements Context
 {
     /**
-     * @var CommandBus
+     * @var MessageBusInterface
      */
     private $commandBus;
     /**
@@ -42,7 +42,7 @@ class RoleContext implements Context
     private $roles;
 
     public function __construct(
-        CommandBus $commandBus,
+        MessageBusInterface $commandBus,
         EventsRecorder $eventsRecorder,
         Roles $roles
     ) {

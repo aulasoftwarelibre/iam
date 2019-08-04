@@ -103,7 +103,7 @@ class User extends AggregateRoot
 
     protected function applyUserWasDemoted(UserWasDemoted $event): void
     {
-        $this->roles = \array_filter($this->roles, function (RoleId $roleId) use ($event) {
+        $this->roles = array_filter($this->roles, function (RoleId $roleId) use ($event) {
             return !$event->roleId()->equals($roleId);
         });
     }

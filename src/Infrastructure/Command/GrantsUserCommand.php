@@ -100,7 +100,7 @@ class GrantsUserCommand extends Command
 
             $table->addRow([
                 $scopeView->getAlias(),
-                ltrim(\array_reduce($grants, function ($carry, GrantView $grantView) {
+                ltrim(array_reduce($grants, function ($carry, GrantView $grantView) {
                     return $carry.', '.$grantView->getRoleName();
                 }, ''), ', '),
             ]);

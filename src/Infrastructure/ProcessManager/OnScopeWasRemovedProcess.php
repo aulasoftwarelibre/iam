@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ProcessManager;
 
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\EventHandlerInterface;
 use AulaSoftwareLibre\Iam\Application\Role\Command\RemoveRole;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\RoleView;
-use Prooph\ServiceBus\CommandBus;
 
-final class OnScopeWasRemovedProcess implements EventHandler
+final class OnScopeWasRemovedProcess implements EventHandlerInterface
 {
     /**
      * @var CommandBus
@@ -44,7 +44,7 @@ final class OnScopeWasRemovedProcess implements EventHandler
 
         $commandBus = $this->commandBus;
         array_walk($roles, function (RoleView $roleView) use ($commandBus) {
-            $commandBus->dispatch(
+            $commandBus->dispatchAfterCurrentBus(
                 RemoveRole::with(RoleId::fromString($roleView->getId()))
             );
         });

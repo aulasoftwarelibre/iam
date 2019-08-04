@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Projection;
 
 use AulaSoftwareLibre\DDD\BaseBundle\Domain\ApplyMethodDispatcherTrait;
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\EventHandlerInterface;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasCreated;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Scope\Event\ScopeWasRenamed;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
 
-final class ScopeReadModel implements EventHandler
+final class ScopeReadModel implements EventHandlerInterface
 {
     use ApplyMethodDispatcherTrait {
         applyMessage as public __invoke;

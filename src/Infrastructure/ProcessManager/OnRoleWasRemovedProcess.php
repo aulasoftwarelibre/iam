@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\ProcessManager;
 
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\EventHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\EventHandlerInterface;
 use AulaSoftwareLibre\Iam\Application\User\Command\DemoteUser;
 use AulaSoftwareLibre\Iam\Domain\Role\Event\RoleWasRemoved;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\GrantViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\GrantView;
-use Prooph\ServiceBus\CommandBus;
 
-final class OnRoleWasRemovedProcess implements EventHandler
+final class OnRoleWasRemovedProcess implements EventHandlerInterface
 {
     /**
      * @var GrantViews
@@ -45,7 +45,7 @@ final class OnRoleWasRemovedProcess implements EventHandler
         $grantViews = $this->grantViews->ofRoleId($event->roleId()->toString());
 
         foreach ($grantViews as $grantView) {
-            $this->commandBus->dispatch(
+            $this->commandBus->dispatchAfterCurrentBus(
                 DemoteUser::with(
                     UserId::fromString($grantView->getUserId()),
                     RoleId::fromString($grantView->getRoleId())

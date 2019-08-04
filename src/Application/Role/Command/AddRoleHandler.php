@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\Role\Command;
 
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandHandlerInterface;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNameAlreadyExistsException;
 use AulaSoftwareLibre\Iam\Application\Role\Repository\Roles;
@@ -22,7 +22,7 @@ use AulaSoftwareLibre\Iam\Application\Scope\Repository\Scopes;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\Scope;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\RoleViews;
 
-final class AddRoleHandler implements CommandHandler
+final class AddRoleHandler implements CommandHandlerInterface
 {
     /**
      * @var Roles

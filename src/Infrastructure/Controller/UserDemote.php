@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Controller;
 
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\User\Command\DemoteUser;
 use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleId;
 use AulaSoftwareLibre\Iam\Domain\User\Model\UserId;
-use Prooph\ServiceBus\CommandBus;
 
 class UserDemote
 {

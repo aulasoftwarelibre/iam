@@ -58,7 +58,7 @@ class ScopesGetUsersRolesCollection
 
         $grants = $this->grantViews->ofScopeIdAndUserId($scopeId, $id);
 
-        return \array_map(function (GrantView $grantView) {
+        return array_map(function (GrantView $grantView) {
             return new RoleView(
                 $grantView->getRoleId(),
                 $grantView->getScopeId(),

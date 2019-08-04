@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Infrastructure\Command;
 
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandBus;
 use AulaSoftwareLibre\Iam\Application\Role\Command\AddRole;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\Role\Exception\RoleNameAlreadyExistsException;
@@ -22,7 +23,6 @@ use AulaSoftwareLibre\Iam\Domain\Role\Model\RoleName;
 use AulaSoftwareLibre\Iam\Domain\Scope\Model\ScopeId;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\ScopeViews;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\View\ScopeView;
-use Prooph\ServiceBus\CommandBus;
 use Prooph\ServiceBus\Exception\MessageDispatchException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

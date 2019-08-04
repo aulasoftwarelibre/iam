@@ -6,10 +6,11 @@
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
         "ext-json": "*",
         "api-platform/api-pack": "^1.1",
-        "aulasoftwarelibre/ddd-base": "0.4.*",
+        "aulasoftwarelibre/ddd-base": "^2.4",
         "doctrine/collections": "^1.5",
         "guzzlehttp/psr7": "^1.4",
         "php-http/curl-client": "^1.7",
@@ -21,14 +22,14 @@
         "prooph/pdo-event-store": "^1.8",
         "prooph/service-bus-symfony-bundle": "^0.7.0",
         "ramsey/uuid": "^3.7",
-        "react/promise": "^2.7",
-        "symfony/console": "*",
-        "symfony/dotenv": "*",
+        "symfony/console": "4.3.*",
+        "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.0",
-        "symfony/framework-bundle": "*",
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/http-client": "4.3.*",
         "symfony/orm-pack": "^1.0",
         "symfony/psr-http-message-bridge": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "4.3.*"
     },
     "require-dev": {
         "aulasoftwarelibre/ddd-test": "^1.2",
@@ -59,6 +60,7 @@
         }
     },
     "replace": {
+        "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php71": "*",
@@ -94,7 +96,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.3.*"
         }
     }
 }

@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace AulaSoftwareLibre\Iam\Application\User\Command;
 
-use AulaSoftwareLibre\DDD\BaseBundle\Handlers\CommandHandler;
+use AulaSoftwareLibre\DDD\BaseBundle\MessageBus\CommandHandlerInterface;
 use AulaSoftwareLibre\Iam\Application\User\Exception\UserIdAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Exception\UsernameAlreadyRegisteredException;
 use AulaSoftwareLibre\Iam\Application\User\Repository\Users;
 use AulaSoftwareLibre\Iam\Domain\User\Model\User;
 use AulaSoftwareLibre\Iam\Infrastructure\ReadModel\Repository\UserViews;
 
-final class RegisterUserHandler implements CommandHandler
+final class RegisterUserHandler implements CommandHandlerInterface
 {
     /**
      * @var Users
